@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+  
+}
+
+  table .mat-button {
+    float: right;
+    margin-right: 20px;
+  }
+  .button {
+  color:crimson;
+  float:right;
+  margin-top: 20px;
+  margin-right: 20px;
+  }
+ 
+

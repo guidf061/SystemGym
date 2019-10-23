@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Angular\src\app\models\aluno-model.ts" />
+    <None Remove="Angular\src\app\models\colaborador-model.ts" />
+    <None Remove="Angular\src\app\models\pessoa-model.ts" />
+    <None Remove="Angular\src\app\models\usuario-model.ts" />
+    <None Remove="Angular\src\app\models\visitante-model.ts" />
+    <None Remove="Angular\src\app\services\aluno.service.ts" />
+    <None Remove="Angular\src\app\services\colaborador.service.ts" />
+    <None Remove="Angular\src\app\services\loader.service.ts" />
+    <None Remove="Angular\src\app\services\usuario.service.ts" />
+    <None Remove="Angular\src\app\services\visitante.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Angular\src\app\components\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Angular\src\app\models\visitante-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\models\colaborador-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\models\aluno-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\models\pessoa-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\models\usuario-model.ts" />
+    <TypeScriptCompile Include="Angular\src\app\services\colaborador.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\services\visitante.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\services\loader.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\services\aluno.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\services\usuario.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+  </ItemGroup>
+
+</Project>

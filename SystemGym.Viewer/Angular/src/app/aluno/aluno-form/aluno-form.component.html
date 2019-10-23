@@ -1,0 +1,67 @@
+<form [formGroup]="form">
+
+    <div fxFlex>
+      <button mat-icon-button (click)="closeDialog(false);" type="button" tabindex="-1">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    <div fxFlex>
+      {{ title }} Usuário
+    </div>
+
+
+    <div class="example-container">
+
+      <mat-form-field>
+        <input matInput placeholder="Nome Usuário" formControlName="nome">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="email" formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="cpf" formControlName="cpf" maxlength="11">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="telefone Celular" formControlName="telefoneCelular" maxlength="11">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="telefone Casa" formControlName="telefoneCasa" maxlength="11">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Numero Do Cartão" formControlName="numeroCartao" maxlength="15">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Situação do Aluno" formControlName="situacaoAlunoId">
+          <mat-option value="1">Regular</mat-option>
+          <mat-option value="2">Irregular</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Sexo" formControlName="sexoId">
+          <mat-option value="1">Masculino</mat-option>
+          <mat-option value="2">Feminimo</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Tipo" formControlName="tipoId">
+          <mat-option value="1">Aluno</mat-option>
+          <mat-option value="2">Colaborador</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  <div fxFlex>
+    <button mat-icon-button (click)="saveClick();" tabindex="-1">
+      <mat-icon>save</mat-icon>
+    </button>
+  </div>
+
+</form>

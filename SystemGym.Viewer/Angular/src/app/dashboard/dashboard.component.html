@@ -1,0 +1,91 @@
+<div class="panel-header panel-header-lg">
+    <canvas baseChart id="bigDashboardChart"
+                [datasets]="lineBigDashboardChartData"
+                [labels]="lineBigDashboardChartLabels"
+                 [colors]="lineBigDashboardChartColors"
+                [options]="lineBigDashboardChartOptions"
+                [chartType]="lineBigDashboardChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+</div>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h4 class="card-title">Usuários Ativos</h4>
+          <div ngbDropdown>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas baseChart id="lineChartExample"
+                        [datasets]="lineChartData"
+                        [labels]="lineChartLabels"
+                        [colors]="lineChartColors"
+                        [options]="lineChartOptions"
+                        [chartType]="lineChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+ 
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h4 class="card-title">Quantidade de Alunos</h4>
+          <div ngbDropdown>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <!-- <canvas id="lineChartExampleWithNumbersAndGrid"></canvas> -->
+            <canvas baseChart id="lineChartExampleWithNumbersAndGrid"
+                        [datasets]="lineChartWithNumbersAndGridData"
+                        [labels]="lineChartWithNumbersAndGridLabels"
+                        [colors]="lineChartWithNumbersAndGridColors"
+                        [options]="lineChartWithNumbersAndGridOptions"
+                        [chartType]="lineChartWithNumbersAndGridType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h4 class="card-title">Resultados dos 7 dias</h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas baseChart id="barChartSimpleGradientsNumbers"
+                        [datasets]="lineChartGradientsNumbersData"
+                        [labels]="lineChartGradientsNumbersLabels"
+                        [colors]="lineChartGradientsNumbersColors"
+                        [options]="lineChartGradientsNumbersOptions"
+                        [chartType]="lineChartGradientsNumbersType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
