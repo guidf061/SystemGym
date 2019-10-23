@@ -40,6 +40,7 @@ export class AlunoComponent implements OnInit {
     this.alunoService.listar().subscribe(rows => this.data = rows);
   }
 
+
   editClick(aluno: Aluno) {
     this.alunoFormService.showDialog(aluno).subscribe();
   }
