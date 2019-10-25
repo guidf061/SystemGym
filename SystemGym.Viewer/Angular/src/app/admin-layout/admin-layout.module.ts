@@ -11,10 +11,6 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { MatTableModule, MatIconModule } from '@angular/material';
 
-
-
-
-
 import { VisitanteService } from '../services/visitante.service';
 import { AlunoService } from '../services/aluno.service';
 import { ColaboradorService } from '../services/colaborador.service';
@@ -22,8 +18,6 @@ import { LoaderService } from '../services/loader.service';
 
 import { MaterialModule } from '../material/material.module';
 import { UsuarioService } from '../services/usuario.service';
-
-
 
 import { AlunoComponent } from './aluno/aluno.component';
 import { UsuarioComponent } from './usuario/usuario.component';
@@ -38,6 +32,7 @@ import { ColaboradorFormService } from './colaborador/colaborador-form/colaborad
 import { VisitanteFormService } from './visitante/visitante-form/visitante-form.service';
 import { AlunoFormService } from './aluno/aluno-form/aluno-form.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -51,6 +46,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
+    SharedModule,
     MatIconModule ,
     ToastrModule.forRoot()
   ],

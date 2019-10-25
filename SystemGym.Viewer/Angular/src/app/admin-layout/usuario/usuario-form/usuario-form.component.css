@@ -6,3 +6,13 @@
   .example-container > * {
     width: 100%;
   }
+
+.modal-mobile-content {
+  position: absolute;
+  height: calc(100% - 64px);
+  max-height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  margin: 0 !important;
+  padding: 24px !important;
+}
