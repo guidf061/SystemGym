@@ -62,6 +62,7 @@ export class UsuarioFormComponent implements OnInit {
 
       this.closeDialog(true);
 
+
       error => {
 
         this.snackBar.open(error, 'Fechar', {

@@ -3,8 +3,8 @@ import { MatDialog, MatDialogRef } from '@angular/material'
 
 import { Observable } from 'rxjs';
 import { Usuario } from '../../models/usuario-model';
-import { AlunoFormComponent } from './aluno-form.component';
 import { Aluno } from '../../models/aluno-model';
+import { AlunoFormComponent } from './aluno-form.component';
 
 @Injectable()
 export class AlunoFormService {

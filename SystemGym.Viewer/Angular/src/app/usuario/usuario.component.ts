@@ -34,6 +34,7 @@ export class UsuarioComponent implements OnInit {
   //  this.createFormGroup();
   }
 
+
   listar() {
     this.usuarioService.listar().subscribe(rows => this.data = rows);
   }

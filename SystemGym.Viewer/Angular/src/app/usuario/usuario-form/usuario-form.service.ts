@@ -5,7 +5,9 @@ import { Observable } from 'rxjs';
 import { UsuarioFormComponent } from './usuario-form.component';
 import { Usuario } from '../../models/usuario-model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UsuarioFormService {
 
   constructor(private dialog: MatDialog) { }
@@ -16,7 +18,7 @@ export class UsuarioFormService {
     dialogRef = this.dialog.open(UsuarioFormComponent, {
       disableClose: true,
       width: '450px',
-      height: '700px',
+      height: '650px',
       panelClass: 'modal-wrapper',
       data: usuario
     });

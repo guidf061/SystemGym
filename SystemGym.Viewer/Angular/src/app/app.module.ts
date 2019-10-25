@@ -11,29 +11,26 @@ import { ComponentsModule } from './components/components.module';
 
 import { AppComponent } from './app.component';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { MaterialModule } from './material/material.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule,
     HttpClientModule,
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
     NgbModule,
-    FlexLayoutModule,
+    SharedModule,
     ToastrModule.forRoot()
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-
-
+  ],
+  exports: [
   ],
   providers: [],
   bootstrap: [AppComponent]
