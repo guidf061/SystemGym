@@ -1,9 +1,10 @@
 import { Component, OnInit, Pipe } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { Colaborador } from '../models/colaborador-model';
-import { ColaboradorService } from '../services/colaborador.service';
+
 import { ColaboradorFormService } from './colaborador-form/colaborador-form.service';
+import { ColaboradorService } from '../../services/colaborador.service';
+import { Colaborador } from '../../models/colaborador-model';
 
 @Component({
   selector: 'app-colaborador',

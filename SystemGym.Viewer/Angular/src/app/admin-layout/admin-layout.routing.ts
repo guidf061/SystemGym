@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 
-import { DashboardComponent } from '../../dashboard/dashboard.component';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { VisitanteComponent } from './visitante/visitante.component';
+import { ColaboradorComponent } from './colaborador/colaborador.component';
+import { AlunoComponent } from './aluno/aluno.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
-import { AlunoComponent } from '../../aluno/aluno.component';
-import { UsuarioComponent } from '../../usuario/usuario.component';
-import { VisitanteComponent } from '../../visitante/visitante.component';
-import { ColaboradorComponent } from '../../colaborador/colaborador.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },

@@ -2,12 +2,11 @@
 import { Component, OnInit, HostListener, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
-import { Pessoa } from '../../models/pessoa-model';
-import { LoaderService } from '../../services/loader.service';
-import { Visitante } from '../../models/visitante-model';
-import { VisitanteService } from '../../services/visitante.service';
-import { Colaborador } from '../../models/colaborador-model';
-import { ColaboradorService } from '../../services/colaborador.service';
+import { Colaborador } from '../../../models/colaborador-model';
+import { ColaboradorService } from '../../../services/colaborador.service';
+import { LoaderService } from '../../../services/loader.service';
+import { Pessoa } from '../../../models/pessoa-model';
+
 
 @Component({
   selector: 'app-colaborador-form',

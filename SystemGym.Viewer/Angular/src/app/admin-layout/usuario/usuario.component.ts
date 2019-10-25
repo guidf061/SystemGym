@@ -1,9 +1,10 @@
 import { Component, OnInit, Pipe } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { Usuario } from '../models/usuario-model';
-import { UsuarioService } from '../services/usuario.service';
+
 import { UsuarioFormService } from './usuario-form/usuario-form.service';
+import { Usuario } from '../../models/usuario-model';
+import { UsuarioService } from '../../services/usuario.service';
 
 
 @Component({

@@ -11,8 +11,9 @@ import { ComponentsModule } from './components/components.module';
 
 import { AppComponent } from './app.component';
 
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+
 import { SharedModule } from './shared/shared.module';
+import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 
 
 @NgModule({

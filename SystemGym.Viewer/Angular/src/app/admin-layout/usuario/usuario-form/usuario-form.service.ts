@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material'
 
 import { Observable } from 'rxjs';
 import { UsuarioFormComponent } from './usuario-form.component';
-import { Usuario } from '../../models/usuario-model';
+import { Usuario } from '../../../models/usuario-model';
 
 @Injectable({
   providedIn: 'root'

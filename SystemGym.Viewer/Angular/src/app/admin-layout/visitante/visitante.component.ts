@@ -1,9 +1,10 @@
 import { Component, OnInit, Pipe } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { Visitante } from '../models/visitante-model';
-import { VisitanteService } from '../services/visitante.service';
+
 import { VisitanteFormService } from './visitante-form/visitante-form.service';
+import { Visitante } from '../../models/visitante-model';
+import { VisitanteService } from '../../services/visitante.service';
 
 
 @Component({

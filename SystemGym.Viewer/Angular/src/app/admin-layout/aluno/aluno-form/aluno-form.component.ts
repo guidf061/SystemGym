@@ -2,12 +2,11 @@
 import { Component, OnInit, HostListener, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
-import { UsuarioService } from '../../services/usuario.service';
-import { Usuario } from '../../models/usuario-model';
-import { Pessoa } from '../../models/pessoa-model';
-import { LoaderService } from '../../services/loader.service';
-import { Aluno } from '../../models/aluno-model';
-import { AlunoService } from '../../services/aluno.service';
+import { Aluno } from '../../../models/aluno-model';
+import { AlunoService } from '../../../services/aluno.service';
+import { LoaderService } from '../../../services/loader.service';
+import { Pessoa } from '../../../models/pessoa-model';
+
 
 @Component({
   selector: 'app-aluno-form',

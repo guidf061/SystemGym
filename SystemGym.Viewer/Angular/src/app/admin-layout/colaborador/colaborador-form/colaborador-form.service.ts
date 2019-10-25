@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material'
 
 import { Observable } from 'rxjs';
-import { Usuario } from '../../models/usuario-model';
-import { Aluno } from '../../models/aluno-model';
-import { Visitante } from '../../models/visitante-model';
-import { Colaborador } from '../../models/colaborador-model';
+
 import { ColaboradorFormComponent } from './colaborador-form.component';
+import { Colaborador } from '../../../models/colaborador-model';
 
 @Injectable()
 export class ColaboradorFormService {

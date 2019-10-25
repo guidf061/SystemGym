@@ -2,24 +2,24 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material'
 
 import { Observable } from 'rxjs';
-import { Usuario } from '../../models/usuario-model';
-import { Aluno } from '../../models/aluno-model';
-import { AlunoFormComponent } from './aluno-form.component';
+
+import { VisitanteFormComponent } from './visitante-form.component';
+import { Visitante } from '../../../models/visitante-model';
 
 @Injectable()
-export class AlunoFormService {
+export class VisitanteFormService {
 
   constructor(private dialog: MatDialog) { }
 
-  showDialog(aluno: Aluno): Observable<boolean> {
-    let dialogRef: MatDialogRef<AlunoFormComponent>;
+  showDialog(visitante: Visitante): Observable<boolean> {
+    let dialogRef: MatDialogRef<VisitanteFormComponent>;
 
-    dialogRef = this.dialog.open(AlunoFormComponent, {
+    dialogRef = this.dialog.open(VisitanteFormComponent, {
       disableClose: true,
       width: '450px',
       height: '700px',
       panelClass: 'modal-wrapper',
-      data: aluno
+      data: visitante
     });
 
     dialogRef.afterClosed().subscribe(result => {
