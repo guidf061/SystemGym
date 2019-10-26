@@ -1,7 +1,6 @@
-<div>
+<div class="modal">
   <form [formGroup]="form">
-
-    <div>
+    <div class="modal-header">
       <mat-toolbar color="warn">
         <mat-toolbar-row>
           <div fxLayout="row" fxLayoutAlign="space-between">
@@ -23,10 +22,10 @@
       </mat-toolbar>
     </div>
 
-    <div mat-dialog-content class="example-container">
- 
+    <div mat-dialog-content>
+
       <div fxLayout="row">
-        <div fxFlex="10px">
+        <div fxFlex>
           <mat-form-field>
             <input matInput placeholder="UserName" formControlName="userName">
           </mat-form-field>

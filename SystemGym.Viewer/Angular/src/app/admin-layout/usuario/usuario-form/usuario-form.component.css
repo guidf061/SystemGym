@@ -3,6 +3,10 @@
   flex-direction: column;
 }
 
+.mat-form-field {
+  width: 100%;
+}
+
   .example-container > * {
     width: 100%;
   }
@@ -15,4 +19,33 @@
   overflow-y: auto;
   margin: 0 !important;
   padding: 24px !important;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.dialog-content {
+}
+
+.modal {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  }
+
+.modal-header {
+  padding: 24px 24px 15px 24px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-select {
+  width: 100%;
 }
