@@ -93,15 +93,15 @@ export class UsuarioFormComponent implements OnInit {
 
    private createFormGroup(): void {
     this.form = this.fb.group({
-      userName: '',
-      password: '',
-      nome:'',
-      email: '',
-      cpf: '',
-      telefoneCelular: '',
-      telefoneCasa: '',
-      sexoId: '',
-      tipoId: '',
+      userName: ['', { validators: Validators.required }],
+      password: ['', { validators: Validators.required }],
+      nome: ['', { validators: Validators.required }],
+      email: ['', { validators: Validators.required }],
+      cpf: ['', { validators: Validators.required }],
+      telefoneCelular: ['', { validators: Validators.required }],
+      telefoneCasa: ['', { validators: Validators.required }],
+      sexoId: ['', { validators: Validators.required }],
+      tipoId: ['', { validators: Validators.required }],
     });
    }
 

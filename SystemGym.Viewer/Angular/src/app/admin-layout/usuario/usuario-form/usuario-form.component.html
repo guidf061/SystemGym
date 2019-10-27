@@ -1,6 +1,6 @@
 <div class="modal">
   <form [formGroup]="form">
-    <div class="modal-header">
+    <div>
       <mat-toolbar color="warn">
         <mat-toolbar-row>
           <div fxLayout="row" fxLayoutAlign="space-between">
@@ -27,7 +27,11 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
-            <input matInput placeholder="UserName" formControlName="userName">
+            <input matInput placeholder="UserName" formControlName="userName"
+                   required>
+            <mat-error *ngIf="form.controls['userName'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -35,7 +39,11 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
-            <input matInput placeholder="PassWord" formControlName="password">
+            <input matInput placeholder="PassWord" formControlName="password"
+                   required>
+            <mat-error *ngIf="form.controls['password'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -43,7 +51,11 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
-            <input matInput placeholder="Nome Usuário" formControlName="nome">
+            <input matInput placeholder="Nome Usuário" formControlName="nome"
+                   required>
+            <mat-error *ngIf="form.controls['nome'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -51,7 +63,11 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
-            <input matInput placeholder="email" formControlName="email">
+            <input matInput placeholder="email" formControlName="email"
+                   required>
+            <mat-error *ngIf="form.controls['email'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -59,25 +75,12 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
-            <input matInput placeholder="cpf" formControlName="cpf" maxlength="11">
-          </mat-form-field>
-        </div>
-        <div fxFlex>
-          <mat-form-field>
-            <input matInput placeholder="telefone Celular" formControlName="telefoneCelular" maxlength="11">
-          </mat-form-field>
-        </div>
-      </div>
-
-      <div fxLayout="row">
-        <div fxFlex>
-          <mat-form-field>
-            <input matInput placeholder="telefone Celular" formControlName="telefoneCelular" maxlength="11">
-          </mat-form-field>
-        </div>
-        <div fxFlex>
-          <mat-form-field>
-            <input matInput placeholder="telefone Casa" formControlName="telefoneCasa" maxlength="11">
+            <input matInput placeholder="cpf" formControlName="cpf"
+                   maxlength="11"
+                   required>
+            <mat-error *ngIf="form.controls['nome'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -85,10 +88,36 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
-            <mat-select placeholder="Sexo" formControlName="sexoId">
+            <input matInput placeholder="telefone Celular" formControlName="telefoneCelular"
+                   maxlength="11"
+                   required>
+            <mat-error *ngIf="form.controls['telefoneCelular'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex>
+          <mat-form-field>
+            <input matInput placeholder="telefone Casa" formControlName="telefoneCasa"
+                   required
+                   maxlength="11">
+            <mat-error *ngIf="form.controls['telefoneCasa'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row">
+        <div fxFlex>
+          <mat-form-field>
+            <mat-select placeholder="Sexo" formControlName="sexoId" required>
               <mat-option value="1">Masculino</mat-option>
               <mat-option value="2">Feminino</mat-option>
             </mat-select>
+            <mat-error *ngIf="form.controls['sexoId'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex>
@@ -97,6 +126,9 @@
               <mat-option value="1">Colaborador</mat-option>
               <mat-option value="2">Aluno</mat-option>
             </mat-select>
+            <mat-error *ngIf="form.controls['tipoId'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
