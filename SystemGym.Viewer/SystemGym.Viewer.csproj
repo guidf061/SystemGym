@@ -25,10 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Angular\src\app\components\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <TypeScriptCompile Include="Angular\src\app\models\visitante-model.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

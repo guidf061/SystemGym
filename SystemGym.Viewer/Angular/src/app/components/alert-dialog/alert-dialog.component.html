@@ -1,0 +1,11 @@
+<div class="alert-modal" [ngClass]="'alert-' + alertType">
+  <div class="modal-header">
+    <h4>{{title}}</h4>
+  </div>
+  <mat-dialog-content class="modal-content">
+    {{message}}
+  </mat-dialog-content>
+  <mat-dialog-actions class="modal-footer">
+    <button mat-button (click)="closeDialog()" type="button">{{buttonLabel}}</button>
+  </mat-dialog-actions>
+</div>

@@ -5,6 +5,8 @@ import * as moment from 'moment';
 import { UsuarioFormService } from './usuario-form/usuario-form.service';
 import { Usuario } from '../../models/usuario-model';
 import { UsuarioService } from '../../services/usuario.service';
+import { ConfirmService, LoaderService } from '../../core';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -25,6 +27,9 @@ export class UsuarioComponent implements OnInit {
 
   constructor(private usuarioService: UsuarioService,
     private usuarioForService: UsuarioFormService,
+    private confirmService: ConfirmService,
+    private snackBar: MatSnackBar,
+    private loaderService: LoaderService,
     private fb: FormBuilder) { }
 
   displayedColumns: string[] = ['pessoa.nome', 'pessoa.cpf', 'userName', 'pessoa.email', 'edit' ,'del'];
@@ -46,7 +51,25 @@ export class UsuarioComponent implements OnInit {
   }
 
   deleteClick(usuario: Usuario) {
-    this.usuarioService.delete(usuario.usuarioId);
+    this.confirmService.activate()
+      .then(confirmed => {
+        if (confirmed) {
+          this.loaderService.show();
+          this.usuarioService.delete(usuario.usuarioId)
+            .then(deleted => {
+              this.listar();
+              this.snackBar.open('Registro excluído com sucesso!.', 'Fechar', {
+                duration: 5000
+              });
+            },
+              error => {
+                this.snackBar.open(<string>error, 'Fechar', {
+                  duration: 50000
+                });
+                this.loaderService.hide();
+              });
+        }
+      });
   }
 
   createClick(): void {

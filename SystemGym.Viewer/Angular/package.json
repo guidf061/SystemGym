@@ -27,6 +27,7 @@
     "@angular/platform-server": "8.2.12",
     "@angular/router": "8.2.12",
     "@ng-bootstrap/ng-bootstrap": "4.0.2",
+    "@ng-idle/core": "^8.0.0-beta.4",
     "ajv": "6.7.0",
     "ajv-keywords": "3.3.0",
     "bootstrap": "4.2.1",
