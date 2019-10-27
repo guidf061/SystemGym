@@ -18,7 +18,7 @@ export class UsuarioFormService {
     dialogRef = this.dialog.open(UsuarioFormComponent, {
       disableClose: true,
       width: '450px',
-      height: '650px',
+      height: '600px',
       panelClass: 'modal-wrapper',
       data: usuario
     });

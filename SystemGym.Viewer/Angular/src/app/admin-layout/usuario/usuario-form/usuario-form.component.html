@@ -4,16 +4,16 @@
       <mat-toolbar color="warn">
         <mat-toolbar-row>
           <div fxLayout="row" fxLayoutAlign="space-between">
-            <div fxFlex="50px" fxFlexAlign="center">
-              <button mat-icon-button (click)="closeDialog(false);" type="button">
+            <div fxFlex="105px" fxFlexAlign="center">
+              <button mat-icon-button (click)="closeDialog(false);" type="button" matTooltip="Fechar" matTooltipPosition="left" tabindex="-1">
                 <mat-icon>arrow_back</mat-icon>
               </button>
             </div>
-            <div fxFlex fxFlexAlign="center" fxFlexOffset.gt-sm="10px">
+            <div fxFlex="180px" fxFlexAlign="center" fxFlexOffset.gt-sm="10px">
               {{ title }}
             </div>
             <div fxFlex="50px" fxFlexAlign="center">
-              <button mat-icon-button id="saveButton" (click)="saveClick();" tabindex="-1">
+              <button mat-icon-button id="saveButton" (click)="saveClick();" matTooltip="Salvar" matTooltipPosition="left" tabindex="-1">
                 <mat-icon>save</mat-icon>
               </button>
             </div>
