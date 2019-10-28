@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.css']
+  styleUrls: ['./usuario.component.scss']
 })
 export class UsuarioComponent implements OnInit {
 
@@ -35,9 +35,10 @@ export class UsuarioComponent implements OnInit {
   displayedColumns: string[] = ['pessoa.nome', 'pessoa.cpf', 'userName', 'pessoa.email', 'edit' ,'del'];
 
   ngOnInit() {
+
+    this.createFormGroup();
     this.listar();
 
-  //  this.createFormGroup();
   }
 
 
@@ -70,6 +71,12 @@ export class UsuarioComponent implements OnInit {
               });
         }
       });
+  }
+
+  private createFormGroup(): void {
+    this.form = this.fb.group({
+      nome: '',
+    });
   }
 
   createClick(): void {

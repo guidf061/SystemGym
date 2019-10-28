@@ -10,7 +10,7 @@ import { AlunoService } from '../../services/aluno.service';
 @Component({
   selector: 'app-aluno',
   templateUrl: './aluno.component.html',
-  styleUrls: ['./aluno.component.css']
+  styleUrls: ['./aluno.component.scss']
 })
 export class AlunoComponent implements OnInit {
 

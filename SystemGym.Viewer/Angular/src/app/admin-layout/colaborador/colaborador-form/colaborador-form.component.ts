@@ -11,7 +11,7 @@ import { Pessoa } from '../../../models/pessoa-model';
 @Component({
   selector: 'app-colaborador-form',
   templateUrl: './colaborador-form.component.html',
-  styleUrls: ['./colaborador-form.component.css']
+  styleUrls: ['./colaborador-form.component.scss']
 })
 export class ColaboradorFormComponent implements OnInit {
   form: FormGroup;

@@ -9,7 +9,7 @@ import { Colaborador } from '../../models/colaborador-model';
 @Component({
   selector: 'app-colaborador',
   templateUrl: './colaborador.component.html',
-  styleUrls: ['./colaborador.component.css']
+  styleUrls: ['./colaborador.component.scss']
 })
 export class ColaboradorComponent implements OnInit {
 

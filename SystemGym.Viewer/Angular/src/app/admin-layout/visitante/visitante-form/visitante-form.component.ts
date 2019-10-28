@@ -14,7 +14,7 @@ import { Pessoa } from '../../../models/pessoa-model';
 @Component({
   selector: 'app-visitante-form',
   templateUrl: './visitante-form.component.html',
-  styleUrls: ['./visitante-form.component.css']
+  styleUrls: ['./visitante-form.component.scss']
 })
 export class VisitanteFormComponent implements OnInit {
   form: FormGroup;

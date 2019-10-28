@@ -11,7 +11,7 @@ import { Pessoa } from '../../../models/pessoa-model';
 @Component({
   selector: 'app-aluno-form',
   templateUrl: './aluno-form.component.html',
-  styleUrls: ['./aluno-form.component.css']
+  styleUrls: ['./aluno-form.component.scss']
 })
 export class AlunoFormComponent implements OnInit {
   form: FormGroup;

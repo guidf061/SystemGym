@@ -1,0 +1,31 @@
+.toolbar {
+  position: fixed;
+  top: 0;
+  padding: 0 0 0 10px;
+  z-index: 502; /*TOP ON mat-sidenav*/
+}
+
+  .toolbar div[fxLayout] {
+    width: 100%;
+  }
+
+.toolbar-title {
+  font-size: 20px;
+  font-weight: 400 !important;
+  text-transform: uppercase;
+  line-height: 36px;
+  letter-spacing: 0.02em;
+}
+
+.toolbar-buttons {
+  margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+  .toolbar-buttons {
+    margin-right: 10px;
+  }
+}
+
+.more-buttom {
+}
