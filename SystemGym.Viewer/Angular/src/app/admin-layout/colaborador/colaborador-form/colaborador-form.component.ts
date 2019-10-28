@@ -4,8 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
 import { Colaborador } from '../../../models/colaborador-model';
 import { ColaboradorService } from '../../../services/colaborador.service';
-import { LoaderService } from '../../../services/loader.service';
+
 import { Pessoa } from '../../../models/pessoa-model';
+import { LoaderService } from '../../../core';
 
 
 @Component({

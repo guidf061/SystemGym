@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Montreal.Process.Sistel.Models;
 using SystemGym.Model.Usuario;
 using SystemGym.Service;
 
@@ -29,6 +30,16 @@ namespace SystemGym.WebApi.Controllers
         public ActionResult<UsuarioReturnModel> Get(Guid usuarioId)
         {
             return this.Ok(this.usuarioService.Get(usuarioId));
+        }
+
+        /// <summary>
+        /// Pesquisa Usuário.
+        /// </summary>
+        /// <param name="model"></param>
+        [HttpGet("Search")]
+        public async Task<ActionResult<PagingModel<UsuarioReturnModel>>> GetAsync([FromQuery] UsuarioSearchModel model)
+        {
+            return this.Ok(await this.usuarioService.SearchAsync(model));
         }
 
         // POST api/values

@@ -6,8 +6,9 @@ import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
 
 import { Visitante } from '../../../models/visitante-model';
 import { VisitanteService } from '../../../services/visitante.service';
-import { LoaderService } from '../../../services/loader.service';
+
 import { Pessoa } from '../../../models/pessoa-model';
+import { LoaderService } from '../../../core';
 
 
 

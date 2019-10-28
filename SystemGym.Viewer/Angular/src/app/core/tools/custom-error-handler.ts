@@ -89,4 +89,25 @@ export class CustomErrorHandler extends ErrorHandler {
     });
   }
 
+  static extractErrorMessage(err: any): string {
+    let message: string;
+
+    if (err.error && err.error.message) {
+      message = err.error.message;
+    }
+    else if (err.status === 0) {
+      message = "Não foi possível conectar no servidor.";
+    }
+    else if (err.message) {
+      message = err.message;
+    }
+
+    return message;
+  }
+
+  static handleApiError(error: any) {
+    let errMsg = CustomErrorHandler.extractErrorMessage(error);
+    return Promise.reject(errMsg);
+  }
+
 }

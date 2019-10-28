@@ -18,6 +18,7 @@ import { CoreModule } from '@angular/flex-layout';
 import { ConfirmService, LoaderService } from './core';
 import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
     AdminLayoutComponent,
     ConfirmComponent,
     AlertDialogComponent,
+    LoaderComponent,
   ],
   exports: [
   ],

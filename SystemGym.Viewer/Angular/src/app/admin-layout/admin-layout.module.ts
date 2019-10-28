@@ -14,7 +14,6 @@ import { MatTableModule, MatIconModule } from '@angular/material';
 import { VisitanteService } from '../services/visitante.service';
 import { AlunoService } from '../services/aluno.service';
 import { ColaboradorService } from '../services/colaborador.service';
-import { LoaderService } from '../services/loader.service';
 
 import { MaterialModule } from '../material/material.module';
 import { UsuarioService } from '../services/usuario.service';
@@ -77,7 +76,6 @@ import { SharedModule } from '../shared/shared.module';
   providers: [
     UsuarioFormService,
     UsuarioService,
-    LoaderService,
     ColaboradorService,
     AlunoService,
     VisitanteService,

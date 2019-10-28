@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Montreal.Process.Sistel.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using SystemGym.DataAccess.Models;
 using SystemGym.Model.Pessoa;
 using SystemGym.Model.Usuario;
@@ -82,31 +84,52 @@ namespace SystemGym.Service
                 .FirstOrDefault();
         }
 
-
-        public List<UsuarioReturnModel> Search(UsuarioSearchModel usuarioModel)
+        public async Task<PagingModel<UsuarioReturnModel>> SearchAsync(UsuarioSearchModel usuarioModel)
         {
             var query = this.context.Usuario
                 .Include(x => x.Pessoa)
                 .AsQueryable();
+
 
             if (!string.IsNullOrEmpty(usuarioModel.Nome))
             {
                 query = query.Where(x => x.Pessoa.Nome.Equals(usuarioModel.Nome));
             }
 
-            return query
+            if (!string.IsNullOrEmpty(usuarioModel.Cpf))
+            {
+                query = query.Where(x => x.Pessoa.Cpf.Equals(usuarioModel.Cpf));
+            }
+
+            var pagingModel = new PagingModel<UsuarioReturnModel>();
+
+            pagingModel.TotalItems = query.Count();
+
+            if (!string.IsNullOrEmpty(usuarioModel.Sort))
+            {
+                query = query.OrderBy(x => x.Pessoa.Nome);
+            }
+
+            pagingModel.Items = (await query
+                .Skip(usuarioModel.PageSize * (usuarioModel.Page - 1))
+                .Take(usuarioModel.PageSize)
+                .ToListAsync())
                 .Select(x => new UsuarioReturnModel()
                 {
                     UsuarioId = x.UsuarioId,
                     Password = x.Password,
                     DataAcesso = x.DataAcesso,
+                    UserName = x.UserName,
                     Pessoa = new PessoaReturnModel()
                     {
                         PessoaId = x.PessoaId,
                         Nome = x.Pessoa.Nome,
                         Cpf = x.Pessoa.Cpf,
+                        Email = x.Pessoa.Email,
                     }
                 }).ToList();
+
+            return pagingModel;
         }
 
         public UsuarioReturnModel Login(string userName, string password)
