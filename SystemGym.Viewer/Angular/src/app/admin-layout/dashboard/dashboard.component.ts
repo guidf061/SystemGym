@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
+import { AuthService } from '../../core/tools/auth.service';
+import { Router } from '@angular/router';
+import { LoginService } from '../../core/login.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -57,9 +60,12 @@ export class DashboardComponent implements OnInit {
       return "rgb(" + r + ", " + g + ", " + b + ")";
     }
   }
-  constructor() { }
+  constructor(private loginService: LoginService,
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
+
     this.chartColor = "#FFFFFF";
     this.canvas = document.getElementById("bigDashboardChart");
     this.ctx = this.canvas.getContext("2d");

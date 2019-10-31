@@ -15,10 +15,13 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { CoreModule } from '@angular/flex-layout';
-import { ConfirmService, LoaderService } from './core';
+import { ConfirmService, LoaderService, JwtService } from './core';
 import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { LoginComponent } from './components/login/login.component';
+import { LoginService } from './core/login.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -38,6 +41,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     ConfirmComponent,
     AlertDialogComponent,
     LoaderComponent,
+    LoginComponent,
+    HomeComponent
   ],
   exports: [
   ],
@@ -45,10 +50,13 @@ import { LoaderComponent } from './components/loader/loader.component';
   entryComponents: [
     AlertDialogComponent,
     ConfirmComponent,
+    LoginComponent,
   ],
   providers: [
     ConfirmService,
-    LoaderService,],
+    LoaderService,
+    LoginService,
+    JwtService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

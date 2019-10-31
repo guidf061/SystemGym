@@ -65,5 +65,24 @@ namespace SystemGym.WebApi.Controllers
             this.usuarioService.Delete(usuarioId);
             return this.Ok();
         }
+        [HttpPost("Login")]
+        [ProducesResponseType(400)]
+        public ActionResult Login(LoginModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest();
+            }
+
+            var user = this.usuarioService.Login(model.UserName, model.Password);
+
+            if (user == null)
+            {
+                return this.BadRequest();
+            }
+
+            return this.Ok();
+        }
+
     }
 }

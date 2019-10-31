@@ -3,24 +3,29 @@ import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: '/home',
     pathMatch: 'full',
-  }, {
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+  },
+  {
     path: '',
     component: AdminLayoutComponent,
     children: [
         {
       path: '',
-      loadChildren: './admin-layout/admin-layout.module#AdminLayoutModule'
+        loadChildren: './admin-layout/admin-layout.module#AdminLayoutModule',
+        data: {
+          preload: true
+        }
   }]},
-  {
-    path: '**',
-    redirectTo: 'dashboard'
-  }
 ];
 
 @NgModule({

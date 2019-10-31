@@ -9,7 +9,6 @@ import { CustomErrorHandler } from './tools/custom-error-handler';
 import { JwtService } from './tools/jtw.service';
 import { LoaderService } from './loader.service';
 import { MobileGuard } from './tools/mobile-guard.service';
-import { ToolbarService } from './toolbar.service';
 import { NgIdleModule } from '@ng-idle/core';
 
 
@@ -17,6 +16,9 @@ registerLocaleData(lcoalePT);
 
 import * as moment from 'moment';
 import 'moment/locale/pt-br';
+import { AuthService } from './tools/auth.service';
+import { LoggedUserService } from './tools/logged-user.service';
+import { LoginService } from './login.service';
 
 @NgModule({
   imports: [
@@ -25,12 +27,14 @@ import 'moment/locale/pt-br';
   providers: [
     { provide: ErrorHandler, useClass: CustomErrorHandler },
     { provide: LOCALE_ID, useValue: "pt" },
+    AuthService,
     AlertDialogService,
     ConfirmService,
+    LoggedUserService,
     JwtService,
     LoaderService,
     MobileGuard,
-    ToolbarService,
+    LoginService
   ],
   exports: [
   ],

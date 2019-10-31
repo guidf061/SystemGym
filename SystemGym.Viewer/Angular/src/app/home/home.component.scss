@@ -1,0 +1,162 @@
+
+hr {
+  position: absolute;
+  left: 0;
+  width: calc(100% - 80px);
+  margin: 0 40px 0 40px;
+}
+
+.hero {
+  background: mat-color() url() center/cover no-repeat;
+  height: 500px;
+
+  a {
+    font-weight: 400;
+    letter-spacing: .010em;
+    color: #000000;
+  }
+}
+
+.hero-container {
+  padding: 56px 0 56px 0 !important;
+
+  h1 {
+    font-size: 46px;
+    font-size: 2.875rem;
+    margin: 8px 0 0 0;
+    margin: .5rem 0 0 0;
+    color: #fff;
+    font-weight: 100;
+  }
+
+  h2 {
+    font-size: 2.8rem;
+    margin: 0 0 2.625rem 0;
+    color: #fff;
+    font-weight: 300;
+  }
+}
+
+.hero-right-panel {
+  position: relative;
+  height: 320px;
+}
+
+.getstarted {
+  margin-top: 60px;
+}
+
+.getstarted button {
+  padding: 5px 30px;
+  margin: 0 5px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  color: white;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: .3px;
+  height: 100px;
+  width: 100%;
+  background-color: mat-color(A700);
+}
+
+@media only screen and (max-width: 1599px) {
+  .hero-container {
+    padding: 36px 0 36px 0 !important;
+
+    h2 {
+      margin: 0 0 22px 0;
+      font-size: 2.5rem;
+    }
+
+    .hero-logo img {
+      width: 290px;
+    }
+  }
+
+  .hero-right-panel {
+    height: 200px;
+    padding-top: 20px;
+  }
+
+  .hero {
+    height: 400px;
+  }
+}
+
+@media only screen and (max-width: 1279px) {
+  .hero-container {
+    padding: 36px 0 36px 0 !important;
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      margin: 0 0 22px 0;
+      font-size: 24px;
+      font-size: 2.5rem;
+      text-align: center;
+    }
+
+    .hero-logo img {
+      width: 250px;
+    }
+  }
+
+  .hero-right-panel {
+    height: 200px;
+    padding-top: 20px;
+  }
+
+  .getstarted {
+    padding: 10px 10px 0 10px;
+    text-align: center;
+  }
+
+  .hero {
+    height: 600px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  hr {
+    position: absolute;
+    left: 0;
+    width: calc(100% - 10px);
+    margin: 0 5px 0 5px;
+  }
+
+  .hero-container {
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    .hero-logo img {
+      width: 250px;
+    }
+  }
+
+  .home-section {
+    max-width: 100%;
+    padding: 20px 0 20px 0;
+
+    img {
+      margin: 20px 0 20px 0;
+    }
+  }
+
+  .footer {
+    height: 150px;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .home-section img {
+    max-width: 95%;
+  }
+}

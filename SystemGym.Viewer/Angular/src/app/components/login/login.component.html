@@ -1,0 +1,46 @@
+<div class="dialog" fxLayout="column" fxFlexFill>
+  <div fxFlex="100%">
+    <form [formGroup]="form">
+      <div class="dialog-content">
+
+        <div fxLayout="row">
+          <div fxFlex>
+            <mat-form-field>
+              <input matInput placeholder="Login" formControlName="userName" required>
+              <mat-error *ngIf="form.controls['userName'].hasError('required')">
+                Campo Obrigatório
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row">
+          <div fxFlex>
+            <mat-form-field>
+              <input type="password" matInput placeholder="Senha" formControlName="password" required>
+              <mat-error *ngIf="form.controls['password'].hasError('required')">
+                Campo Obrigatório
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row" *ngIf="false">
+          <div fxFlex>
+            {{form.value | json}}
+          </div>
+        </div>
+
+      </div>
+      <div class="dialog-footer">
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <div fxFlex="90px">
+            <button mat-raised-button type="button" (click)="closeDialog(false)" color="primary">Fechar</button>
+          </div>
+          <div fxFlex="75px">
+            <button mat-raised-button type="submit" (click)="login()" color="primary">Logar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

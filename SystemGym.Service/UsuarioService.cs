@@ -2,6 +2,7 @@
 using Montreal.Process.Sistel.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -134,7 +135,7 @@ namespace SystemGym.Service
 
         public UsuarioReturnModel Login(string userName, string password)
         {
-            return this.context.Usuario
+            var usuario = this.context.Usuario
                 .Include(x => x.Pessoa)
                 .Where(x => x.UserName.Equals(userName) && x.Password.Equals(password))
                 .ToList()
@@ -151,6 +152,13 @@ namespace SystemGym.Service
                     }
                 })
                 .FirstOrDefault();
+
+            if (usuario == null)
+            {
+                throw new ValidationException("Usuário ou senha inválido!");
+            }
+
+            return usuario;
         }
 
         public void Adicionar(UsuarioBindingModel usuarioModel)
