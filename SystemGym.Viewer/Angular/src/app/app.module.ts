@@ -37,7 +37,6 @@ import { HomeComponent } from './home/home.component';
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
     ConfirmComponent,
     AlertDialogComponent,
     LoaderComponent,

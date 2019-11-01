@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminLayoutRoutes } from './admin-layout.routing';
+
 
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -32,12 +32,17 @@ import { VisitanteFormService } from './visitante/visitante-form/visitante-form.
 import { AlunoFormService } from './aluno/aluno-form/aluno-form.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
+import { AdminLayoutComponent } from './admin-layout.component';
+import { AdminLayoutRouting } from './admin-layout.routing';
+import { ComponentsModule } from '../components/components.module';
+
 
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
+    ComponentsModule,
+    AdminLayoutRouting,
     FormsModule,
     ChartsModule,
     NgbModule,
@@ -59,6 +64,7 @@ import { SharedModule } from '../shared/shared.module';
     VisitanteFormComponent,
     ColaboradorComponent,
     ColaboradorFormComponent,
+    AdminLayoutComponent,
   ],
 
   entryComponents: [

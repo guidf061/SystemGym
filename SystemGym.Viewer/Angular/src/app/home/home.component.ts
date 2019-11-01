@@ -21,12 +21,12 @@ export class HomeComponent implements OnInit {
     if (!this.authService.loggedIn()) {
       this.loginService.showDialog().subscribe(logado => {
         if (logado) {
-          this.router.navigate(['/admin-layout/dashboard/dashboard.component']);
+          this.router.navigate(['./admin-layout/dashboard']);
         }
       });
     }
     else {
-      this.router.navigate(['/admin/produto']);
+      this.router.navigate(['./admin-layout/dashboard']);
     }
   }
 }
