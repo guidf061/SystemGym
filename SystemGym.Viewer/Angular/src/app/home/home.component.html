@@ -1,16 +1,30 @@
-  <!--The content below is only a placeholder and can be replaced.-->
-<div fxLayout="row" fxLayoutAlign="center center">
-  <div fxFlex="90px">
-    <button mat-raised-button type="button" (click)="openLogin()" color="primary">Acessar</button>
+<div [@fadeIn]="'in'">
+  <div fxLayout="row" fxLayoutAlign="center" class="hero">
+    <div fxFlex="100%" fxFlex.gt-md="1200px" class="hero-container">
+      <div fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign="center">
+        <div fxFlex="50%" fxFlex.gt-md="40%" fxFlexAlign="center" class="hero-logo center-align">
+          <img src="./assets/img/angular2-logo-red.png">
+        </div>
+        <div fxFlex="150px" fxFlex.gt-md="60%" fxFlexAlign="center" class="hero-right-panel">
+          <div class="getstarted">
+            <h2 class="tagline">Sistema de Gerenciamento<br />de Academia.</h2>
+            <button mat-raised-button type="button" (click)="access()">ACESSAR</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-
-
-
-
-
-
+<div fxLayout="row" fxLayoutAlign="center" class="footer" *ngIf="false">
+  <div fxFlex="100%" fxFlex.gt-md="1024px">
+    <div fxLayout="column" fxLayoutAlign="center">
+      <div fxFlex="50px" fxFlex.lt-md="50px">&nbsp;</div>
+      <div fxFlex class="center-align">
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

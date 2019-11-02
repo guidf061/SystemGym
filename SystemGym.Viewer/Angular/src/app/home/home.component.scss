@@ -7,8 +7,13 @@ hr {
 }
 
 .hero {
-  background: mat-color() url() center/cover no-repeat;
-  height: 500px;
+  background: url('../../assets/img/imagem-home.png') center no-repeat;
+  height: 100px;
+  display: table;
+  width: 100%;
+  height: 100vh;
+  padding: 100px;
+  background-size: cover;
 
   a {
     font-weight: 400;
@@ -81,10 +86,6 @@ hr {
   .hero-right-panel {
     height: 200px;
     padding-top: 20px;
-  }
-
-  .hero {
-    height: 400px;
   }
 }
 
