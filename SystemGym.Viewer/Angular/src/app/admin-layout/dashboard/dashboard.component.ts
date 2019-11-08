@@ -80,7 +80,7 @@ export class DashboardComponent implements OnInit {
 
     this.lineBigDashboardChartData = [
         {
-          label: "Data",
+          label: "Matrícula",
 
           pointBorderWidth: 1,
           pointHoverRadius: 7,
@@ -88,8 +88,9 @@ export class DashboardComponent implements OnInit {
           pointRadius: 5,
           fill: true,
 
-          borderWidth: 2,
-          data: [50, 150, 100, 190, 130, 90, 150, 160, 120, 140, 190, 95]
+        borderWidth: 2,
+               //jan,fev,mar, abr, mai,jun, jul, ago, set, out, nov, dez
+          data: [50, 25, 100, 190, 130, 90, 150, 160, 120, 140, 190]
         }
       ];
       this.lineBigDashboardChartColors = [
@@ -102,7 +103,7 @@ export class DashboardComponent implements OnInit {
          pointHoverBorderColor: this.chartColor,
        }
      ];
-    this.lineBigDashboardChartLabels = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    this.lineBigDashboardChartLabels = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
     this.lineBigDashboardChartOptions = {
 
           layout: {

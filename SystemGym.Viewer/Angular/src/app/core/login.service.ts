@@ -16,7 +16,7 @@ export class LoginService {
 
     dialogRef = this.dialog.open(LoginComponent, {
       disableClose: true,
-      width: '350px',
+      width: '300px',
       height: '300px',
       //panelClass: 'modal-wrapper',
     });

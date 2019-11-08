@@ -1,57 +1,47 @@
-<div class="modal">
-  <div class="modal-header">
-    <mat-toolbar color="primary">
-      <div fxLayout="row" fxLayoutAlign="space-between">
-        <div fxFlex="50px" fxFlexAlign="center" *ngIf="false">
-          <button mat-icon-button (click)="back();" type="button" tabindex="-1">
-            <mat-icon>arrow_back</mat-icon>
-          </button>
-        </div>
-        <div fxFlex fxFlexAlign="center" fxFlexOffset.gt-sm="10px">
-          {{ title }}
-        </div>
-      </div>
-    </mat-toolbar>
-  </div>
 
-  <mat-dialog-content class="modal-mobile-content form-theme">
-
-    <mat-tab-group #panelView class="tab-hidden-header tab-no-scroll">
-
-      <mat-tab label="Login">
+  <div class="dialog" fxLayout="column" fxFlexFill>
+    <div style="display: block;
+    color: crimson;
+    line-height: 1.2;
+    text-align: center;">
+      <h4>Login</h4>
+    </div>
+      <div fxFlex="100%" style="margin-top:20px;">
         <form [formGroup]="form">
-          <div fxLayout="row">
-            <div fxFlex="100%">
-              <mat-form-field>
-                <input matInput #emailInput placeholder="Usuário" type="email" 
-                       required
-                       autocomplete="off" />
-                
-              </mat-form-field>
+          <div class="dialog-content">
+
+            <div fxLayout="row">
+              <div fxFlex>
+                <mat-form-field>
+                  <input matInput placeholder="Login" formControlName="userName" required>
+                  <mat-error *ngIf="form.controls['userName'].hasError('required')">
+                    Campo Obrigatório
+                  </mat-error>
+                </mat-form-field>
+              </div>
             </div>
-          </div>
-          <div fxLayout="row">
-            <div fxFlex="100%">
-              <mat-form-field>
-                <input matInput #passwordInput name="password" class="login-input" placeholder="Senha" type="password" formControlName="password"
-                       required
-                       autocomplete="off" />
-              </mat-form-field>
+            <div fxLayout="row">
+              <div fxFlex>
+                <mat-form-field>
+                  <input type="password" matInput placeholder="Senha" formControlName="password" required>
+                  <mat-error *ngIf="form.controls['password'].hasError('required')">
+                    Campo Obrigatório
+                  </mat-error>
+                </mat-form-field>
+              </div>
             </div>
+
           </div>
-          <div fxLayout="row" class="center-align">
-            <div fxFlex="100%">
-              <span class="center-align red-text">{{ invalidLogin }}</span>
-            </div>
-          </div>
-          <div fxLayout="row" fxLayoutAlign="start">
-            <div fxFlex="100%" class="right-align">
-              <button mat-raised-button color="accent" type="submit" (click)="loginClick()">Login</button>
+          <div style="margin-top:20px">
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <div fxFlex>
+                <button mat-raised-button type="button" class="btn" (click)="closeDialog(false)" color="warn">Fechar</button>
+              </div>
+              <div fxFlex="60px">
+                <button mat-raised-button type="submit" class="btn" (click)="login()" color="warn">Logar</button>
+              </div>
             </div>
           </div>
         </form>
-      </mat-tab>
-    </mat-tab-group>
-
-  </mat-dialog-content>
-</div>
+      </div>
+    </div>

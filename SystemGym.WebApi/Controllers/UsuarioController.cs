@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Montreal.Process.Sistel.Models;
 using SystemGym.Model.Usuario;
@@ -65,6 +66,8 @@ namespace SystemGym.WebApi.Controllers
             this.usuarioService.Delete(usuarioId);
             return this.Ok();
         }
+
+        [AllowAnonymous]
         [HttpPost("Login")]
         [ProducesResponseType(400)]
         public ActionResult Login(LoginModel model)

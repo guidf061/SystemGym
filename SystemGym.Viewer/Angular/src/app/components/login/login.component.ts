@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
     private http: HttpClient,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
     private dialogRef: MatDialogRef<LoginComponent>,
     private fb: FormBuilder) {
   }

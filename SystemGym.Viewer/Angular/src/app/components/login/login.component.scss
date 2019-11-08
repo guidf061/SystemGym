@@ -1,7 +1,45 @@
-.forgot-password-wraper {
-  padding: 5px 0 0 0;
+.example-container {
+  display: flex;
+  flex-direction: column;
 }
 
-.forgot-password {
-  cursor: pointer;
+.example-container > * {
+  width: 100%;
 }
+
+.container {
+  display: flex;
+  width: 100%;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+div[fxlayout] {
+  margin: 0 5px 0 5px;
+}
+
+.mat-select {
+  width: 100%;
+}
+
+mat-toolbar-row {
+  width: 100%;
+}
+
+button {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  min-height: 24px;
+}
+
+.mat-icon {
+  font-size: 20px;
+}
+
+.btn {
+  padding: 0;
+  width: 30px;
+  height: 30px;
+}
+
