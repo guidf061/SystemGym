@@ -13,11 +13,13 @@ namespace SystemGym.DataAccess.Models
         }
 
         public virtual DbSet<Aluno> Aluno { get; set; }
+        public virtual DbSet<Ano> Ano { get; set; }
         public virtual DbSet<Colaborador> Colaborador { get; set; }
         public virtual DbSet<FormaPagamento> FormaPagamento { get; set; }
         public virtual DbSet<Funcao> Funcao { get; set; }
         public virtual DbSet<GerenciarAluno> GerenciarAluno { get; set; }
         public virtual DbSet<GerenciarVisitante> GerenciarVisitante { get; set; }
+        public virtual DbSet<Mes> Mes { get; set; }
         public virtual DbSet<Pagamento> Pagamento { get; set; }
         public virtual DbSet<Pessoa> Pessoa { get; set; }
         public virtual DbSet<Sexo> Sexo { get; set; }
@@ -27,7 +29,6 @@ namespace SystemGym.DataAccess.Models
         public virtual DbSet<TipoNotificacao> TipoNotificacao { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Visitante> Visitante { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -59,6 +60,16 @@ namespace SystemGym.DataAccess.Models
                     .WithMany(p => p.Aluno)
                     .HasForeignKey(d => d.SituacaoAlunoId)
                     .HasConstraintName("FK_Aluno_SituacaoAluno");
+            });
+
+            modelBuilder.Entity<Ano>(entity =>
+            {
+                entity.Property(e => e.AnoId).ValueGeneratedNever();
+
+                entity.Property(e => e.Descricao)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Colaborador>(entity =>
@@ -157,17 +168,25 @@ namespace SystemGym.DataAccess.Models
                     .HasConstraintName("FK_GerenciarVisitante_Visitante");
             });
 
+            modelBuilder.Entity<Mes>(entity =>
+            {
+                entity.Property(e => e.Descricao)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Pagamento>(entity =>
             {
+                entity.HasIndex(e => e.PagamentoId)
+                    .HasName("IX_Pagamento_Ano")
+                    .IsUnique();
+
                 entity.Property(e => e.PagamentoId).HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.DataCriacao).HasColumnType("datetime");
 
                 entity.Property(e => e.DataPagamento).HasColumnType("datetime");
-
-                entity.Property(e => e.Nome)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.ValorMensalidade)
                     .IsRequired()
@@ -180,11 +199,29 @@ namespace SystemGym.DataAccess.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Pagamento_Aluno");
 
+                entity.HasOne(d => d.Ano)
+                    .WithMany(p => p.Pagamento)
+                    .HasForeignKey(d => d.AnoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Pagamento_Ano");
+
+                entity.HasOne(d => d.Colaborador)
+                    .WithMany(p => p.Pagamento)
+                    .HasForeignKey(d => d.ColaboradorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Pagamento_Colaborador");
+
                 entity.HasOne(d => d.FormaPagamento)
                     .WithMany(p => p.Pagamento)
                     .HasForeignKey(d => d.FormaPagamentoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Pagamento_FormaPagamento");
+
+                entity.HasOne(d => d.Mes)
+                    .WithMany(p => p.Pagamento)
+                    .HasForeignKey(d => d.MesId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Pagamento_Mes");
             });
 
             modelBuilder.Entity<Pessoa>(entity =>

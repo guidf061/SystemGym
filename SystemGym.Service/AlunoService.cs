@@ -139,5 +139,39 @@ namespace SystemGym.Service
 
             this.context.SaveChanges();
         }
+
+        public void Pagamento(PagamentoBindingModel model)
+        {
+            using (var transaction = this.context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var pagamento = new Pagamento()
+                    {
+                        AlunoId = model.AlunoId,
+                        ColaboradorId = model.ColaboradorId,
+                        DataPagamento = DateTime.UtcNow,
+                        ValorMensalidade = model.ValorMensalidade,
+                        MesId = model.MesId,
+                        AnoId = model.AnoId,
+                        FormaPagamentoId = model.FormaPagamentoId,
+                        DataCriacao = DateTime.UtcNow,
+                    };
+
+                    this.context.Pagamento.Add(pagamento);
+                    this.context.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+
+                }
+            }
+        }
+
+
     }
 }

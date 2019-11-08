@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SystemGym.Model.Aluno;
+using SystemGym.Model.Pagamento;
 using SystemGym.Model.Pessoa;
 using SystemGym.Service;
 
@@ -57,6 +58,13 @@ namespace SystemGym.WebApi.Controllers
             this.alunoService.Delete(alunoId);
             return this.Ok();
 
+        }
+
+        [HttpPost("Pagamento")]
+        public ActionResult Post([FromBody] PagamentoBindingModel model)
+        {
+            this.alunoService.Pagamento(model);
+            return this.Ok();
         }
     }
 }
