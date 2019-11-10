@@ -89,11 +89,12 @@ namespace SystemGym.Service
                 {
                     var aluno = new Aluno()
                     {
+                        PessoaId = pessoaService.Adicionar(alunoModel.Pessoa),
                         NumeroCartao = alunoModel.NumeroCartao,
                         CriacaoData = DateTime.UtcNow,
                         AlteracaoData = DateTime.UtcNow,
                         SituacaoAlunoId = alunoModel.SituacaoAlunoId,
-                        PessoaId = pessoaService.Adicionar(alunoModel.Pessoa)
+                        Ativo = alunoModel.Ativo,  
                     };
 
                     this.context.Aluno.Add(aluno);
@@ -156,6 +157,7 @@ namespace SystemGym.Service
                         AnoId = model.AnoId,
                         FormaPagamentoId = model.FormaPagamentoId,
                         DataCriacao = DateTime.UtcNow,
+                        
                     };
 
                     this.context.Pagamento.Add(pagamento);

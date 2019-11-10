@@ -6,7 +6,6 @@ namespace SystemGym.DataAccess.Models
 {
     public partial class SystemGymContext : DbContext
     {
-
         public SystemGymContext(DbContextOptions<SystemGymContext> options)
             : base(options)
         {

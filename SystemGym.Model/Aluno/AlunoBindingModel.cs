@@ -14,6 +14,7 @@ namespace SystemGym.Model.Aluno
         public DateTime? AlteracaoData { get; set; }
         public PessoaBindingModel Pessoa {get; set;}
         public List<PagamentoBindingModel> Pagamento { get; set; }
+        public bool Ativo { get; set; }
 
     }
 }

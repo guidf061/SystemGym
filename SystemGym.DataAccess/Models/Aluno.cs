@@ -15,8 +15,9 @@ namespace SystemGym.DataAccess.Models
         public Guid PessoaId { get; set; }
         public string NumeroCartao { get; set; }
         public int? SituacaoAlunoId { get; set; }
-        public DateTime? CriacaoData { get; set; }
-        public DateTime? AlteracaoData { get; set; }
+        public DateTime CriacaoData { get; set; }
+        public DateTime AlteracaoData { get; set; }
+        public bool Ativo { get; set; }
 
         public virtual Pessoa Pessoa { get; set; }
         public virtual SituacaoAluno SituacaoAluno { get; set; }
