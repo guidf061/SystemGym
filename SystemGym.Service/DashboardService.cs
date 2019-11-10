@@ -13,18 +13,16 @@ namespace SystemGym.Service
     public class DashboardService
     {
         private readonly SystemGymContext context;
-        private readonly PessoaService pessoaService;
-        private readonly AlunoService  alunoService;
 
         public DashboardService(SystemGymContext context, PessoaService pessoaService)
         {
             this.context = context;
-            this.pessoaService = pessoaService;
         }
 
         public DashboardQuantityReturnModel GetQuantity()
         {
             DateTime date = new DateTime(2019, 01, 01);
+            DateTime nowDate = DateTime.Now;
 
                 var query = this.context.Aluno
                 .Include(x => x.Pessoa)
@@ -42,53 +40,52 @@ namespace SystemGym.Service
 
             var quantityModel = new DashboardQuantityReturnModel
             {
-
-                Janeiro = this.context.Aluno
-                .Where(x => x.Pessoa.CriacaoData.Value.Month.Equals(date.Month) && x.Ativo.Equals(true))
+                Janeiro = query
+                .Where(x => x.CriacaoData.Value.Month.Equals(date.Month))
                 .Count(),
 
-                Fevereiro = this.context.Aluno
-                .Where(x => x.Pessoa.CriacaoData.Value.Month.Equals(date.AddMonths(1)) && x.Ativo.Equals(true))
+                Fevereiro = query
+                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(1)))
                 .Count(),
 
-                Marco = this.context.Aluno
-                .Where(x => x.Pessoa.CriacaoData.Value.Month.Equals(date.AddMonths(2)) && x.Ativo.Equals(true))
+                Marco = query
+                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(2)))
                 .Count(),
 
-                Abriu = this.context.Aluno
-                .Where(x => x.Pessoa.CriacaoData.Value.Month.Equals(date.AddMonths(3)) && x.Ativo.Equals(true))
+                Abriu = query
+                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(3)))
                 .Count(),
 
-                Maio = this.context.Aluno
-                .Where(x => x.Pessoa.CriacaoData.Value.Month.Equals(date.AddMonths(4)) && x.Ativo.Equals(true))
+                Maio = query
+                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(4)))
                 .Count(),
 
-                Junho = this.context.Aluno
-                .Where(x => x.Pessoa.CriacaoData.Value.Month.Equals(date.AddMonths(5)) && x.Ativo.Equals(true))
+                Junho = query
+                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(5)))
                 .Count(),
 
-                Julho = this.context.Aluno
-                .Where(x => x.Pessoa.CriacaoData.Value.Month.Equals(date.AddMonths(6)) && x.Ativo.Equals(true))
+                Julho = query
+                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(6)))
                 .Count(),
 
-                Agosto = this.context.Aluno
-                .Where(x => x.Pessoa.CriacaoData.Value.Month.Equals(date.AddMonths(7)) && x.Ativo.Equals(true))
+                Agosto = query
+                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(7)))
                 .Count(),
 
-                Setembro = this.context.Aluno
-                .Where(x => x.Pessoa.CriacaoData.Value.Month.Equals(date.AddMonths(8)) && x.Ativo.Equals(true))
+                Setembro = query
+                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(8)))
                 .Count(),
 
-                Outubro = this.context.Aluno
-                .Where(x => x.Pessoa.CriacaoData.Value.Month.Equals(date.AddMonths(9)) && x.Ativo.Equals(true))
+                Outubro = query
+                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(9)))
                 .Count(),
 
-                Novembro = this.context.Aluno
-                .Where(x => x.Pessoa.CriacaoData.Value.Month.Equals(date.AddMonths(10)) && x.Ativo.Equals(true))
+                Novembro = query
+                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(10)))
                 .Count(),
 
-                Dezembro = this.context.Aluno
-                .Where(x => x.Pessoa.CriacaoData.Value.Month.Equals(date.AddMonths(11)) && x.Ativo.Equals(true))
+                Dezembro = query
+                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(11)))
                 .Count(),
             };
 

@@ -31,6 +31,5 @@ namespace SystemGym.WebApi.Controllers
         {
             return this.Ok(this.dashboardService.GetQuantity());
         }
-
     }
 }
