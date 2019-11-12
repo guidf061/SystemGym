@@ -18,10 +18,12 @@ namespace SystemGym.DataAccess.Models
         public virtual DbSet<Funcao> Funcao { get; set; }
         public virtual DbSet<GerenciarAluno> GerenciarAluno { get; set; }
         public virtual DbSet<GerenciarVisitante> GerenciarVisitante { get; set; }
-        public virtual DbSet<Matricula> Matricula { get; set; }
+        public virtual DbSet<MatriculaAluno> MatriculaAluno { get; set; }
+        public virtual DbSet<MatriculaColaborador> MatriculaColaborador { get; set; }
         public virtual DbSet<Mes> Mes { get; set; }
         public virtual DbSet<Pagamento> Pagamento { get; set; }
         public virtual DbSet<Pessoa> Pessoa { get; set; }
+        public virtual DbSet<Plano> Plano { get; set; }
         public virtual DbSet<Sexo> Sexo { get; set; }
         public virtual DbSet<SituacaoColaborador> SituacaoColaborador { get; set; }
         public virtual DbSet<SituacaoMatricula> SituacaoMatricula { get; set; }
@@ -47,7 +49,11 @@ namespace SystemGym.DataAccess.Models
                 entity.Property(e => e.CriacaoData).HasColumnType("datetime");
 
                 entity.Property(e => e.NumeroCartao)
-                    .HasMaxLength(50)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NumeroWhatsapp)
+                    .HasMaxLength(15)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Pessoa)
@@ -63,7 +69,7 @@ namespace SystemGym.DataAccess.Models
 
                 entity.Property(e => e.Descricao)
                     .IsRequired()
-                    .HasMaxLength(50)
+                    .HasMaxLength(4)
                     .IsUnicode(false);
             });
 
@@ -163,25 +169,45 @@ namespace SystemGym.DataAccess.Models
                     .HasConstraintName("FK_GerenciarVisitante_Visitante");
             });
 
-            modelBuilder.Entity<Matricula>(entity =>
+            modelBuilder.Entity<MatriculaAluno>(entity =>
             {
-                entity.Property(e => e.MatriculaId).ValueGeneratedNever();
+                entity.Property(e => e.MatriculaAlunoId).ValueGeneratedNever();
 
                 entity.Property(e => e.CancelamentoDate).HasColumnType("datetime");
 
                 entity.Property(e => e.CriacaoDate).HasColumnType("datetime");
 
                 entity.HasOne(d => d.Aluno)
-                    .WithMany(p => p.Matricula)
+                    .WithMany(p => p.MatriculaAluno)
                     .HasForeignKey(d => d.AlunoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Matricula_Aluno");
+                    .HasConstraintName("FK_MatriculaAluno_Aluno");
 
                 entity.HasOne(d => d.SituacaoMatricula)
-                    .WithMany(p => p.Matricula)
+                    .WithMany(p => p.MatriculaAluno)
                     .HasForeignKey(d => d.SituacaoMatriculaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Matricula_SituacaoMatricula");
+            });
+
+            modelBuilder.Entity<MatriculaColaborador>(entity =>
+            {
+                entity.Property(e => e.MatriculaColaboradorId).HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.CancelamentoDate).HasColumnType("datetime");
+
+                entity.Property(e => e.CriacaoDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Colaborador)
+                    .WithMany(p => p.MatriculaColaborador)
+                    .HasForeignKey(d => d.ColaboradorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MatriculaColaborador_Colaborador");
+
+                entity.HasOne(d => d.SituacaoMatricula)
+                    .WithMany(p => p.MatriculaColaborador)
+                    .HasForeignKey(d => d.SituacaoMatriculaId)
+                    .HasConstraintName("FK_MatriculaColaborador_SituacaoMatricula");
             });
 
             modelBuilder.Entity<Mes>(entity =>
@@ -200,9 +226,11 @@ namespace SystemGym.DataAccess.Models
 
                 entity.Property(e => e.PagamentoId).HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.DataCriacao).HasColumnType("datetime");
+                entity.Property(e => e.AlteracaoDate).HasColumnType("datetime");
 
-                entity.Property(e => e.DataPagamento).HasColumnType("datetime");
+                entity.Property(e => e.CriacaoDate).HasColumnType("datetime");
+
+                entity.Property(e => e.PagamentoDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ValorMensalidade)
                     .IsRequired()
@@ -238,6 +266,12 @@ namespace SystemGym.DataAccess.Models
                     .HasForeignKey(d => d.MesId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Pagamento_Mes");
+
+                entity.HasOne(d => d.Plano)
+                    .WithMany(p => p.Pagamento)
+                    .HasForeignKey(d => d.PlanoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Pagamento_Plano");
             });
 
             modelBuilder.Entity<Pessoa>(entity =>
@@ -260,6 +294,8 @@ namespace SystemGym.DataAccess.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.CriacaoData).HasColumnType("datetime");
+
+                entity.Property(e => e.DataNascimento).HasColumnType("datetime");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -287,12 +323,22 @@ namespace SystemGym.DataAccess.Models
                 entity.HasOne(d => d.Sexo)
                     .WithMany(p => p.Pessoa)
                     .HasForeignKey(d => d.SexoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Pessoa_Sexo");
 
                 entity.HasOne(d => d.Tipo)
                     .WithMany(p => p.Pessoa)
                     .HasForeignKey(d => d.TipoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Pessoa_Tipo");
+            });
+
+            modelBuilder.Entity<Plano>(entity =>
+            {
+                entity.Property(e => e.Descricao)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Sexo>(entity =>

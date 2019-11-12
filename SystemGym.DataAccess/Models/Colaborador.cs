@@ -7,6 +7,7 @@ namespace SystemGym.DataAccess.Models
     {
         public Colaborador()
         {
+            MatriculaColaborador = new HashSet<MatriculaColaborador>();
             Pagamento = new HashSet<Pagamento>();
         }
 
@@ -15,11 +16,12 @@ namespace SystemGym.DataAccess.Models
         public int? FuncaoId { get; set; }
         public int? SituacaoColaboradorId { get; set; }
         public DateTime? CriacaoData { get; set; }
-        public DateTime? AlteracaoData { get; set; }
+        public DateTime AlteracaoData { get; set; }
 
         public virtual Funcao Funcao { get; set; }
         public virtual Pessoa Pessoa { get; set; }
         public virtual SituacaoColaborador SituacaoColaborador { get; set; }
+        public virtual ICollection<MatriculaColaborador> MatriculaColaborador { get; set; }
         public virtual ICollection<Pagamento> Pagamento { get; set; }
     }
 }

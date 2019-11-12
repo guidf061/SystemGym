@@ -13,7 +13,7 @@ namespace SystemGym.Model.Pessoa
         public string TelefoneCasa { get; set; }
         public int TipoId { get; set; }
         public DateTime? CriacaoData { get; set; }
-        public int? SexoId { get; set; }
+        public int SexoId { get; set; }
         public string Endereco { get; set; }
 
     }

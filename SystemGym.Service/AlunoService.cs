@@ -149,12 +149,12 @@ namespace SystemGym.Service
                     {
                         AlunoId = model.AlunoId,
                         ColaboradorId = model.ColaboradorId,
-                        DataPagamento = DateTime.UtcNow,
+                        PagamentoDate = DateTime.UtcNow,
                         ValorMensalidade = model.ValorMensalidade,
                         MesId = model.MesId,
                         AnoId = model.AnoId,
                         FormaPagamentoId = model.FormaPagamentoId,
-                        DataCriacao = DateTime.UtcNow,
+                        CriacaoDate = DateTime.UtcNow,
                         
                     };
 

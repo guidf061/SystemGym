@@ -7,12 +7,14 @@ namespace SystemGym.DataAccess.Models
     {
         public SituacaoMatricula()
         {
-            Matricula = new HashSet<Matricula>();
+            MatriculaAluno = new HashSet<MatriculaAluno>();
+            MatriculaColaborador = new HashSet<MatriculaColaborador>();
         }
 
         public int SituacaoMatriculaId { get; set; }
         public string Descricao { get; set; }
 
-        public virtual ICollection<Matricula> Matricula { get; set; }
+        public virtual ICollection<MatriculaAluno> MatriculaAluno { get; set; }
+        public virtual ICollection<MatriculaColaborador> MatriculaColaborador { get; set; }
     }
 }

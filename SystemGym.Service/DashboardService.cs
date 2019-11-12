@@ -27,7 +27,7 @@ namespace SystemGym.Service
             var query = this.context.Aluno
             .Include(x => x.Pessoa)
             .OrderBy(x => x.CriacaoData)
-            .Where(x => x.Matricula.Any(i => i.Ativo.Equals(true)))
+            .Where(x => x.MatriculaAluno.Any(i => i.Ativo.Equals(true)))
             .ToList().Select(x => new AlunoReturnModel()
             {
                 AlunoId = x.AlunoId,
@@ -122,7 +122,7 @@ namespace SystemGym.Service
 
             var query = this.context.Aluno
             .Include(x => x.Pessoa)
-            .Where(x => x.Matricula.Any(i => i.Ativo.Equals(true)))
+            .Where(x => x.MatriculaAluno.Any(i => i.Ativo.Equals(true)))
             .ToList().Select(x => new AlunoReturnModel()
             {
                 AlunoId = x.AlunoId,
