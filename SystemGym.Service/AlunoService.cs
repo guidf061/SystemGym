@@ -29,7 +29,6 @@ namespace SystemGym.Service
                 .ToList().Select(x => new AlunoReturnModel()
                 {
                     AlunoId = x.AlunoId,
-                    SituacaoAlunoId = x.SituacaoAlunoId,
                     NumeroCartao = x.NumeroCartao,
                     CriacaoData = x.CriacaoData,
                     AlteracaoData = x.AlteracaoData,
@@ -59,7 +58,7 @@ namespace SystemGym.Service
                 .Select(x => new AlunoReturnModel()
                 {
                     AlunoId = x.AlunoId,
-                    SituacaoAlunoId = x.SituacaoAlunoId,
+
                     NumeroCartao = x.NumeroCartao,
                     CriacaoData = x.CriacaoData,
                     AlteracaoData = x.AlteracaoData,
@@ -93,8 +92,7 @@ namespace SystemGym.Service
                         NumeroCartao = alunoModel.NumeroCartao,
                         CriacaoData = DateTime.UtcNow,
                         AlteracaoData = DateTime.UtcNow,
-                        SituacaoAlunoId = alunoModel.SituacaoAlunoId,
-                        Ativo = alunoModel.Ativo,  
+
                     };
 
                     this.context.Aluno.Add(aluno);
@@ -118,7 +116,7 @@ namespace SystemGym.Service
                 .FirstOrDefault();
 
             aluno.NumeroCartao = alunoModel.NumeroCartao;
-            aluno.SituacaoAlunoId = alunoModel.SituacaoAlunoId;
+
             aluno.AlteracaoData = DateTime.UtcNow;
 
             this.pessoaService.Alterar(aluno.PessoaId, alunoModel.Pessoa);

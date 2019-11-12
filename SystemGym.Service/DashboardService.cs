@@ -24,69 +24,187 @@ namespace SystemGym.Service
             DateTime date = new DateTime(2019, 01, 01);
             DateTime nowDate = DateTime.Now;
 
-                var query = this.context.Aluno
-                .Include(x => x.Pessoa)
-                .OrderBy(x => x.CriacaoData)
-                .Where(x => x.Ativo.Equals(true))
-                .ToList().Select(x => new AlunoReturnModel()
-                {
-                    AlunoId = x.AlunoId,
-                    SituacaoAlunoId = x.SituacaoAlunoId,
-                    NumeroCartao = x.NumeroCartao,
-                    CriacaoData = x.CriacaoData,
-                    AlteracaoData = x.AlteracaoData,
-                })
-                .ToList();
+            var query = this.context.Aluno
+            .Include(x => x.Pessoa)
+            .OrderBy(x => x.CriacaoData)
+            .Where(x => x.Matricula.Any(i => i.Ativo.Equals(true)))
+            .ToList().Select(x => new AlunoReturnModel()
+            {
+                AlunoId = x.AlunoId,
+                NumeroCartao = x.NumeroCartao,
+                CriacaoData = x.CriacaoData,
+                AlteracaoData = x.AlteracaoData,
+            })
+            .ToList();
+
+            int janeiro = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.Month))
+             .Count();
+
+            int fevereiro = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(1)))
+             .Count();
+
+            int marco = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(2)))
+             .Count();
+
+            int abril = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(3)))
+             .Count();
+
+            int maio = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(4)))
+             .Count();
+
+            int junho = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(5)))
+             .Count();
+
+            int julho = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(6)))
+             .Count();
+
+            int agosto = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(7)))
+             .Count();
+
+            int setembro = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(8)))
+             .Count();
+
+            int outubro = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(9)))
+             .Count();
+
+            int novembro = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(10)))
+             .Count();
+
+            int dezembro = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(11)))
+             .Count();
 
             var quantityModel = new DashboardQuantityReturnModel
             {
-                Janeiro = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.Month))
-                .Count(),
+                Janeiro = janeiro,
 
-                Fevereiro = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(1)))
-                .Count(),
+                Fevereiro = fevereiro + janeiro,
 
-                Marco = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(2)))
-                .Count(),
+                Marco = marco + fevereiro,
 
-                Abriu = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(3)))
-                .Count(),
+                Abril = abril + marco,
 
-                Maio = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(4)))
-                .Count(),
+                Maio = maio + abril,
 
-                Junho = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(5)))
-                .Count(),
+                Junho = junho + maio,
 
-                Julho = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(6)))
-                .Count(),
+                Julho = julho + junho,
 
-                Agosto = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(7)))
-                .Count(),
+                Agosto = agosto + julho,
 
-                Setembro = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(8)))
-                .Count(),
+                Setembro = setembro + agosto,
 
-                Outubro = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(9)))
-                .Count(),
+                Outubro = outubro + setembro,
 
-                Novembro = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(10)))
-                .Count(),
+                Novembro = novembro + outubro,
 
-                Dezembro = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(11)))
-                .Count(),
+                Dezembro = dezembro + novembro,
+            };
+
+            return quantityModel;
+        }
+
+        public DashboardQuantityReturnModel GetRendimento()
+        {
+            DateTime date = new DateTime(2019, 01, 01);
+            DateTime nowDate = DateTime.Now;
+
+            var query = this.context.Aluno
+            .Include(x => x.Pessoa)
+            .Where(x => x.Matricula.Any(i => i.Ativo.Equals(true)))
+            .ToList().Select(x => new AlunoReturnModel()
+            {
+                AlunoId = x.AlunoId,
+                NumeroCartao = x.NumeroCartao,
+                CriacaoData = x.CriacaoData,
+                AlteracaoData = x.AlteracaoData,
+            })
+            .ToList();
+
+            int janeiro = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.Month))
+             .Count();
+
+            int fevereiro = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(1)))
+             .Count();
+
+            int marco = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(2)))
+             .Count();
+
+            int abril = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(3)))
+             .Count();
+
+            int maio = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(4)))
+             .Count();
+
+            int junho = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(5)))
+             .Count();
+
+            int julho = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(6)))
+             .Count();
+
+            int agosto = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(7)))
+             .Count();
+
+            int setembro = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(8)))
+             .Count();
+
+            int outubro = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(9)))
+             .Count();
+
+            int novembro = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(10)))
+             .Count();
+
+            int dezembro = query
+             .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(11)))
+             .Count();
+
+            var quantityModel = new DashboardQuantityReturnModel
+            {
+                Janeiro = janeiro,
+
+                Fevereiro = fevereiro + janeiro,
+
+                Marco = marco + fevereiro,
+
+                Abril = abril + marco,
+
+                Maio = maio + abril,
+
+                Junho = junho + maio,
+
+                Julho = julho + junho,
+
+                Agosto = agosto + julho,
+
+                Setembro = setembro + agosto,
+
+                Outubro = outubro + setembro,
+
+                Novembro = novembro + outubro,
+
+                Dezembro = dezembro + novembro,
             };
 
             return quantityModel;

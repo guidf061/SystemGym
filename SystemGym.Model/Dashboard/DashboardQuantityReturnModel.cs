@@ -11,7 +11,7 @@ namespace SystemGym.Model.Aluno
         public int Janeiro { get; set; }
         public int Fevereiro { get; set; }
         public int Marco { get; set; }
-        public int Abriu { get; set; }
+        public int Abril { get; set; }
         public int Maio { get; set; }
         public int Junho { get; set; }
         public int Julho { get; set; }
