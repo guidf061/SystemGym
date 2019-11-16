@@ -40,6 +40,7 @@ namespace SystemGym.WebApi
             services.AddScoped<ColaboradorService>();
             services.AddScoped<VisitanteService>();
             services.AddScoped<DashboardService>();
+            services.AddScoped<AddressService>();
 
             services.AddSwaggerGen(c =>
             {

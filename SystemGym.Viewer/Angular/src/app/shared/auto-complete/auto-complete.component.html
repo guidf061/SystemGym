@@ -1,0 +1,28 @@
+<div #autoCompleteDiv class="auto-complete" [class.no-border]="noBorder">
+  <mat-form-field color="{{ required && keyword === '' ? 'warn' : 'primary' }}">
+    <input matInput name="grupoAutoComplete" [placeholder]="placeholder" [ngModelOptions]="{standalone: true}"
+           autocomplete="off"
+           (focus)="showDropdownList()"
+           (blur)="hideDropdownList()"
+           (keydown)="inputElKeyHandler($event)"
+           (input)="reloadListInDelay()"
+           [(ngModel)]="keyword"
+           [required]="required"
+           [tabindex]="tabIndex"
+           [disabled]="disabled" />
+    <mat-error *ngIf="required && (keyword === undefined || keyword === null || keyword === '')">
+      Campo obrigat&oacute;rio.
+    </mat-error>
+  </mat-form-field>
+
+  <div #autoCompleteOptionsDiv class="auto-complete-options" *ngIf="dropdownVisible" [class.hide]="filteredList.length == 0">
+    <ul>
+      <li class="item truncate"
+          *ngFor="let item of filteredList; let i=index"
+          (mousedown)="selectOne(item)"
+          [ngClass]="{selected: i === itemIndex}"
+          [innerHtml]="getFormattedList(item)">
+      </li>
+    </ul>
+  </div>
+</div>

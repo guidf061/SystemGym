@@ -1,0 +1,95 @@
+.auto-complete {
+  position: relative;
+  width: 100%;
+
+  &.no-border {
+    .mat-form-field-wrapper {
+      padding-bottom: 0 !important;
+    }
+
+    .mat-form-field-underline {
+      bottom: 0px !important;
+    }
+  }
+}
+
+.auto-complete-options {
+  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+  max-height: 240px;
+  position: absolute;
+  top: 29px;
+  /*width: 95%;*/
+  z-index: 2000;
+  background-color: #fff;
+  overflow: auto;
+  margin: 0.5rem 0 1rem 0;
+  pointer-events: fill;
+  -webkit-transition: height 0.3s ease-out;
+  -moz-transition: height 0.3s ease-out;
+  -o-transition: height 0.3s ease-out;
+  transition: height 0.3s ease-out;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style-type: none;
+    box-sizing: border-box;
+    animation: slideDown 0.1s;
+    border: 1px solid #e0e0e0;
+
+    li {
+      /*background-color: #fff;*/
+      line-height: 48px;
+      height: 48px;
+      padding: 0 10px;
+      margin: 0;
+      border-bottom: 1px solid #e0e0e0;
+      cursor: pointer;
+
+      &.selected {
+        background-color: rgba(0, 0, 0, 0.04) !important;
+        /*color: #eafaf9 !important;*/
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04) !important;
+        /*color: #eafaf9 !important;*/
+      }
+    }
+  }
+}
+
+.auto-complete-icon {
+  font-size: 18px;
+  float: left;
+  padding-right: 10px;
+  padding-top: 13px;
+}
+
+.dark-theme {
+  .auto-complete-options {
+    background-color: #424242;
+    color: white;
+
+    ul {
+      border: 1px solid #5a5a5a;
+
+      li {
+        border-bottom: 1px solid #5a5a5a;
+
+        &.selected {
+          background-color: rgba(255, 255, 255, 0.04) !important;
+        }
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.04) !important;
+        }
+      }
+    }
+  }
+}

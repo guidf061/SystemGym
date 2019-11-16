@@ -109,6 +109,28 @@
       </div>
 
       <div fxLayout="row">
+        <div fxFlex="30%">
+          <mat-form-field>
+            <mat-select placeholder="Estado" formControlName="stateId"
+                        (selectionChange)="stateSelected()">
+              <mat-option *ngFor="let item of states;" [value]="item.stateId">{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex>
+          <app-auto-complete [serviceUrl]="autoCompleteUrl"
+                             [(keyword)]="keyword"
+                             placeHolder="Cidade"
+                             [minChars]="3"
+                             displayPropertyName="name"
+                             (valueSelected)="citySelected($event)"
+                             [required]="false"
+                             [noBorder]="true">
+          </app-auto-complete>
+        </div>
+      </div>
+
+      <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
             <mat-select placeholder="Sexo" formControlName="sexoId" required>

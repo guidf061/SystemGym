@@ -35,6 +35,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AdminLayoutComponent } from './admin-layout.component';
 import { AdminLayoutRouting } from './admin-layout.routing';
 import { ComponentsModule } from '../components/components.module';
+import { AddressService } from '../services/address.service';
 
 
 
@@ -88,6 +89,7 @@ import { ComponentsModule } from '../components/components.module';
     AlunoFormService,
     VisitanteFormService,
     ColaboradorFormService,
+    AddressService
   ],
 })
 

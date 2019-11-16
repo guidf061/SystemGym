@@ -12,8 +12,4 @@
     <ProjectReference Include="..\SystemGym.DataAccess\SystemGym.DataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="paging\" />
-  </ItemGroup>
-
 </Project>

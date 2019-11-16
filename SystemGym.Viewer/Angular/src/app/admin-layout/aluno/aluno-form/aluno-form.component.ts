@@ -2,8 +2,9 @@
 import { Component, OnInit, HostListener, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
-import { Aluno } from '../../../models/aluno-model';
 import { AlunoService } from '../../../services/aluno.service';
+
+import { Aluno } from '../../../models/aluno-model';
 import { Pessoa } from '../../../models/pessoa-model';
 import { LoaderService } from '../../../core';
 
@@ -48,6 +49,7 @@ export class AlunoFormComponent implements OnInit {
     this.formSubmited = true;
 
     if (this.form.valid) {
+      this.loaderService.show();
 
       let aluno: Aluno = this.prepareSave();
 
@@ -59,11 +61,12 @@ export class AlunoFormComponent implements OnInit {
       }
 
       this.snackBar.open('Dados salvos com sucesso!.', 'Fechar')
-      duration: 5000
 
       this.closeDialog(true);
 
+
       error => {
+
         this.snackBar.open(error, 'Fechar', {
           duration: 10000
         });
@@ -89,11 +92,11 @@ export class AlunoFormComponent implements OnInit {
     });
   }
 
-   private createFormGroup(): void {
+  private createFormGroup(): void {
     this.form = this.fb.group({
       numeroCartao: '',
-      situacaoAlunoId:'',
-      nome:'',
+      situacaoAlunoId: '',
+      nome: '',
       email: '',
       cpf: '',
       telefoneCelular: '',
@@ -101,12 +104,11 @@ export class AlunoFormComponent implements OnInit {
       sexoId: '',
       tipoId: '',
     });
-   }
+  }
 
   private prepareSave(): Aluno {
     const formModel = this.form.value;
     let aluno: Aluno = new Aluno();
-
     aluno.numeroCartao = formModel.numeroCartao as string;
     aluno.situacaoAlunoId = formModel.situacaoAlunoId as number;
     aluno.pessoa = new Pessoa();

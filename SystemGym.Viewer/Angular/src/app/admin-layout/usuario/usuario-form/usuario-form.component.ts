@@ -7,6 +7,10 @@ import { UsuarioService } from '../../../services/usuario.service';
 import { Usuario } from '../../../models/usuario-model';
 import { Pessoa } from '../../../models/pessoa-model';
 import { LoaderService } from '../../../core';
+import { State } from '../../../models/state-model';
+import { AddressService } from '../../../services/address.service';
+import { City } from '../../../models/city-model';
+import { environment } from '../../../../environments/environment';
 
 
 @Component({
@@ -18,12 +22,15 @@ export class UsuarioFormComponent implements OnInit {
   form: FormGroup;
   title: string = 'Cadastrar';
   usuario: Usuario;
+  states: State[];
+  stateSelec: boolean = false;
 
   formSubmited: boolean;
 
   constructor(
     private usuarioService: UsuarioService,
     private loaderService: LoaderService,
+    private addressService: AddressService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<UsuarioFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Usuario,
@@ -31,7 +38,31 @@ export class UsuarioFormComponent implements OnInit {
     this.usuario = data;
   }
 
+  selectedCity: City;
+
+  autoCompleteUrl = 'https://localhost:44365/api/Address' + '/City?Name=';
+  keyword: string;
+
+  @HostListener('window:keydown', ['$event'])
+  keydownHandler(event) {
+    let target = event.target || event.srcElement;
+    if (event.keyCode === 27) {
+      this.closeDialog(false);
+    }
+  }
+
   ngOnInit() {
+
+    this.addressService.getState().then(rows => {
+      this.states = rows;
+      this.loaderService.hide();
+    },
+      error => {
+        this.loaderService.hide();
+        this.snackBar.open(error, 'Fechar', {
+          duration: 10000
+        });
+      });
 
     this.createFormGroup();
 
@@ -78,6 +109,21 @@ export class UsuarioFormComponent implements OnInit {
     this.dialogRef.close(update);
   }
 
+  citySelected(city: City) {
+    if (city !== null) {
+      this.selectedCity = city;
+      if (!this.stateSelec) {
+        this.form.controls['stateId'].setValue(city.stateId);
+      }
+    }
+    return this.selectedCity;
+  }
+
+  stateSelected() {
+    this.autoCompleteUrl = 'https://localhost:44365/api/Address' + '/City?StateId=' + this.form.controls['stateId'].value + '&Name=';
+    this.stateSelec == true;
+  }
+
   private setFormGroup(): void {
     this.form.setValue({
       userName: this.usuario.userName,
@@ -85,10 +131,15 @@ export class UsuarioFormComponent implements OnInit {
       nome: this.usuario.pessoa.nome,
       email: this.usuario.pessoa.email,
       cpf: this.usuario.pessoa.cpf,
+      sexoId: this.usuario.pessoa.sexoId,
+      endereco: this.usuario.pessoa.endereco,
+      tipoId: this.usuario.pessoa.tipoId,
       telefoneCelular: this.usuario.pessoa.telefoneCelular,
       telefoneCasa: this.usuario.pessoa.telefoneCasa,
-      sexoId: this.usuario.pessoa.sexoId,
-      tipoId: this.usuario.pessoa.tipoId,
+      criacaoData: this.usuario.pessoa.criacaoData,
+      alteracaoData: this.usuario.pessoa.alteracaoData,
+      dataNascimento: this.usuario.pessoa.dataNascimento,
+      stateId: this.usuario.pessoa.stateId,
     });
   }
 
@@ -99,10 +150,15 @@ export class UsuarioFormComponent implements OnInit {
       nome: ['', { validators: Validators.required }],
       email: ['', { validators: Validators.required }],
       cpf: ['', { validators: Validators.required }],
+      sexoId: ['', { validators: Validators.required }],
+      endereco: ['', { validators: Validators.required }],
+      tipoId: ['', { validators: Validators.required }],
       telefoneCelular: ['', { validators: Validators.required }],
       telefoneCasa: ['', { validators: Validators.required }],
-      sexoId: ['', { validators: Validators.required }],
-      tipoId: ['', { validators: Validators.required }],
+      criacaoData: '',
+      alteracaoData: '',
+      dataNascimento: ['', { validators: Validators.required }],
+      stateId: '',
     });
    }
 

@@ -21,7 +21,7 @@ namespace SystemGym.Service
 
         public DashboardQuantityReturnModel GetQuantity()
         {
-            int janeiro = 0, fevereiro, marco, abril, maio, junho, julho, agosto, setembro, outubro, novembro, dezembro;
+            int janeiro, fevereiro, marco, abril, maio, junho, julho, agosto, setembro, outubro, novembro, dezembro;
             DateTime date = new DateTime(2019, 01, 01);
             DateTime nowDate = DateTime.Now;
 

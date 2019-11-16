@@ -3,11 +3,13 @@ export class Pessoa {
   nome: string;
   email: string;
   cpf: string;
+  sexoId: number;
+  endereco: string;
+  tipoId: number;
   telefoneCelular: string;
-  telefoneCasa: string; 
-  tipoId?: number;
-  criacaoData?: Date;
-  alteracaoData?: Date;
-  sexoId?:number;
-  endereco?: Date;
+  telefoneCasa: string;
+  criacaoData: Date;
+  alteracaoData: Date;
+  dataNascimento: Date;
+  stateId: number;
 }

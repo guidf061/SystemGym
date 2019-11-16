@@ -6,6 +6,7 @@ namespace SystemGym.DataAccess.Models
 {
     public partial class SystemGymContext : DbContext
     {
+
         public SystemGymContext(DbContextOptions<SystemGymContext> options)
             : base(options)
         {
@@ -13,7 +14,9 @@ namespace SystemGym.DataAccess.Models
 
         public virtual DbSet<Aluno> Aluno { get; set; }
         public virtual DbSet<Ano> Ano { get; set; }
+        public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Colaborador> Colaborador { get; set; }
+        public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<FormaPagamento> FormaPagamento { get; set; }
         public virtual DbSet<Funcao> Funcao { get; set; }
         public virtual DbSet<GerenciarAluno> GerenciarAluno { get; set; }
@@ -27,6 +30,7 @@ namespace SystemGym.DataAccess.Models
         public virtual DbSet<Sexo> Sexo { get; set; }
         public virtual DbSet<SituacaoColaborador> SituacaoColaborador { get; set; }
         public virtual DbSet<SituacaoMatricula> SituacaoMatricula { get; set; }
+        public virtual DbSet<State> State { get; set; }
         public virtual DbSet<Tipo> Tipo { get; set; }
         public virtual DbSet<TipoNotificacao> TipoNotificacao { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
@@ -73,6 +77,19 @@ namespace SystemGym.DataAccess.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<City>(entity =>
+            {
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.State)
+                    .WithMany(p => p.City)
+                    .HasForeignKey(d => d.StateId)
+                    .HasConstraintName("FK_City_State");
+            });
+
             modelBuilder.Entity<Colaborador>(entity =>
             {
                 entity.Property(e => e.ColaboradorId).HasDefaultValueSql("(newid())");
@@ -96,6 +113,13 @@ namespace SystemGym.DataAccess.Models
                     .WithMany(p => p.Colaborador)
                     .HasForeignKey(d => d.SituacaoColaboradorId)
                     .HasConstraintName("FK_Colaborador_SituacaoColaborador");
+            });
+
+            modelBuilder.Entity<Country>(entity =>
+            {
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<FormaPagamento>(entity =>
@@ -171,7 +195,7 @@ namespace SystemGym.DataAccess.Models
 
             modelBuilder.Entity<MatriculaAluno>(entity =>
             {
-                entity.Property(e => e.MatriculaAlunoId).ValueGeneratedNever();
+                entity.Property(e => e.MatriculaAlunoId).HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.CancelamentoDate).HasColumnType("datetime");
 
@@ -320,11 +344,26 @@ namespace SystemGym.DataAccess.Models
                     .HasMaxLength(11)
                     .IsUnicode(false);
 
+                entity.HasOne(d => d.City)
+                    .WithMany(p => p.Pessoa)
+                    .HasForeignKey(d => d.CityId)
+                    .HasConstraintName("FK_Pessoa_City");
+
+                entity.HasOne(d => d.Country)
+                    .WithMany(p => p.Pessoa)
+                    .HasForeignKey(d => d.CountryId)
+                    .HasConstraintName("FK_Pessoa_Country");
+
                 entity.HasOne(d => d.Sexo)
                     .WithMany(p => p.Pessoa)
                     .HasForeignKey(d => d.SexoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Pessoa_Sexo");
+
+                entity.HasOne(d => d.State)
+                    .WithMany(p => p.Pessoa)
+                    .HasForeignKey(d => d.StateId)
+                    .HasConstraintName("FK_Pessoa_State");
 
                 entity.HasOne(d => d.Tipo)
                     .WithMany(p => p.Pessoa)
@@ -358,6 +397,23 @@ namespace SystemGym.DataAccess.Models
                 entity.Property(e => e.Descricao)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<State>(entity =>
+            {
+                entity.Property(e => e.Acronym)
+                    .IsRequired()
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Country)
+                    .WithMany(p => p.State)
+                    .HasForeignKey(d => d.CountryId)
+                    .HasConstraintName("FK_State_Country");
             });
 
             modelBuilder.Entity<Tipo>(entity =>

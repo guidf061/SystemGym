@@ -6,6 +6,7 @@ import { MaterialModule } from '../material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MAT_DATE_FORMATS } from '@angular/material';
+import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
 
 export const DD_MM_YYYY_Format = {
   parse: {
@@ -20,7 +21,9 @@ export const DD_MM_YYYY_Format = {
 };
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AutoCompleteComponent,
+  ],
 
   providers: [
     { provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format },
@@ -31,14 +34,17 @@ export const DD_MM_YYYY_Format = {
     MaterialModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule,
   ],
   exports: [
+    AutoCompleteComponent,
     CommonModule,
     MaterialModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule,
   ]
 })
 export class SharedModule { }

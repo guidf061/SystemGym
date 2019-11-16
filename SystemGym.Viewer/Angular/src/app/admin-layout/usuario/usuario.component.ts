@@ -9,6 +9,8 @@ import { ConfirmService, LoaderService } from '../../core';
 import { MatSnackBar, MatPaginator, MatSort } from '@angular/material';
 import { UsuarioSearch } from '../../models/usuario-search-model';
 import { merge } from 'rxjs';
+import { AddressService } from '../../services/address.service';
+import { State } from '../../models/state-model';
 
 
 @Component({
@@ -22,6 +24,7 @@ export class UsuarioComponent implements OnInit {
   usuario: Usuario;
   data: Usuario[];
   dataSource = this.data;
+ 
   noDataFound: boolean = false;
   formSubmited: boolean;
   length: number;
