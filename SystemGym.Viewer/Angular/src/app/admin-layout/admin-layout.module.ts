@@ -9,7 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 
 
-import { MatTableModule, MatIconModule } from '@angular/material';
+import { MatTableModule, MatIconModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 
 import { VisitanteService } from '../services/visitante.service';
 import { AlunoService } from '../services/aluno.service';
@@ -39,6 +39,7 @@ import { AddressService } from '../services/address.service';
 
 
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -52,7 +53,7 @@ import { AddressService } from '../services/address.service';
     ReactiveFormsModule,
     MatTableModule,
     SharedModule,
-    MatIconModule ,
+    MatIconModule,
     ToastrModule.forRoot()
   ],
   declarations: [
@@ -89,7 +90,8 @@ import { AddressService } from '../services/address.service';
     AlunoFormService,
     VisitanteFormService,
     ColaboradorFormService,
-    AddressService
+    AddressService,
+    
   ],
 })
 

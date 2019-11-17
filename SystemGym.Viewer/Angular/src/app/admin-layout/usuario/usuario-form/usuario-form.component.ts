@@ -10,7 +10,7 @@ import { LoaderService } from '../../../core';
 import { State } from '../../../models/state-model';
 import { AddressService } from '../../../services/address.service';
 import { City } from '../../../models/city-model';
-import { environment } from '../../../../environments/environment';
+import * as moment from 'moment';
 
 
 @Component({
@@ -136,11 +136,15 @@ export class UsuarioFormComponent implements OnInit {
       tipoId: this.usuario.pessoa.tipoId,
       telefoneCelular: this.usuario.pessoa.telefoneCelular,
       telefoneCasa: this.usuario.pessoa.telefoneCasa,
-      criacaoData: this.usuario.pessoa.criacaoData,
-      alteracaoData: this.usuario.pessoa.alteracaoData,
       dataNascimento: this.usuario.pessoa.dataNascimento,
-      stateId: this.usuario.pessoa.stateId,
+      stateId: (this.usuario.pessoa.city == undefined && this.usuario.pessoa.city == null ? '' : this.usuario.pessoa.city.stateId),
+
     });
+
+    if (this.usuario.pessoa.city !== undefined && this.usuario.pessoa.city !== null) {
+      this.keyword = this.usuario.pessoa.city.name;
+      this.selectedCity = this.usuario.pessoa.city;
+    }
   }
 
    private createFormGroup(): void {
@@ -155,8 +159,6 @@ export class UsuarioFormComponent implements OnInit {
       tipoId: ['', { validators: Validators.required }],
       telefoneCelular: ['', { validators: Validators.required }],
       telefoneCasa: ['', { validators: Validators.required }],
-      criacaoData: '',
-      alteracaoData: '',
       dataNascimento: ['', { validators: Validators.required }],
       stateId: '',
     });
@@ -176,8 +178,13 @@ export class UsuarioFormComponent implements OnInit {
     usuario.pessoa.telefoneCelular = formModel.telefoneCelular as string;
     usuario.pessoa.sexoId = formModel.sexoId as number;
     usuario.pessoa.tipoId = formModel.tipoId as number;
-
-
+    usuario.pessoa.endereco = formModel.endereco as string;
+    usuario.pessoa.stateId = this.form.controls['stateId'].value;
+    usuario.pessoa.dataNascimento = moment(formModel.dataNascimento, 'DD/MM/YYYY ').toDate();
+    if (this.selectedCity !== undefined && this.selectedCity !== null) {
+      usuario.pessoa.cityId = this.selectedCity.cityId;
+    }
+    
     return usuario;
   }
 }

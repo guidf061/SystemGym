@@ -1,3 +1,5 @@
+import { City } from './city-model';
+
 export class Pessoa {
   pessoaId: string;
   nome: string;
@@ -12,4 +14,6 @@ export class Pessoa {
   alteracaoData: Date;
   dataNascimento: Date;
   stateId: number;
+  cityId: number;
+  city: City;
 }

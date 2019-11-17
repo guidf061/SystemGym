@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SystemGym.DataAccess.Models;
+using SystemGym.Model.Address;
 using SystemGym.Model.Pessoa;
 using SystemGym.Model.Usuario;
 
@@ -26,6 +27,8 @@ namespace SystemGym.Service
         {
             return this.context.Usuario
                 .Include(x => x.Pessoa)
+                    .ThenInclude(x => x.City)
+                         .ThenInclude(x => x.State)
                 .OrderBy(x => x.Pessoa.Nome)
                 .ToList()
                 .Select(x => new UsuarioReturnModel()
@@ -49,6 +52,19 @@ namespace SystemGym.Service
                         TipoId = x.Pessoa.TipoId,
                         AlteracaoData = x.Pessoa.AlteracaoData,
                         CriacaoData = x.Pessoa.CriacaoData,
+                        City = x.Pessoa.City == null ? null : new CityReturnModel()
+                        {
+                            CityId = x.Pessoa.City.CityId,
+                            Name = x.Pessoa.City.Name,
+                            StateId = x.Pessoa.City.StateId,
+                            State = x.Pessoa.City.State == null ? null : new StateReturnModel()
+                            {
+                                StateId = x.Pessoa.City.State.StateId,
+                                Acronym = x.Pessoa.City.State.Acronym,
+                                Name = x.Pessoa.City.State.Name,
+                                CountryId = x.Pessoa.City.State.CountryId,
+                            }
+                        }
                     }
                 })
                 .ToList();
@@ -89,17 +105,17 @@ namespace SystemGym.Service
         {
             var query = this.context.Usuario
                 .Include(x => x.Pessoa)
+                    .ThenInclude(x => x.City)
                 .AsQueryable();
-
 
             if (!string.IsNullOrEmpty(usuarioModel.Nome))
             {
-                query = query.Where(x => x.Pessoa.Nome.Equals(usuarioModel.Nome));
+                query = query.Where(x => EF.Functions.Like(x.Pessoa.Nome, "%" + usuarioModel.Nome + "%"));
             }
 
             if (!string.IsNullOrEmpty(usuarioModel.Cpf))
             {
-                query = query.Where(x => x.Pessoa.Cpf.Equals(usuarioModel.Cpf));
+                query = query.Where(x => EF.Functions.Like(x.Pessoa.Cpf, "%" + usuarioModel.Cpf + "%"));
             }
 
             var pagingModel = new PagingModel<UsuarioReturnModel>();
@@ -118,15 +134,37 @@ namespace SystemGym.Service
                 .Select(x => new UsuarioReturnModel()
                 {
                     UsuarioId = x.UsuarioId,
-                    Password = x.Password,
-                    DataAcesso = x.DataAcesso,
                     UserName = x.UserName,
+                    Password = x.Password,
+                    DataCadastro = x.DataCadastro,
+                    DataAlteracao = x.DataAlteracao,
+                    DataAcesso = x.DataAcesso,
                     Pessoa = new PessoaReturnModel()
                     {
-                        PessoaId = x.PessoaId,
+                        PessoaId = x.Pessoa.PessoaId,
                         Nome = x.Pessoa.Nome,
                         Cpf = x.Pessoa.Cpf,
                         Email = x.Pessoa.Email,
+                        TelefoneCasa = x.Pessoa.TelefoneCasa,
+                        TelefoneCelular = x.Pessoa.TelefoneCelular,
+                        Endereco = x.Pessoa.Endereco,
+                        SexoId = x.Pessoa.SexoId,
+                        TipoId = x.Pessoa.TipoId,
+                        AlteracaoData = x.Pessoa.AlteracaoData,
+                        CriacaoData = x.Pessoa.CriacaoData,
+                        City = x.Pessoa.City == null ? null : new CityReturnModel()
+                        {
+                            CityId = x.Pessoa.City.CityId,
+                            Name = x.Pessoa.City.Name,
+                            StateId = x.Pessoa.City.StateId,
+                            State = x.Pessoa.City.State == null ? null : new StateReturnModel()
+                            {
+                                StateId = x.Pessoa.City.State.StateId,
+                                Acronym = x.Pessoa.City.State.Acronym,
+                                Name = x.Pessoa.City.State.Name,
+                                CountryId = x.Pessoa.City.State.CountryId,
+                            }
+                        }
                     }
                 }).ToList();
 

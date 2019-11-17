@@ -39,7 +39,7 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
-            <input matInput placeholder="PassWord" formControlName="password"
+            <input matInput placeholder="Senha" formControlName="password"
                    required>
             <mat-error *ngIf="form.controls['password'].hasError('required')">
               Campo obrigat&oacute;rio.
@@ -51,7 +51,7 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
-            <input matInput placeholder="Nome Usuário" formControlName="nome"
+            <input matInput placeholder="Nome Completo" formControlName="nome"
                    required>
             <mat-error *ngIf="form.controls['nome'].hasError('required')">
               Campo obrigat&oacute;rio.
@@ -75,7 +75,7 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
-            <input matInput placeholder="cpf" formControlName="cpf"
+            <input matInput placeholder="Cpf" formControlName="cpf"
                    maxlength="11"
                    required>
             <mat-error *ngIf="form.controls['nome'].hasError('required')">
@@ -83,6 +83,19 @@
             </mat-error>
           </mat-form-field>
         </div>
+          <div fxFlex>
+            <mat-form-field>
+              <input matInput autocomplete="off" placeholder="Data de Nascimento" formControlName="dataNascimento"
+                     [matDatepicker]="dataNascimento"
+                     (focus)="dataNascimento.open()"
+                     required />
+              <mat-datepicker #dataNascimento></mat-datepicker>
+              <mat-error *ngIf="form.controls['dataNascimento'].hasError('required')">
+                Campo obrigat&oacute;rio.
+              </mat-error>
+              <mat-datepicker-toggle class="datepicker-toggle-wrapper" fxFlex="30px" fxFlexAlign="center" matSuffix [for]="dataNascimento"></mat-datepicker-toggle>
+            </mat-form-field>
+          </div>
       </div>
 
       <div fxLayout="row">
@@ -127,6 +140,18 @@
                              [required]="false"
                              [noBorder]="true">
           </app-auto-complete>
+        </div>
+      </div>
+      <div fxLayout="row">
+        <div fxFlex>
+          <mat-form-field>
+            <input matInput placeholder="Endereço" formControlName="endereco"
+                   maxlength="11"
+                   required>
+            <mat-error *ngIf="form.controls['nome'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
+          </mat-form-field>
         </div>
       </div>
 

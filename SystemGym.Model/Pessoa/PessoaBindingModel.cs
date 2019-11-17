@@ -14,9 +14,8 @@ namespace SystemGym.Model.Pessoa
         public int TipoId { get; set; }
         public string TelefoneCelular { get; set; }
         public string TelefoneCasa { get; set; }
-        public DateTime? CriacaoData { get; set; }
-        public DateTime? AlteracaoData { get; set; }
         public DateTime? DataNascimento { get; set; }
         public int? StateId { get; set; }
+        public int? CityId { get; set; }
     }
 }

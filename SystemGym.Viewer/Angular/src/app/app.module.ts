@@ -22,6 +22,19 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginService } from './core/login.service';
 import { HomeComponent } from './home/home.component';
+import { MatDatepickerModule, MatNativeDateModule, MAT_DATE_FORMATS } from '@angular/material';
+
+export const DD_MM_YYYY_Format = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   imports: [
@@ -41,9 +54,11 @@ import { HomeComponent } from './home/home.component';
     AlertDialogComponent,
     LoaderComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
   ],
   exports: [
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
 
   entryComponents: [
@@ -55,7 +70,10 @@ import { HomeComponent } from './home/home.component';
     ConfirmService,
     LoaderService,
     LoginService,
-    JwtService,],
+    JwtService,
+    MatDatepickerModule,
+     { provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -90,9 +90,9 @@ namespace SystemGym.Service
                     {
                         PessoaId = pessoaService.Adicionar(alunoModel.Pessoa),
                         NumeroCartao = alunoModel.NumeroCartao,
+                        NumeroWhatsapp = alunoModel.NumeroCartao,
                         CriacaoData = DateTime.UtcNow,
                         AlteracaoData = DateTime.UtcNow,
-
                     };
 
                     this.context.Aluno.Add(aluno);

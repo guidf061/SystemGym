@@ -75,6 +75,10 @@ namespace SystemGym.Service
                 Endereco = pessoaModel.Endereco,
                 SexoId = pessoaModel.SexoId,
                 TipoId = pessoaModel.TipoId,
+                StateId = pessoaModel.StateId,
+                CityId = pessoaModel.CityId,
+                CountryId = 1058,
+                DataNascimento = pessoaModel.DataNascimento,
                 AlteracaoData = DateTime.UtcNow,
                 CriacaoData = DateTime.UtcNow,
 
@@ -103,7 +107,8 @@ namespace SystemGym.Service
             pessoa.SexoId = pessoaModel.SexoId;
             pessoa.TipoId = pessoaModel.TipoId;
             pessoa.AlteracaoData = DateTime.UtcNow;
-
+            pessoa.DataNascimento = pessoaModel.DataNascimento;
+           
             this.context.SaveChanges();
 
         }
