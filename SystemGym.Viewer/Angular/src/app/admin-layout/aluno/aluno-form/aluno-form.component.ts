@@ -81,7 +81,6 @@ export class AlunoFormComponent implements OnInit {
   private setFormGroup(): void {
     this.form.setValue({
       numeroCartao: this.aluno.numeroCartao,
-      situacaoAlunoId: this.aluno.situacaoAlunoId,
       nome: this.aluno.pessoa.nome,
       email: this.aluno.pessoa.email,
       cpf: this.aluno.pessoa.cpf,
@@ -110,7 +109,6 @@ export class AlunoFormComponent implements OnInit {
     const formModel = this.form.value;
     let aluno: Aluno = new Aluno();
     aluno.numeroCartao = formModel.numeroCartao as string;
-    aluno.situacaoAlunoId = formModel.situacaoAlunoId as number;
     aluno.pessoa = new Pessoa();
     aluno.pessoa.nome = formModel.nome as string;
     aluno.pessoa.email = formModel.email as string;
