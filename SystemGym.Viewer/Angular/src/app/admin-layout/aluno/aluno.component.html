@@ -10,13 +10,13 @@
             <div fxLayout="row" fxLayoutAlign="end">
               <div fxFlex="180px" fxFlex.lt-sm="150px" fxFlexAlign="center">
                 <mat-form-field>
-                  <input matInput autocomplete="off" placeholder="Nome" 
+                  <input matInput autocomplete="off" placeholder="Nome" formControlName="nome"
                          maxlength="256" />
                 </mat-form-field>
               </div>
               <div fxFlex="180px" fxFlex.lt-sm="100px" fxFlexAlign="center">
                 <mat-form-field>
-                  <input matInput autocomplete="off" placeholder="Cpf" 
+                  <input matInput autocomplete="off" placeholder="Cpf" formControlName="cpf"
                          maxlength="11" />
                 </mat-form-field>
               </div>
@@ -50,21 +50,15 @@
           </td>
         </ng-container>
         <ng-container matColumnDef="pessoa.cpf">
-          <th mat-header-cell *matHeaderCellDef r class="flex-item" fxFlex="150px" fxFlex.lt-xl="150px" fxHide.lt-sm>Cpf</th>
-          <td mat-cell *matCellDef="let row" class="flex-item" fxFlex="150px" fxFlex.lt-xl="150px" fxHide.lt-sm>
+          <th mat-header-cell *matHeaderCellDef r class="flex-item" fxFlex fxFlex.lt-xl="150px" fxHide.lt-sm>Cpf</th>
+          <td mat-cell *matCellDef="let row" class="flex-item" fxFlex fxFlex.lt-xl="150px" fxHide.lt-sm>
             {{row.pessoa.cpf}}
           </td>
         </ng-container>
         <ng-container matColumnDef="pessoa.email">
-          <th mat-header-cell *matpessoa.emailHeaderCellDef class="flex-item" fxFlex fxHide.lt-md>Usuário</th>
-          <td mat-cell *matCellDef="let row" class="flex-item" fxFlex fxHide.lt-md>
-            {{row.pessoa.email}}
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="numeroCartao">
           <th mat-header-cell *matHeaderCellDef class="flex-item" fxFlex fxFlex.lt-xl fxHide.lt-lg>Email</th>
           <td mat-cell *matCellDef="let row" class="flex-item" fxFlex fxFlex.lt-xl fxHide.lt-lg>
-            {{row.numeroCartao}}
+            {{row.pessoa.email}}
           </td>
         </ng-container>
         <ng-container matColumnDef="edit">
@@ -105,7 +99,7 @@
 
   <div class="fixed-action-btn">
     <button mat-fab disableRipple="false" color="warn" class="floating-button" (click)="createClick()"
-            matTooltip="Adicionar Usuário"
+            matTooltip="Matricular Aluno"
             matTooltipPosition="left"
             tabindex="-1">
       <mat-icon class="mat-24">add</mat-icon>

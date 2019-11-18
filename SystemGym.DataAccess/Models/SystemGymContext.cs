@@ -6,7 +6,6 @@ namespace SystemGym.DataAccess.Models
 {
     public partial class SystemGymContext : DbContext
     {
-
         public SystemGymContext(DbContextOptions<SystemGymContext> options)
             : base(options)
         {
@@ -314,7 +313,7 @@ namespace SystemGym.DataAccess.Models
 
                 entity.Property(e => e.Cpf)
                     .IsRequired()
-                    .HasMaxLength(11)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.CriacaoData).HasColumnType("datetime");
@@ -336,12 +335,12 @@ namespace SystemGym.DataAccess.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.TelefoneCasa)
-                    .HasMaxLength(11)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.TelefoneCelular)
                     .IsRequired()
-                    .HasMaxLength(11)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.City)

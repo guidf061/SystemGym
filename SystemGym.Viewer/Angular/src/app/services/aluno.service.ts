@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 
-import { Aluno } from '../models/aluno-model';
 import { AlunoSearch } from '../models/aluno-search-model';
 import { CustomErrorHandler } from '../core';
 import { Paging } from '../models/paging-model';
+import { Aluno } from '../models/aluno-model';
 
 @Injectable({
   providedIn: 'root'

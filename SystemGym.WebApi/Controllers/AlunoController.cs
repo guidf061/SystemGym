@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Montreal.Process.Sistel.Models;
 using SystemGym.Model.Aluno;
 using SystemGym.Model.Pagamento;
 using SystemGym.Model.Pessoa;
@@ -20,6 +21,17 @@ namespace SystemGym.WebApi.Controllers
         {
             this.alunoService = alunoService;
         }
+
+        /// <summary>
+        /// Pesquisa Aluno.
+        /// </summary>
+        /// <param name="model"></param>
+        [HttpGet("Search")]
+        public async Task<ActionResult<PagingModel<AlunoReturnModel>>> GetAsync([FromQuery] AlunoSearchModel model)
+        {
+            return this.Ok(await this.alunoService.SearchAsync(model));
+        }
+
 
         // GET api/values
         [HttpGet]

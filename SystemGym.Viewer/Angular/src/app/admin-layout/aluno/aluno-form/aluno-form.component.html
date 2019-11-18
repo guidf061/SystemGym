@@ -27,31 +27,7 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
-            <input matInput placeholder="UserName" formControlName="userName"
-                   required>
-            <mat-error *ngIf="form.controls['userName'].hasError('required')">
-              Campo obrigat&oacute;rio.
-            </mat-error>
-          </mat-form-field>
-        </div>
-      </div>
-
-      <div fxLayout="row">
-        <div fxFlex>
-          <mat-form-field>
-            <input matInput placeholder="PassWord" formControlName="password"
-                   required>
-            <mat-error *ngIf="form.controls['password'].hasError('required')">
-              Campo obrigat&oacute;rio.
-            </mat-error>
-          </mat-form-field>
-        </div>
-      </div>
-
-      <div fxLayout="row">
-        <div fxFlex>
-          <mat-form-field>
-            <input matInput placeholder="Nome Usuário" formControlName="nome"
+            <input matInput placeholder="Nome Completo" formControlName="nome"
                    required>
             <mat-error *ngIf="form.controls['nome'].hasError('required')">
               Campo obrigat&oacute;rio.
@@ -75,10 +51,36 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
-            <input matInput placeholder="cpf" formControlName="cpf"
+            <input matInput placeholder="Cpf" formControlName="cpf"
                    maxlength="11"
                    required>
-            <mat-error *ngIf="form.controls['nome'].hasError('required')">
+            <mat-error *ngIf="form.controls['cpf'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex>
+          <mat-form-field>
+            <input matInput autocomplete="off" placeholder="Data de Nascimento" formControlName="dataNascimento"
+                   [matDatepicker]="dataNascimento"
+                   (focus)="dataNascimento.open()"
+                   required />
+            <mat-datepicker #dataNascimento></mat-datepicker>
+            <mat-error *ngIf="form.controls['dataNascimento'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
+            <mat-datepicker-toggle class="datepicker-toggle-wrapper" fxFlex="30px" fxFlexAlign="center" matSuffix [for]="dataNascimento"></mat-datepicker-toggle>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row">
+        <div fxFlex>
+          <mat-form-field>
+            <input matInput placeholder="Número do Cartão" formControlName="numeroCartao"
+                   maxlength="16"
+                   required>
+            <mat-error *ngIf="form.controls['numeroCartao'].hasError('required')">
               Campo obrigat&oacute;rio.
             </mat-error>
           </mat-form-field>
@@ -111,6 +113,53 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
+            <input matInput placeholder="Numero Whatsapp" formControlName="numeroWhatsapp"
+                   required
+                   maxlength="11">
+            <mat-error *ngIf="form.controls['numeroWhatsapp'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row">
+        <div fxFlex="30%">
+          <mat-form-field>
+            <mat-select placeholder="Estado" formControlName="stateId"
+                        (selectionChange)="stateSelected()">
+              <mat-option *ngFor="let item of states;" [value]="item.stateId">{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex>
+          <app-auto-complete [serviceUrl]="autoCompleteUrl"
+                             [(keyword)]="keyword"
+                             placeHolder="Cidade"
+                             [minChars]="3"
+                             displayPropertyName="name"
+                             (valueSelected)="citySelected($event)"
+                             [required]="false"
+                             [noBorder]="true">
+          </app-auto-complete>
+        </div>
+      </div>
+      <div fxLayout="row">
+        <div fxFlex>
+          <mat-form-field>
+            <input matInput placeholder="Endereço" formControlName="endereco"
+                   maxlength="50"
+                   required>
+            <mat-error *ngIf="form.controls['endereco'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row">
+        <div fxFlex>
+          <mat-form-field>
             <mat-select placeholder="Sexo" formControlName="sexoId" required>
               <mat-option value="1">Masculino</mat-option>
               <mat-option value="2">Feminino</mat-option>
@@ -123,7 +172,6 @@
         <div fxFlex>
           <mat-form-field>
             <mat-select placeholder="Tipo" formControlName="tipoId">
-              <mat-option value="1">Colaborador</mat-option>
               <mat-option value="2">Aluno</mat-option>
             </mat-select>
             <mat-error *ngIf="form.controls['tipoId'].hasError('required')">
@@ -132,6 +180,30 @@
           </mat-form-field>
         </div>
       </div>
+
+      <div fxLayout="row">
+        <div fxFlex>
+          <mat-form-field>
+            <mat-select placeholder="Situação" formControlName="situacaoMatriculaId" required>
+              <mat-option value="1">Regular</mat-option>
+              <mat-option value="2">Irregular</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls['situacaoMatriculaId'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row">
+        <div fxFlex>
+          <mat-slide-toggle class="slide-toggle" formControlName="ativo" labelPosition="before">
+            Ativo ?
+          </mat-slide-toggle>
+        </div>
+      </div>
+
+
     </div>
-  </form>
+</form>
 </div>

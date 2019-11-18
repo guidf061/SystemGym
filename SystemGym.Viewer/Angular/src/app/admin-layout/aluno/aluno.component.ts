@@ -10,7 +10,6 @@ import { MatSnackBar, MatPaginator, MatSort } from '@angular/material';
 import { AlunoSearch } from '../../models/aluno-search-model';
 import { merge } from 'rxjs';
 
-
 @Component({
   selector: 'app-aluno',
   templateUrl: './aluno.component.html',
@@ -22,6 +21,7 @@ export class AlunoComponent implements OnInit {
   aluno: Aluno;
   data: Aluno[];
   dataSource = this.data;
+
   noDataFound: boolean = false;
   formSubmited: boolean;
   length: number;
@@ -36,7 +36,7 @@ export class AlunoComponent implements OnInit {
     private loaderService: LoaderService,
     private fb: FormBuilder) { }
 
-  displayedColumns: string[] = ['pessoa.nome', 'pessoa.cpf', 'userName', 'pessoa.email', 'edit', 'del'];
+  displayedColumns: string[] = ['pessoa.nome', 'pessoa.cpf', 'pessoa.email', 'edit', 'del'];
 
   ngOnInit() {
 

@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Montreal.Process.Sistel.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using SystemGym.DataAccess.Models;
+using SystemGym.Model.Address;
 using SystemGym.Model.Aluno;
 using SystemGym.Model.Colaborador;
 using SystemGym.Model.Pagamento;
@@ -79,6 +82,74 @@ namespace SystemGym.Service
                 })
                 .FirstOrDefault();
         }
+
+        public async Task<PagingModel<AlunoReturnModel>> SearchAsync(AlunoSearchModel alunoModel)
+        {
+            var query = this.context.Aluno
+                .Include(x => x.Pessoa)
+                    .ThenInclude(x => x.City)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(alunoModel.Nome))
+            {
+                query = query.Where(x => EF.Functions.Like(x.Pessoa.Nome, "%" + alunoModel.Nome + "%"));
+            }
+
+            if (!string.IsNullOrEmpty(alunoModel.Cpf))
+            {
+                query = query.Where(x => EF.Functions.Like(x.Pessoa.Cpf, "%" + alunoModel.Cpf + "%"));
+            }
+
+            var pagingModel = new PagingModel<AlunoReturnModel>();
+
+            pagingModel.TotalItems = query.Count();
+
+            if (!string.IsNullOrEmpty(alunoModel.Sort))
+            {
+                query = query.OrderBy(x => x.Pessoa.Nome);
+            }
+
+            pagingModel.Items = (await query
+                .Skip(alunoModel.PageSize * (alunoModel.Page - 1))
+                .Take(alunoModel.PageSize)
+                .ToListAsync())
+                .Select(x => new AlunoReturnModel()
+                {
+                    AlunoId = x.AlunoId,
+                    AlteracaoData = x.AlteracaoData,
+                    CriacaoData = x.CriacaoData,
+                    NumeroCartao = x.NumeroCartao,
+                    Pessoa = new PessoaReturnModel()
+                    {
+                        PessoaId = x.Pessoa.PessoaId,
+                        Nome = x.Pessoa.Nome,
+                        Cpf = x.Pessoa.Cpf,
+                        Email = x.Pessoa.Email,
+                        TelefoneCasa = x.Pessoa.TelefoneCasa,
+                        TelefoneCelular = x.Pessoa.TelefoneCelular,
+                        Endereco = x.Pessoa.Endereco,
+                        SexoId = x.Pessoa.SexoId,
+                        TipoId = x.Pessoa.TipoId,
+                        AlteracaoData = x.Pessoa.AlteracaoData,
+                        CriacaoData = x.Pessoa.CriacaoData,
+                        City = x.Pessoa.City == null ? null : new CityReturnModel()
+                        {
+                            CityId = x.Pessoa.City.CityId,
+                            Name = x.Pessoa.City.Name,
+                            StateId = x.Pessoa.City.StateId,
+                            State = x.Pessoa.City.State == null ? null : new StateReturnModel()
+                            {
+                                StateId = x.Pessoa.City.State.StateId,
+                                Acronym = x.Pessoa.City.State.Acronym,
+                                Name = x.Pessoa.City.State.Name,
+                                CountryId = x.Pessoa.City.State.CountryId,
+                            }
+                        }
+                    }
+                }).ToList();
+
+            return pagingModel;
+        }
         public void Adicionar(AlunoBindingModel alunoModel)
         {
             using (var transaction = this.context.Database.BeginTransaction())
@@ -88,11 +159,11 @@ namespace SystemGym.Service
                 {
                     var aluno = new Aluno()
                     {
-                        PessoaId = pessoaService.Adicionar(alunoModel.Pessoa),
                         NumeroCartao = alunoModel.NumeroCartao,
-                        NumeroWhatsapp = alunoModel.NumeroCartao,
+                        NumeroWhatsapp = alunoModel.NumeroWhatsapp,
                         CriacaoData = DateTime.UtcNow,
                         AlteracaoData = DateTime.UtcNow,
+                        PessoaId = pessoaService.Adicionar(alunoModel.Pessoa)
                     };
 
                     this.context.Aluno.Add(aluno);
@@ -100,7 +171,7 @@ namespace SystemGym.Service
 
                     transaction.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     transaction.Rollback();
                     throw;
@@ -123,7 +194,6 @@ namespace SystemGym.Service
 
             this.context.SaveChanges();
 
-
         }
 
         public void Delete(Guid alunoId)
@@ -131,6 +201,12 @@ namespace SystemGym.Service
             var aluno = this.context.Aluno
                 .Where(x => x.AlunoId.Equals(alunoId))
                 .FirstOrDefault();
+
+            var matricula = this.context.MatriculaAluno
+                .Where(x => x.AlunoId.Equals(aluno.AlunoId))
+                .FirstOrDefault();
+
+            this.context.MatriculaAluno.Remove(matricula);
 
             this.context.Aluno.Remove(aluno);
 
@@ -171,7 +247,5 @@ namespace SystemGym.Service
                 }
             }
         }
-
-
     }
 }
