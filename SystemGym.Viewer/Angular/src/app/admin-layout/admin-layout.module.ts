@@ -36,6 +36,11 @@ import { AdminLayoutComponent } from './admin-layout.component';
 import { AdminLayoutRouting } from './admin-layout.routing';
 import { ComponentsModule } from '../components/components.module';
 import { AddressService } from '../services/address.service';
+import { PagamentoService } from '../services/pagamento.service';
+import { PagamentoListService } from './aluno/pagamento/pagamento.service';
+import { PagamentoFormService } from './aluno/pagamento/form/pagamento-form.service';
+import { PagamentoComponent } from './aluno/pagamento/pagamento.component';
+import { PagamentoFormComponent } from './aluno/pagamento/form/pagamento-form.component';
 
 
 
@@ -67,6 +72,8 @@ import { AddressService } from '../services/address.service';
     ColaboradorComponent,
     ColaboradorFormComponent,
     AdminLayoutComponent,
+    PagamentoComponent,
+    PagamentoFormComponent
   ],
 
   entryComponents: [
@@ -78,6 +85,8 @@ import { AddressService } from '../services/address.service';
     VisitanteFormComponent,
     ColaboradorComponent,
     ColaboradorFormComponent,
+    PagamentoComponent,
+    PagamentoFormComponent
 
   ],
 
@@ -91,7 +100,9 @@ import { AddressService } from '../services/address.service';
     VisitanteFormService,
     ColaboradorFormService,
     AddressService,
-    
+    PagamentoService,
+    PagamentoListService,
+    PagamentoFormService
   ],
 })
 

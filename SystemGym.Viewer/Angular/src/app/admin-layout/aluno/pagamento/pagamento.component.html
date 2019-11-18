@@ -1,0 +1,76 @@
+<div class="modal contact">
+  <div class="modal-header">
+    <mat-toolbar color="warn">
+      <mat-toolbar-row>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <div fxFlex="50px" fxFlexAlign="center">
+            <button mat-icon-button (click)="closeDialog(false);" type="button" tabindex="-1">
+              <mat-icon>arrow_back</mat-icon>
+            </button>
+          </div>
+          <div fxFlex fxFlexAlign="center" fxFlexOffset.gt-sm="10px">
+            Pagamento
+          </div>
+        </div>
+        <div class="form-theme filter">
+          <div fxLayout="row" fxLayoutAlign="end">
+            <div fxFlex="130px" fxFlexAlign="center">
+              <button mat-raised-button color="basic" class="floating-button" (click)="createClick()" matTooltip="Registrar Pagamento" matTooltipPosition="left">
+                <mat-icon class="mat-24">add</mat-icon> Registrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+
+  <mat-dialog-content class="modal-content-data-table form-theme">
+
+    <div fxLayout="row" class="top20" *ngIf="data !== undefined && data.length > 0">
+      <div fxFlex>
+        <div fxLayout="row" class="contact">
+          <div fxFlex fxFlexAlign="center"></div>
+        </div>
+        <ng-template ngFor let-contact [ngForOf]="data">
+          <div fxLayout="row" class="contact">
+            <div fxFlex fxFlexAlign="center">
+              <div class="name">
+                {{pagamento.aluno.nome}} - {{pagamento.valorMensalidade}}
+              </div>
+            </div>
+            <div fxFlex="30px">
+              <button mat-icon-button [mat-menu-trigger-for]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu" xPosition="before">
+                <button mat-menu-item (click)="editClick(contact)">
+                  <mat-icon>edit</mat-icon>
+                  <span> Editar </span>
+                </button>
+                <button mat-menu-item (click)="deleteClick(contact)">
+                  <mat-icon>delete</mat-icon>
+                  <span> Excluir </span>
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end" [fxHide]="data == undefined || data.length == 0">
+      <div fxFlex>
+        <mat-paginator [length]="length"
+                       [pageSizeOptions]="[10, 20, 50, 100]"
+                       itemsPerPageLabel="Itens por p\xE1gina">
+        </mat-paginator>
+      </div>
+    </div>
+
+    <div class="center-align no-data-found" *ngIf="noDataFound && data">
+      Nenhum registro encontrado.
+    </div>
+
+  </mat-dialog-content>
+</div>
+

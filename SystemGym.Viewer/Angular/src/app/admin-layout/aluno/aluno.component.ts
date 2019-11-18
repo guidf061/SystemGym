@@ -9,6 +9,7 @@ import { ConfirmService, LoaderService } from '../../core';
 import { MatSnackBar, MatPaginator, MatSort } from '@angular/material';
 import { AlunoSearch } from '../../models/aluno-search-model';
 import { merge } from 'rxjs';
+import { PagamentoListService } from './pagamento/pagamento.service';
 
 @Component({
   selector: 'app-aluno',
@@ -31,12 +32,13 @@ export class AlunoComponent implements OnInit {
 
   constructor(private alunoService: AlunoService,
     private alunoForService: AlunoFormService,
+    private pagamentoListService: PagamentoListService,
     private confirmService: ConfirmService,
     private snackBar: MatSnackBar,
     private loaderService: LoaderService,
     private fb: FormBuilder) { }
 
-  displayedColumns: string[] = ['pessoa.nome', 'pessoa.cpf', 'pessoa.email', 'edit', 'del'];
+  displayedColumns: string[] = ['pessoa.nome', 'pessoa.cpf', 'pessoa.email', 'pagamento' ,'edit', 'del'];
 
   ngOnInit() {
 
@@ -105,6 +107,14 @@ export class AlunoComponent implements OnInit {
               });
         }
       });
+  }
+
+  pagamentoClick(aluno: Aluno) {
+    this.pagamentoListService.showDialog(aluno).subscribe(update => {
+      if (update) {
+        this.loadData();
+      }
+    });
   }
 
   clearForm() {

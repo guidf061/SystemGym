@@ -1,4 +1,4 @@
-﻿namespace Montreal.Process.Sistel.Models
+﻿namespace SystemGym.Model
 {
     public class PaginatorModel
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Montreal.Process.Sistel.Models;
+using SystemGym.Model;
 using SystemGym.Model.Usuario;
 using SystemGym.Service;
 

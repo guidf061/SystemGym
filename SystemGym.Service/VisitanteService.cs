@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Montreal.Process.Sistel.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SystemGym.DataAccess.Models;
+using SystemGym.Model;
 using SystemGym.Model.Address;
 using SystemGym.Model.Pessoa;
 using SystemGym.Model.Visitante;

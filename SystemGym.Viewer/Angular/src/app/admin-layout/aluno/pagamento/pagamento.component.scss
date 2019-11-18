@@ -1,0 +1,55 @@
+.contact {
+  .data-table {
+    margin-bottom: 60px;
+  }
+
+  .contact {
+    border-bottom: 1px solid #e0e0e0;
+    line-height: 50px;
+    padding: 0 15px 0 24px;
+
+    .name {
+      width: 100%;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 25px;
+
+      .role {
+        color: rgba(0, 0, 0, 0.7);
+      }
+    }
+
+    .datails {
+      width: 100%;
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 15px;
+    }
+
+    button {
+      color: rgba(0, 0, 0, 0.54);
+    }
+  }
+}
+
+.dark-theme {
+  .contact {
+    .card {
+      background-color: #424242;
+    }
+
+    .contact {
+      border-bottom-color: rgba(255, 255, 255, 0.12);
+
+      .name {
+        .role {
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+
+      button {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+  }
+}

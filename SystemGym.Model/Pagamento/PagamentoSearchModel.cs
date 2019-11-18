@@ -7,11 +7,8 @@ using SystemGym.Model.Pessoa;
 
 namespace SystemGym.Model.Aluno
 {
-    public class MatriculaAlunoSearchModel : PaginatorModel
+    public class PagamentoSearchModel : PaginatorModel
     {
-        public string Nome { get; set; }
-
-        public string Cpf { get; set; }
-
+        public string AlunoId { get; set; }
     }
 }

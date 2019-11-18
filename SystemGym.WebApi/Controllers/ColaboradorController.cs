@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SystemGym.Model;
 using SystemGym.Model.Colaborador;
 using SystemGym.Model.Pessoa;
 using SystemGym.Model.Visitante;
@@ -19,6 +20,16 @@ namespace SystemGym.WebApi.Controllers
         public ColaboradorController(ColaboradorService colaboradorService)
         {
             this.colaboradorService = colaboradorService;
+        }
+
+        /// <summary>
+        /// Pesquisa Usuário.
+        /// </summary>
+        /// <param name="model"></param>
+        [HttpGet("Search")]
+        public async Task<ActionResult<PagingModel<ColaboradorReturnModel>>> GetAsync([FromQuery] ColaboradorSearchModel model)
+        {
+            return this.Ok(await this.colaboradorService.SearchAsync(model));
         }
 
         // GET api/values

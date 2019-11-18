@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Montreal.Process.Sistel.Models;
+using SystemGym.Model;
 using SystemGym.Model.Aluno;
 using SystemGym.Model.Pagamento;
 using SystemGym.Model.Pessoa;

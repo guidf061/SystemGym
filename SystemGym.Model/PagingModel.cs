@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Montreal.Process.Sistel.Models
+namespace SystemGym.Model
 {
     public class PagingModel<T>
     {
