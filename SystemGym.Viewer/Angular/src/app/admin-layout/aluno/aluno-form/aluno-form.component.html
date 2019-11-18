@@ -161,8 +161,8 @@
         <div fxFlex>
           <mat-form-field>
             <mat-select placeholder="Sexo" formControlName="sexoId" required>
-              <mat-option value="1">Masculino</mat-option>
-              <mat-option value="2">Feminino</mat-option>
+              <mat-option value=1>Masculino</mat-option>
+              <mat-option value=2>Feminino</mat-option>
             </mat-select>
             <mat-error *ngIf="form.controls['sexoId'].hasError('required')">
               Campo obrigat&oacute;rio.
@@ -172,7 +172,7 @@
         <div fxFlex>
           <mat-form-field>
             <mat-select placeholder="Tipo" formControlName="tipoId">
-              <mat-option value="2">Aluno</mat-option>
+              <mat-option value=2>Aluno</mat-option>
             </mat-select>
             <mat-error *ngIf="form.controls['tipoId'].hasError('required')">
               Campo obrigat&oacute;rio.
@@ -185,8 +185,8 @@
         <div fxFlex>
           <mat-form-field>
             <mat-select placeholder="Situação" formControlName="situacaoMatriculaId" required>
-              <mat-option value="1">Regular</mat-option>
-              <mat-option value="2">Irregular</mat-option>
+              <mat-option value=1>Regular</mat-option>
+              <mat-option value=2>Irregular</mat-option>
             </mat-select>
             <mat-error *ngIf="form.controls['situacaoMatriculaId'].hasError('required')">
               Campo obrigat&oacute;rio.

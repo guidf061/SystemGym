@@ -52,11 +52,11 @@ namespace SystemGym.DataAccess.Models
                 entity.Property(e => e.CriacaoData).HasColumnType("datetime");
 
                 entity.Property(e => e.NumeroCartao)
-                    .HasMaxLength(15)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.NumeroWhatsapp)
-                    .HasMaxLength(15)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Pessoa)
@@ -367,7 +367,6 @@ namespace SystemGym.DataAccess.Models
                 entity.HasOne(d => d.Tipo)
                     .WithMany(p => p.Pessoa)
                     .HasForeignKey(d => d.TipoId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Pessoa_Tipo");
             });
 

@@ -16,7 +16,7 @@ namespace SystemGym.Model.Aluno
         public DateTime? AlteracaoData { get; set; }
         public PessoaBindingModel Pessoa {get; set;}
         public Guid AlunoId { get; set; }
-        public bool Ativo { get; set; }
+       // public bool Ativo { get; set; }
         public DateTime? CancelamentoDate { get; set; }
     }
 }

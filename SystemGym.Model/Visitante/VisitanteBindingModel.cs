@@ -13,6 +13,5 @@ namespace SystemGym.Model.Visitante
         public DateTime? CriacaoData { get; set; }
         public DateTime? AlteracaoData { get; set; }
         public PessoaBindingModel Pessoa { get; set; }
-        public List<GerenciarVisitanteBindingModel> GerenciarVisitante { get; set; }
     }
 }

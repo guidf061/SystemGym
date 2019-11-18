@@ -16,7 +16,7 @@ namespace SystemGym.DataAccess.Models
         public Guid PessoaId { get; set; }
         public string NumeroCartao { get; set; }
         public string NumeroWhatsapp { get; set; }
-        public DateTime CriacaoData { get; set; }
+        public DateTime? CriacaoData { get; set; }
         public DateTime? AlteracaoData { get; set; }
 
         public virtual Pessoa Pessoa { get; set; }

@@ -13,6 +13,7 @@
     <None Remove="Angular\src\app\models\usuario-model.ts" />
     <None Remove="Angular\src\app\models\usuario-search-model.ts" />
     <None Remove="Angular\src\app\models\visitante-model.ts" />
+    <None Remove="Angular\src\app\models\visitante-search-model.ts" />
     <None Remove="Angular\src\app\services\aluno.service.ts" />
     <None Remove="Angular\src\app\services\colaborador.service.ts" />
     <None Remove="Angular\src\app\services\usuario.service.ts" />
@@ -26,6 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="Angular\src\app\models\visitante-search-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Angular\src\app\models\aluno-search-model.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

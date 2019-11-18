@@ -159,14 +159,27 @@ namespace SystemGym.Service
                 {
                     var aluno = new Aluno()
                     {
-                        NumeroCartao = alunoModel.NumeroCartao,
-                        NumeroWhatsapp = alunoModel.NumeroWhatsapp,
+                      NumeroCartao = alunoModel.NumeroCartao,
+                         NumeroWhatsapp = alunoModel.NumeroWhatsapp,
                         CriacaoData = DateTime.UtcNow,
                         AlteracaoData = DateTime.UtcNow,
                         PessoaId = pessoaService.Adicionar(alunoModel.Pessoa)
                     };
 
                     this.context.Aluno.Add(aluno);
+                    this.context.SaveChanges();
+
+                    var matricula = new MatriculaAluno()
+                    {
+                        SituacaoMatriculaId = alunoModel.SituacaoMatriculaId,
+                      //Ativo = alunoModel.Ativo,
+                        CancelamentoDate = DateTime.UtcNow,
+                        CriacaoDate = DateTime.UtcNow,
+                        AlunoId = aluno.AlunoId,
+                    };
+
+                    this.context.MatriculaAluno.Add(matricula);
+
                     this.context.SaveChanges();
 
                     transaction.Commit();
@@ -206,7 +219,10 @@ namespace SystemGym.Service
                 .Where(x => x.AlunoId.Equals(aluno.AlunoId))
                 .FirstOrDefault();
 
-            this.context.MatriculaAluno.Remove(matricula);
+            if(matricula != null)
+            {
+                this.context.MatriculaAluno.Remove(matricula);
+            }
 
             this.context.Aluno.Remove(aluno);
 

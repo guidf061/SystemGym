@@ -74,7 +74,7 @@ namespace SystemGym.Service
                 TelefoneCasa = pessoaModel.TelefoneCasa,
                 Endereco = pessoaModel.Endereco,
                 SexoId = pessoaModel.SexoId,
-                TipoId = pessoaModel.TipoId,
+                TipoId = 1003,
                 StateId = pessoaModel.StateId,
                 CityId = pessoaModel.CityId,
                 CountryId = 1058,

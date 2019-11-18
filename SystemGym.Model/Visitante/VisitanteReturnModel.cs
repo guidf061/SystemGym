@@ -13,7 +13,6 @@ namespace SystemGym.Model.Visitante
         public DateTime? VisitaData { get; set; }
         public DateTime? CriacaoData { get; set; }
         public DateTime? AlteracaoData { get; set; }
-
         public PessoaReturnModel Pessoa { get; set; }
         public List<GerenciarVisitanteReturnModel> GerenciarVisitante { get; set; }
     }

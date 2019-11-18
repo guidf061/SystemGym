@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Montreal.Process.Sistel.Models;
 using SystemGym.Model.Pessoa;
 using SystemGym.Model.Visitante;
 using SystemGym.Service;
@@ -18,6 +19,16 @@ namespace SystemGym.WebApi.Controllers
         public VisitanteController(VisitanteService visitanteService)
         {
             this.visitanteService = visitanteService;
+        }
+
+        /// <summary>
+        /// Pesquisa Visitante.
+        /// </summary>
+        /// <param name="model"></param>
+        [HttpGet("Search")]
+        public async Task<ActionResult<PagingModel<VisitanteReturnModel>>> GetAsync([FromQuery] VisitanteSearchModel model)
+        {
+            return this.Ok(await this.visitanteService.SearchAsync(model));
         }
 
         // GET api/values
