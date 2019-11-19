@@ -17,7 +17,7 @@ export class VisitanteFormService {
     dialogRef = this.dialog.open(VisitanteFormComponent, {
       disableClose: true,
       width: '450px',
-      height: '700px',
+      height: '450px',
       panelClass: 'modal-wrapper',
       data: visitante
     });

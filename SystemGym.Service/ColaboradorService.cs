@@ -46,7 +46,7 @@ namespace SystemGym.Service
                         TelefoneCelular = x.Pessoa.TelefoneCelular,
                         Endereco = x.Pessoa.Endereco,
                         SexoId = x.Pessoa.SexoId,
-                        TipoId = x.Pessoa.TipoId,
+                        PermissaoId = x.Pessoa.PermissaoId,
                         AlteracaoData = x.Pessoa.AlteracaoData,
                         CriacaoData = x.Pessoa.CriacaoData,
                     }
@@ -75,7 +75,7 @@ namespace SystemGym.Service
                         TelefoneCelular = x.Pessoa.TelefoneCelular,
                         Endereco = x.Pessoa.Endereco,
                         SexoId = x.Pessoa.SexoId,
-                        TipoId = x.Pessoa.TipoId,
+                        PermissaoId = x.Pessoa.PermissaoId,
                         AlteracaoData = x.Pessoa.AlteracaoData,
                         CriacaoData = x.Pessoa.CriacaoData,
                     }
@@ -131,7 +131,7 @@ namespace SystemGym.Service
                         TelefoneCelular = x.Pessoa.TelefoneCelular,
                         Endereco = x.Pessoa.Endereco,
                         SexoId = x.Pessoa.SexoId,
-                        TipoId = x.Pessoa.TipoId,
+                        PermissaoId = x.Pessoa.PermissaoId,
                         AlteracaoData = x.Pessoa.AlteracaoData,
                         CriacaoData = x.Pessoa.CriacaoData,
                         City = x.Pessoa.City == null ? null : new CityReturnModel()

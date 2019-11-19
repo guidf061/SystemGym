@@ -24,7 +24,7 @@ export class UsuarioComponent implements OnInit {
   usuario: Usuario;
   data: Usuario[];
   dataSource = this.data;
- 
+
   noDataFound: boolean = false;
   formSubmited: boolean;
   length: number;
@@ -39,7 +39,7 @@ export class UsuarioComponent implements OnInit {
     private loaderService: LoaderService,
     private fb: FormBuilder) { }
 
-  displayedColumns: string[] = ['pessoa.nome', 'pessoa.cpf', 'userName', 'pessoa.email', 'edit' ,'del'];
+  displayedColumns: string[] = ['pessoa.nome', 'pessoa.cpf', 'userName', 'pessoa.email', 'dataAcesso', 'edit', 'del'];
 
   ngOnInit() {
 
@@ -59,7 +59,6 @@ export class UsuarioComponent implements OnInit {
         this.loadData();
         this.scrollTop();
       });
-
   }
 
 
@@ -83,9 +82,12 @@ export class UsuarioComponent implements OnInit {
       });
   }
 
-
   editClick(usuario: Usuario) {
-    this.usuarioForService.showDialog(usuario).subscribe();
+    this.usuarioForService.showDialog(usuario).subscribe(update => {
+      if (update) {
+        this.loadData();
+      }
+    });
   }
 
   deleteClick(usuario: Usuario) {
@@ -118,7 +120,11 @@ export class UsuarioComponent implements OnInit {
   }
 
   createClick(): void {
-    this.usuarioForService.showDialog(null).subscribe();
+    this.usuarioForService.showDialog(null).subscribe(update => {
+      if (update) {
+        this.loadData();
+      }
+    });
   }
 
   private createFormGroup(): void {

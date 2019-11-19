@@ -41,9 +41,7 @@ import { PagamentoListService } from './aluno/pagamento/pagamento.service';
 import { PagamentoFormService } from './aluno/pagamento/form/pagamento-form.service';
 import { PagamentoComponent } from './aluno/pagamento/pagamento.component';
 import { PagamentoFormComponent } from './aluno/pagamento/form/pagamento-form.component';
-
-
-
+import { CombosListService } from '../services/combosList.service';
 
 @NgModule({
   imports: [
@@ -102,7 +100,8 @@ import { PagamentoFormComponent } from './aluno/pagamento/form/pagamento-form.co
     AddressService,
     PagamentoService,
     PagamentoListService,
-    PagamentoFormService
+    PagamentoFormService,
+    CombosListService
   ],
 })
 

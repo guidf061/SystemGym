@@ -75,7 +75,7 @@ namespace SystemGym.Service
                             TelefoneCelular = x.Aluno.Pessoa.TelefoneCelular,
                             Endereco = x.Aluno.Pessoa.Endereco,
                             SexoId = x.Aluno.Pessoa.SexoId,
-                            TipoId = x.Aluno.Pessoa.TipoId,
+                            PermissaoId = x.Aluno.Pessoa.PermissaoId,
                             AlteracaoData = x.Aluno.Pessoa.AlteracaoData,
                             CriacaoData = x.Aluno.Pessoa.CriacaoData,
                         }

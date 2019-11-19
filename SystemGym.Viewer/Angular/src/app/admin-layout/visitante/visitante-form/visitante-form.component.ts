@@ -1,7 +1,7 @@
 
 import { Component, OnInit, HostListener, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
+import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA, DateAdapter } from '@angular/material'
 import { VisitanteService } from '../../../services/visitante.service';
 
 import { Visitante } from '../../../models/visitante-model';
@@ -12,12 +12,20 @@ import { AddressService } from '../../../services/address.service';
 import { City } from '../../../models/city-model';
 import * as moment from 'moment';
 import { visitAll } from '@angular/compiler';
+import { CombosListService } from '../../../services/combosList.service';
+import { Sexo } from '../../../models/sexo-model';
+import { CustomDateAdapter } from '../../../custom-date-adapter';
 
 
 @Component({
   selector: 'app-visitante-form',
   templateUrl: './visitante-form.component.html',
-  styleUrls: ['./visitante-form.component.scss']
+  styleUrls: ['./visitante-form.component.scss'],
+  providers: [
+    {
+      provide: DateAdapter, useClass: CustomDateAdapter
+    }
+  ]
 })
 export class VisitanteFormComponent implements OnInit {
   form: FormGroup;
@@ -25,6 +33,7 @@ export class VisitanteFormComponent implements OnInit {
   visitante: Visitante;
   states: State[];
   stateSelec: boolean = false;
+  sexos: Sexo[];
 
   formSubmited: boolean;
 
@@ -32,6 +41,7 @@ export class VisitanteFormComponent implements OnInit {
     private visitanteService: VisitanteService,
     private loaderService: LoaderService,
     private addressService: AddressService,
+    private combosListService: CombosListService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<VisitanteFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Visitante,
@@ -65,6 +75,18 @@ export class VisitanteFormComponent implements OnInit {
         });
       });
 
+
+    this.combosListService.getSexo().then(rows => {
+      this.sexos = rows;
+      this.loaderService.hide();
+    },
+      error => {
+        this.loaderService.hide();
+        this.snackBar.open(error, 'Fechar', {
+          duration: 10000
+        });
+      });
+
     this.createFormGroup();
 
     if (this.visitante !== undefined && this.visitante !== null) {
@@ -85,24 +107,27 @@ export class VisitanteFormComponent implements OnInit {
 
       let visitante: Visitante = this.prepareSave();
 
+      let save: Promise<any>;
+
       if (this.visitante.visitanteId === null || this.visitante.visitanteId === undefined) {
-        this.visitanteService.add(visitante);
+        save = this.visitanteService.add(visitante);
+      } else {
+        save = this.visitanteService.update(this.visitante.visitanteId, visitante);
       }
-      else {
-        this.visitanteService.update(this.visitante.visitanteId, visitante)
-      }
 
-      this.snackBar.open('Dados salvos com sucesso!.', 'Fechar')
-
-      this.closeDialog(true);
-
-
-      error => {
-
-        this.snackBar.open(error, 'Fechar', {
-          duration: 10000
+      save.then(reseted => {
+        this.loaderService.hide();
+        this.snackBar.open('Dados salvos com sucesso!.', 'Fechar', {
+          duration: 5000
         });
-      }
+        this.closeDialog(true);
+      },
+        error => {
+          this.loaderService.hide();
+          this.snackBar.open(error, 'Fechar', {
+            duration: 10000
+          });
+        });
     }
   }
 

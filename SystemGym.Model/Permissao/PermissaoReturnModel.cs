@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SystemGym.Model.Tipo
+namespace SystemGym.Model.Permissao
 {
-    public class TipoReturnModel
+    public class PermissaoReturnModel
     {
-        public int TipoId { get; set; }
+        public int PermissaoId { get; set; }
         public string Descricao { get; set; }
     }
 }

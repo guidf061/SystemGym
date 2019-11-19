@@ -56,11 +56,10 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div fxFlex="100px">
+          <div fxFlex="95px">
             <mat-form-field>
-              <mat-select placeholder="Sexo" formControlName="sexoId" required>
-                <mat-option value="1">Masculino</mat-option>
-                <mat-option value="2">Feminino</mat-option>
+              <mat-select placeholder="Sexo" formControlName="sexoId">
+                <mat-option *ngFor="let item of sexos;" [value]="item.sexoId">{{item.descricao}}</mat-option>
               </mat-select>
               <mat-error *ngIf="form.controls['sexoId'].hasError('required')">
                 Campo obrigat&oacute;rio.

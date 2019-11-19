@@ -82,9 +82,12 @@ export class AlunoComponent implements OnInit {
       });
   }
 
-
   editClick(aluno: Aluno) {
-    this.alunoForService.showDialog(aluno).subscribe();
+    this.alunoForService.showDialog(aluno).subscribe(update => {
+      if (update) {
+        this.loadData();
+      }
+    });
   }
 
   deleteClick(aluno: Aluno) {
@@ -125,7 +128,11 @@ export class AlunoComponent implements OnInit {
   }
 
   createClick(): void {
-    this.alunoForService.showDialog(null).subscribe();
+    this.alunoForService.showDialog(null).subscribe(update => {
+      if (update) {
+        this.loadData();
+      }
+    });
   }
 
   private createFormGroup(): void {

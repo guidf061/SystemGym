@@ -83,9 +83,12 @@ export class VisitanteComponent implements OnInit {
       });
   }
 
-
   editClick(visitante: Visitante) {
-    this.visitanteForService.showDialog(visitante).subscribe();
+    this.visitanteForService.showDialog(visitante).subscribe(update => {
+      if (update) {
+        this.loadData();
+      }
+    });
   }
 
   deleteClick(visitante: Visitante) {
@@ -118,7 +121,11 @@ export class VisitanteComponent implements OnInit {
   }
 
   createClick(): void {
-    this.visitanteForService.showDialog(null).subscribe();
+    this.visitanteForService.showDialog(null).subscribe(update => {
+      if (update) {
+        this.loadData();
+      }
+    });
   }
 
   private createFormGroup(): void {

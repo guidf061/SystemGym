@@ -42,6 +42,8 @@ namespace SystemGym.WebApi
             services.AddScoped<DashboardService>();
             services.AddScoped<AddressService>();
             services.AddScoped<PagamentoService>();
+            services.AddScoped<CombosListService>();
+
 
             services.AddSwaggerGen(c =>
             {

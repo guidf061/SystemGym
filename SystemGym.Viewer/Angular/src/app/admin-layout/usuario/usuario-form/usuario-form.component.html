@@ -39,7 +39,7 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
-            <input matInput placeholder="Senha" formControlName="password"
+            <input matInput type="password" placeholder="Senha" formControlName="password"
                    required>
             <mat-error *ngIf="form.controls['password'].hasError('required')">
               Campo obrigat&oacute;rio.
@@ -73,32 +73,57 @@
       </div>
 
       <div fxLayout="row">
-        <div fxFlex>
+        <div fxFlex="95px">
           <mat-form-field>
             <input matInput placeholder="Cpf" formControlName="cpf"
                    maxlength="11"
                    required>
-            <mat-error *ngIf="form.controls['nome'].hasError('required')">
+            <mat-error *ngIf="form.controls['cpf'].hasError('required')">
               Campo obrigat&oacute;rio.
             </mat-error>
           </mat-form-field>
         </div>
-          <div fxFlex>
-            <mat-form-field>
-              <input matInput autocomplete="off" placeholder="Data de Nascimento" formControlName="dataNascimento"
-                     [matDatepicker]="dataNascimento"
-                     (focus)="dataNascimento.open()"
-                     required />
-              <mat-datepicker #dataNascimento></mat-datepicker>
-              <mat-error *ngIf="form.controls['dataNascimento'].hasError('required')">
-                Campo obrigat&oacute;rio.
-              </mat-error>
-              <mat-datepicker-toggle class="datepicker-toggle-wrapper" fxFlex="30px" fxFlexAlign="center" matSuffix [for]="dataNascimento"></mat-datepicker-toggle>
-            </mat-form-field>
-          </div>
+        <div fxFlex>
+          <mat-form-field>
+            <input matInput placeholder="Data de Nascimento" formControlName="dataNascimento"
+                   [matDatepicker]="dataNascimento"
+                   (focus)="dataNascimento.open()"
+                   autocomplete="off"
+                   readonly
+                   required
+                   tabindex="-1" />
+            <mat-datepicker #dataNascimento [touchUi]="touch"></mat-datepicker>
+            <mat-error *ngIf="formSubmited && form.controls['dataNascimento'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="30px" fxFlexAlign="center" class="datepicker-toggle-wrapper">
+          <mat-datepicker-toggle [for]="dataNascimento"></mat-datepicker-toggle>
+        </div>
+        <div fxFlex>
+          <mat-form-field>
+            <mat-select placeholder="Permissao" formControlName="permissaoId">
+              <mat-option *ngFor="let item of permissaos;" [value]="item.permissaoId">{{item.descricao}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls['permissaoId'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
+          </mat-form-field>
+        </div>
       </div>
 
       <div fxLayout="row">
+        <div fxFlex="95px">
+          <mat-form-field>
+            <mat-select placeholder="Sexo" formControlName="sexoId">
+              <mat-option *ngFor="let item of sexos;" [value]="item.sexoId">{{item.descricao}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls['sexoId'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
+          </mat-form-field>
+        </div>
         <div fxFlex>
           <mat-form-field>
             <input matInput placeholder="telefone Celular" formControlName="telefoneCelular"
@@ -146,24 +171,9 @@
         <div fxFlex>
           <mat-form-field>
             <input matInput placeholder="Endereço" formControlName="endereco"
-                   maxlength="11"
+                   maxlength="50"
                    required>
-            <mat-error *ngIf="form.controls['nome'].hasError('required')">
-              Campo obrigat&oacute;rio.
-            </mat-error>
-          </mat-form-field>
-        </div>
-      </div>
-
-      <div fxLayout="row">
-       
-        <div fxFlex>
-          <mat-form-field>
-            <mat-select placeholder="Tipo" formControlName="tipoId">
-              <mat-option value="1">Colaborador</mat-option>
-              <mat-option value="2">Aluno</mat-option>
-            </mat-select>
-            <mat-error *ngIf="form.controls['tipoId'].hasError('required')">
+            <mat-error *ngIf="form.controls['endereco'].hasError('required')">
               Campo obrigat&oacute;rio.
             </mat-error>
           </mat-form-field>

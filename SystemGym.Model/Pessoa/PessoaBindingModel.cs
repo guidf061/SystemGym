@@ -11,7 +11,7 @@ namespace SystemGym.Model.Pessoa
         public string Cpf { get; set; }
         public int SexoId { get; set; }
         public string Endereco { get; set; }
-        public int TipoId { get; set; }
+        public int? PermissaoId { get; set; }
         public string TelefoneCelular { get; set; }
         public string TelefoneCasa { get; set; }
         public DateTime? DataNascimento { get; set; }

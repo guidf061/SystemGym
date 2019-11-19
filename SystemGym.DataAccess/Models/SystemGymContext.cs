@@ -24,13 +24,13 @@ namespace SystemGym.DataAccess.Models
         public virtual DbSet<MatriculaColaborador> MatriculaColaborador { get; set; }
         public virtual DbSet<Mes> Mes { get; set; }
         public virtual DbSet<Pagamento> Pagamento { get; set; }
+        public virtual DbSet<Permissao> Permissao { get; set; }
         public virtual DbSet<Pessoa> Pessoa { get; set; }
         public virtual DbSet<Plano> Plano { get; set; }
         public virtual DbSet<Sexo> Sexo { get; set; }
         public virtual DbSet<SituacaoColaborador> SituacaoColaborador { get; set; }
         public virtual DbSet<SituacaoMatricula> SituacaoMatricula { get; set; }
         public virtual DbSet<State> State { get; set; }
-        public virtual DbSet<Tipo> Tipo { get; set; }
         public virtual DbSet<TipoNotificacao> TipoNotificacao { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Visitante> Visitante { get; set; }
@@ -297,6 +297,13 @@ namespace SystemGym.DataAccess.Models
                     .HasConstraintName("FK_Pagamento_Plano");
             });
 
+            modelBuilder.Entity<Permissao>(entity =>
+            {
+                entity.Property(e => e.Descricao)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Pessoa>(entity =>
             {
                 entity.HasIndex(e => e.Cpf)
@@ -353,6 +360,11 @@ namespace SystemGym.DataAccess.Models
                     .HasForeignKey(d => d.CountryId)
                     .HasConstraintName("FK_Pessoa_Country");
 
+                entity.HasOne(d => d.Permissao)
+                    .WithMany(p => p.Pessoa)
+                    .HasForeignKey(d => d.PermissaoId)
+                    .HasConstraintName("FK_Pessoa_Permissao");
+
                 entity.HasOne(d => d.Sexo)
                     .WithMany(p => p.Pessoa)
                     .HasForeignKey(d => d.SexoId)
@@ -363,11 +375,6 @@ namespace SystemGym.DataAccess.Models
                     .WithMany(p => p.Pessoa)
                     .HasForeignKey(d => d.StateId)
                     .HasConstraintName("FK_Pessoa_State");
-
-                entity.HasOne(d => d.Tipo)
-                    .WithMany(p => p.Pessoa)
-                    .HasForeignKey(d => d.TipoId)
-                    .HasConstraintName("FK_Pessoa_Tipo");
             });
 
             modelBuilder.Entity<Plano>(entity =>
@@ -412,14 +419,6 @@ namespace SystemGym.DataAccess.Models
                     .WithMany(p => p.State)
                     .HasForeignKey(d => d.CountryId)
                     .HasConstraintName("FK_State_Country");
-            });
-
-            modelBuilder.Entity<Tipo>(entity =>
-            {
-                entity.Property(e => e.Descricao)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<TipoNotificacao>(entity =>

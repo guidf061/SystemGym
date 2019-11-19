@@ -1,4 +1,5 @@
 import { City } from './city-model';
+import { Sexo } from './sexo-model';
 
 export class Pessoa {
   pessoaId: string;
@@ -7,7 +8,7 @@ export class Pessoa {
   cpf: string;
   sexoId: number;
   endereco: string;
-  tipoId: number;
+  permissaoId: number;
   telefoneCelular: string;
   telefoneCasa: string;
   criacaoData: Date;

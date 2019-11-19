@@ -133,7 +133,7 @@ export class ColaboradorFormComponent implements OnInit {
       cpf: this.colaborador.pessoa.cpf,
       sexoId: this.colaborador.pessoa.sexoId,
       endereco: this.colaborador.pessoa.endereco,
-      tipoId: this.colaborador.pessoa.tipoId,
+      permissaoId: this.colaborador.pessoa.permissaoId,
       telefoneCelular: this.colaborador.pessoa.telefoneCelular,
       telefoneCasa: this.colaborador.pessoa.telefoneCasa,
       dataNascimento: this.colaborador.pessoa.dataNascimento,
@@ -185,7 +185,7 @@ export class ColaboradorFormComponent implements OnInit {
 
     colaborador.pessoa.sexoId = formModel.sexoId as number;
 
-    colaborador.pessoa.tipoId = formModel.tipoId as number;
+    colaborador.pessoa.permissaoId = formModel.permissaoId as number;
 
     colaborador.pessoa.endereco = formModel.endereco as string;
 

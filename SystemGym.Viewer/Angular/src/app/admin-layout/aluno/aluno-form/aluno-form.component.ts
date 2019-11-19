@@ -1,7 +1,7 @@
 
 import { Component, OnInit, HostListener, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
+import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA, DateAdapter } from '@angular/material'
 import { AlunoService } from '../../../services/aluno.service';
 import { Pessoa } from '../../../models/pessoa-model';
 import { LoaderService } from '../../../core';
@@ -10,18 +10,27 @@ import { AddressService } from '../../../services/address.service';
 import { City } from '../../../models/city-model';
 import * as moment from 'moment';
 import { Aluno } from '../../../models/aluno-model';
+import { CustomDateAdapter } from '../../../custom-date-adapter';
+import { Sexo } from '../../../models/sexo-model';
+import { CombosListService } from '../../../services/combosList.service';
 
 
 @Component({
   selector: 'app-aluno-form',
   templateUrl: './aluno-form.component.html',
-  styleUrls: ['./aluno-form.component.scss']
+  styleUrls: ['./aluno-form.component.scss'],
+  providers: [
+    {
+      provide: DateAdapter, useClass: CustomDateAdapter
+    }
+  ]
 })
 export class AlunoFormComponent implements OnInit {
   form: FormGroup;
   title: string = 'Matricular Aluno';
   aluno: Aluno;
   states: State[];
+  sexos: Sexo[];
   stateSelec: boolean = false;
 
   formSubmited: boolean;
@@ -31,6 +40,7 @@ export class AlunoFormComponent implements OnInit {
     private loaderService: LoaderService,
     private addressService: AddressService,
     private snackBar: MatSnackBar,
+    private combosListService: CombosListService,
     private dialogRef: MatDialogRef<AlunoFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Aluno,
     private fb: FormBuilder) {
@@ -63,6 +73,17 @@ export class AlunoFormComponent implements OnInit {
         });
       });
 
+    this.combosListService.getSexo().then(rows => {
+      this.sexos = rows;
+      this.loaderService.hide();
+    },
+      error => {
+        this.loaderService.hide();
+        this.snackBar.open(error, 'Fechar', {
+          duration: 10000
+        });
+      });
+
     this.createFormGroup();
 
     if (this.aluno !== undefined && this.aluno !== null) {
@@ -83,24 +104,27 @@ export class AlunoFormComponent implements OnInit {
 
       let aluno: Aluno = this.prepareSave();
 
+      let save: Promise<any>;
+
       if (this.aluno.alunoId === null || this.aluno.alunoId === undefined) {
-        this.alunoService.add(aluno);
+        save = this.alunoService.add(aluno);
+      } else {
+        save = this.alunoService.update(this.aluno.alunoId, aluno);
       }
-      else {
-        this.alunoService.update(this.aluno.alunoId, aluno)
-      }
 
-      this.snackBar.open('Dados salvos com sucesso!.', 'Fechar')
-
-      this.closeDialog(true);
-
-
-      error => {
-
-        this.snackBar.open(error, 'Fechar', {
-          duration: 10000
+      save.then(reseted => {
+        this.loaderService.hide();
+        this.snackBar.open('Dados salvos com sucesso!.', 'Fechar', {
+          duration: 5000
         });
-      }
+        this.closeDialog(true);
+      },
+        error => {
+          this.loaderService.hide();
+          this.snackBar.open(error, 'Fechar', {
+            duration: 10000
+          });
+        });
     }
   }
 
@@ -130,12 +154,15 @@ export class AlunoFormComponent implements OnInit {
       cpf: this.aluno.pessoa.cpf,
       sexoId: this.aluno.pessoa.sexoId,
       endereco: this.aluno.pessoa.endereco,
-      tipoId: this.aluno.pessoa.tipoId,
+      permissaoId: this.aluno.pessoa.permissaoId,
       telefoneCelular: this.aluno.pessoa.telefoneCelular,
       telefoneCasa: this.aluno.pessoa.telefoneCasa,
       dataNascimento: this.aluno.pessoa.dataNascimento,
+      numeroCartao: this.aluno.numeroCartao,
       stateId: (this.aluno.pessoa.city == undefined && this.aluno.pessoa.city == null ? '' : this.aluno.pessoa.city.stateId),
       numeroWhatsapp: this.aluno.numeroWhatsapp,
+      situacaoMatriculaId: this.aluno.situacaoMatriculaId,
+      ativo: 1,
     });
 
     if (this.aluno.pessoa.city !== undefined && this.aluno.pessoa.city !== null) {
@@ -153,7 +180,7 @@ export class AlunoFormComponent implements OnInit {
       cpf: ['', { validators: Validators.required }],
       sexoId: 1,
       endereco: ['', { validators: Validators.required }],
-      tipoId: 1,
+      permissaoId: 1,
       telefoneCelular: ['', { validators: Validators.required }],
       telefoneCasa: ['', { validators: Validators.required }],
       dataNascimento: ['', { validators: Validators.required }],
@@ -161,7 +188,7 @@ export class AlunoFormComponent implements OnInit {
       situacaoMatriculaId: 1,
       ativo: 1,
       cancelamentoDate: '',
-      numeroWhatsapp:'',
+      numeroWhatsapp: '',
     });
   }
 
@@ -181,7 +208,7 @@ export class AlunoFormComponent implements OnInit {
     aluno.pessoa.telefoneCasa = formModel.telefoneCasa as string;
     aluno.pessoa.telefoneCelular = formModel.telefoneCelular as string;
     aluno.pessoa.sexoId = formModel.sexoId as number;
-    aluno.pessoa.tipoId = formModel.tipoId as number;
+    aluno.pessoa.permissaoId = formModel.permissaoId as number;
     aluno.pessoa.endereco = formModel.endereco as string;
     aluno.pessoa.stateId = this.form.controls['stateId'].value;
     aluno.pessoa.dataNascimento = moment(formModel.dataNascimento, 'DD/MM/YYYY ').toDate();

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using SystemGym.Model.Address;
+using SystemGym.Model.Permissao;
+using SystemGym.Model.Sexo;
 
 namespace SystemGym.Model.Pessoa
 {
@@ -13,7 +15,7 @@ namespace SystemGym.Model.Pessoa
         public string Cpf { get; set; }
         public int? SexoId { get; set; }
         public string Endereco { get; set; }
-        public int? TipoId { get; set; }
+        public int? PermissaoId { get; set; }
         public string TelefoneCelular { get; set; }
         public string TelefoneCasa { get; set; }
         public DateTime? CriacaoData { get; set; }
@@ -23,5 +25,7 @@ namespace SystemGym.Model.Pessoa
         public int? StateId { get; set; }
         public int? CountryId { get; set; }
         public CityReturnModel City { get; set; }
+        public SexoReturnModel Sexo { get; set; }
+        public PermissaoReturnModel Permissao { get; set; }
     }
 }

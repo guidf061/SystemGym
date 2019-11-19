@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SystemGym.Model.Tipo
+namespace SystemGym.Model.Permissao
 {
-    public class TipoBindingModel
+    public class PermissaoBindingModel
     {
         public string Descricao { get; set; }
     }

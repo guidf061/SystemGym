@@ -19,7 +19,6 @@ namespace SystemGym.Service
         {
             return this.context.Pessoa
                 .Include(x => x.Sexo)
-                .Include(x => x.Tipo)
                 .OrderBy(x => x.Nome)
                 .ToList()
                 .Select(x => new PessoaReturnModel()
@@ -32,9 +31,9 @@ namespace SystemGym.Service
                     TelefoneCasa = x.TelefoneCasa,
                     TelefoneCelular = x.TelefoneCelular,
                     SexoId = x.SexoId,
-                    TipoId = x.TipoId,
                     AlteracaoData = x.AlteracaoData,
-                    CriacaoData = x.CriacaoData
+                    CriacaoData = x.CriacaoData,
+                    DataNascimento = x.DataNascimento
                 })
                 .ToList();
         } 
@@ -52,10 +51,11 @@ namespace SystemGym.Service
                     Endereco = x.Endereco,
                     TelefoneCelular = x.TelefoneCelular,
                     TelefoneCasa = x.TelefoneCasa,
+                    PermissaoId = x.PermissaoId,
                     SexoId = x.SexoId,
-                    TipoId = x.TipoId,
                     AlteracaoData = x.AlteracaoData,
-                    CriacaoData = x.CriacaoData
+                    CriacaoData = x.CriacaoData,
+                    DataNascimento = x.DataNascimento
 
                 }).FirstOrDefault();
         }
@@ -74,7 +74,7 @@ namespace SystemGym.Service
                 TelefoneCasa = pessoaModel.TelefoneCasa,
                 Endereco = pessoaModel.Endereco,
                 SexoId = pessoaModel.SexoId,
-                TipoId = 1003,
+                PermissaoId = pessoaModel.PermissaoId,
                 StateId = pessoaModel.StateId,
                 CityId = pessoaModel.CityId,
                 CountryId = 1058,
@@ -105,10 +105,11 @@ namespace SystemGym.Service
             pessoa.TelefoneCelular = pessoaModel.TelefoneCelular;
             pessoa.Endereco = pessoaModel.Endereco;
             pessoa.SexoId = pessoaModel.SexoId;
-            pessoa.TipoId = pessoaModel.TipoId;
+            pessoa.PermissaoId = pessoaModel.PermissaoId;
             pessoa.AlteracaoData = DateTime.UtcNow;
             pessoa.DataNascimento = pessoaModel.DataNascimento;
-           
+
+
             this.context.SaveChanges();
 
         }

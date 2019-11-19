@@ -17,7 +17,7 @@ export class AlunoFormService {
     dialogRef = this.dialog.open(AlunoFormComponent, {
       disableClose: true,
       width: '450px',
-      height: '700px',
+      height: '530px',
       panelClass: 'modal-wrapper',
       data: aluno
     });

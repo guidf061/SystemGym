@@ -18,8 +18,8 @@ namespace SystemGym.DataAccess.Models
         public string Email { get; set; }
         public string Cpf { get; set; }
         public int SexoId { get; set; }
+        public int? PermissaoId { get; set; }
         public string Endereco { get; set; }
-        public int? TipoId { get; set; }
         public string TelefoneCelular { get; set; }
         public string TelefoneCasa { get; set; }
         public DateTime? CriacaoData { get; set; }
@@ -31,9 +31,9 @@ namespace SystemGym.DataAccess.Models
 
         public virtual City City { get; set; }
         public virtual Country Country { get; set; }
+        public virtual Permissao Permissao { get; set; }
         public virtual Sexo Sexo { get; set; }
         public virtual State State { get; set; }
-        public virtual Tipo Tipo { get; set; }
         public virtual ICollection<Aluno> Aluno { get; set; }
         public virtual ICollection<Colaborador> Colaborador { get; set; }
         public virtual ICollection<Usuario> Usuario { get; set; }

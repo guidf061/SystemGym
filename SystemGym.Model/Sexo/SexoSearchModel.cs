@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SystemGym.Model.Sexo
 {
-    public class SexoBindingModel
+    public class SexoSearchModel
     {
         public string Descricao { get; set; }
     }
