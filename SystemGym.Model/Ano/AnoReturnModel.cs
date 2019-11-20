@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SystemGym.Model.Funcao
+namespace SystemGym.Model.Ano
 {
-   public class FuncaoReturnModel
+    public class AnoReturnModel
     {
-        public int FuncaoId { get; set; }
+        public int AnoId { get; set; }
         public string Descricao { get; set; }
     }
 }

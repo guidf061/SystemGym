@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SystemGym.Model.SituacaoAluno
+namespace SystemGym.Model.Mes
 {
-    public class SituacaoReturnModel
+    public class MesReturnModel
     {
+        public int MesId { get; set; }
         public string Descricao { get; set; }
     }
 }

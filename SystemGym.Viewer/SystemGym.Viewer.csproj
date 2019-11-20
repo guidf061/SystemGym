@@ -8,13 +8,21 @@
   <ItemGroup>
     <None Remove="Angular\src\app\models\aluno-model.ts" />
     <None Remove="Angular\src\app\models\aluno-search-model.ts" />
+    <None Remove="Angular\src\app\models\ano-model.ts" />
     <None Remove="Angular\src\app\models\colaborador-model.ts" />
     <None Remove="Angular\src\app\models\colaborador-search-model.ts" />
+    <None Remove="Angular\src\app\models\forma-pagamento-model.ts" />
+    <None Remove="Angular\src\app\models\funcao-model.ts" />
+    <None Remove="Angular\src\app\models\mes-model.ts" />
     <None Remove="Angular\src\app\models\pagamento-model.ts" />
     <None Remove="Angular\src\app\models\pagamento-search-model.ts" />
     <None Remove="Angular\src\app\models\permissao-model.ts" />
     <None Remove="Angular\src\app\models\pessoa-model.ts" />
+    <None Remove="Angular\src\app\models\plano-model.ts" />
     <None Remove="Angular\src\app\models\sexo-model.ts" />
+    <None Remove="Angular\src\app\models\situacao-colaborador-model.ts" />
+    <None Remove="Angular\src\app\models\situacao-matricula-model.ts" />
+    <None Remove="Angular\src\app\models\tipo-notificacao-model.ts" />
     <None Remove="Angular\src\app\models\usuario-model.ts" />
     <None Remove="Angular\src\app\models\usuario-search-model.ts" />
     <None Remove="Angular\src\app\models\visitante-model.ts" />
@@ -33,6 +41,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="Angular\src\app\models\forma-pagamento-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\models\ano-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Angular\src\app\models\pagamento-model.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -43,6 +57,24 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Angular\src\app\models\permissao-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\models\funcao-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\models\plano-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\models\mes-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\models\tipo-notificacao-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\models\situacao-matricula-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Angular\src\app\models\situacao-colaborador-model.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Angular\src\app\models\sexo-model.ts">

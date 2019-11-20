@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SystemGym.Model.SituacaoAluno
 {
-    public class SituacaoBindingModel
+    public class SituacaoAlunoBindingModel
     {
           public string Descricao { get; set; }
     }

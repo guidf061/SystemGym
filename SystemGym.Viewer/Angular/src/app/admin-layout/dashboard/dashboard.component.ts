@@ -135,12 +135,12 @@ export class DashboardComponent implements OnInit {
         borderWidth: 2,
         //jan,fev,mar, abr, mai,jun, jul, ago, set, out, nov, dez
         data:[
-          this.dashboard.janeiro,
-          this.dashboard.fevereiro,
-          this.dashboard.marco,
-          this.dashboard.abril,
-          this.dashboard.maio,
-          this.dashboard.junho,
+          this.dashboard.janeiro = 10,
+          this.dashboard.fevereiro = 20,
+          this.dashboard.marco = 5,
+          this.dashboard.abril = 20,
+          this.dashboard.maio = 50 ,
+          this.dashboard.junho = 5,
           this.dashboard.julho,
           this.dashboard.agosto,
           this.dashboard.setembro,

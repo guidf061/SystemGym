@@ -7,8 +7,7 @@ namespace SystemGym.Model.FormaPagamento
 {
    public class FormaPagamentoReturnModel
    {
+        public int FormaPagamentoId { get; set; }
         public string Descricao { get; set; }
-
-        public List<PagamentoReturnModel> Pagamento { get; set; }
     }
 }

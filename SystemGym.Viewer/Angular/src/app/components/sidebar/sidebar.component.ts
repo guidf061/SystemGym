@@ -12,6 +12,8 @@ export const ROUTES: RouteInfo[] = [
   { path: './aluno', title: 'Aluno', icon: 'sport_user-run', class: '' },
   { path: './visitante', title: 'Visitante', icon: 'emoticons_satisfied', class: '' },
   { path: './colaborador', title: 'Colaborador', icon: 'business_badge', class: '' },
+  { path: './colaborador', title: 'Relatorio', icon: 'business_badge', class: '' },
+
 
 ];
 

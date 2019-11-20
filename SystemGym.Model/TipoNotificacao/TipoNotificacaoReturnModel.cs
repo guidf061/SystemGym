@@ -6,6 +6,7 @@ namespace SystemGym.Model.TipoNotificacao
 {
     public class TipoNotificacaoReturnModel
     {
+        public int TipoNotificacaoId { get; set; }
         public string Descricao { get; set; }
     }
 }
