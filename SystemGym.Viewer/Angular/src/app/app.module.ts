@@ -22,7 +22,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginService } from './core/login.service';
 import { HomeComponent } from './home/home.component';
-import { MatDatepickerModule, MatNativeDateModule, MAT_DATE_FORMATS } from '@angular/material';
+import { MatDatepickerModule, MatNativeDateModule} from '@angular/material';
 @NgModule({
   imports: [
     BrowserAnimationsModule,

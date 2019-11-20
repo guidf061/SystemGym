@@ -30,13 +30,14 @@
                 </mat-form-field>
               </div>
             </div>
-
+            <div fxLayout="row" class="center-align">
+              <div fxFlex="100%">
+                <span class="center-align red-text">{{ invalidLogin }}</span>
+              </div>
+            </div>
           </div>
           <div style="margin-top:20px">
             <div fxLayout="row" fxLayoutAlign="end center">
-              <div fxFlex>
-                <button mat-raised-button type="button" class="btn" (click)="closeDialog(false)" color="warn">Fechar</button>
-              </div>
               <div fxFlex="60px">
                 <button mat-raised-button type="submit" class="btn" (click)="login()" color="warn">Logar</button>
               </div>

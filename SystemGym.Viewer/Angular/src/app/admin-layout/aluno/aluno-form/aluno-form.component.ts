@@ -13,6 +13,7 @@ import { Aluno } from '../../../models/aluno-model';
 import { CustomDateAdapter } from '../../../custom-date-adapter';
 import { Sexo } from '../../../models/sexo-model';
 import { CombosListService } from '../../../services/combosList.service';
+import { SituacaoMatricula } from '../../../models/situacao-matricula-model';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class AlunoFormComponent implements OnInit {
   aluno: Aluno;
   states: State[];
   sexos: Sexo[];
+  situacaoMatriculas: SituacaoMatricula[];
   stateSelec: boolean = false;
 
   formSubmited: boolean;
@@ -149,6 +151,10 @@ export class AlunoFormComponent implements OnInit {
 
   private setFormGroup(): void {
     this.form.setValue({
+      numeroCartao: this.aluno.numeroCartao,
+      numeroWhatsapp: this.aluno.numeroWhatsapp,
+      ativo: this.aluno.ativo,
+
       nome: this.aluno.pessoa.nome,
       email: this.aluno.pessoa.email,
       cpf: this.aluno.pessoa.cpf,
@@ -158,11 +164,7 @@ export class AlunoFormComponent implements OnInit {
       telefoneCelular: this.aluno.pessoa.telefoneCelular,
       telefoneCasa: this.aluno.pessoa.telefoneCasa,
       dataNascimento: this.aluno.pessoa.dataNascimento,
-      numeroCartao: this.aluno.numeroCartao,
       stateId: (this.aluno.pessoa.city == undefined && this.aluno.pessoa.city == null ? '' : this.aluno.pessoa.city.stateId),
-      numeroWhatsapp: this.aluno.numeroWhatsapp,
-      situacaoMatriculaId: this.aluno.situacaoMatriculaId,
-      ativo: 1,
     });
 
     if (this.aluno.pessoa.city !== undefined && this.aluno.pessoa.city !== null) {
@@ -173,22 +175,20 @@ export class AlunoFormComponent implements OnInit {
 
   private createFormGroup(): void {
     this.form = this.fb.group({
+      numeroWhatsapp: ['', { validators: Validators.required }],
+      numeroCartao: ['', { validators: Validators.required }],
+      ativo: false,
      
       nome: ['', { validators: Validators.required }],
       email: ['', { validators: Validators.required }],
-      numeroCartao: ['', { validators: Validators.required }],
       cpf: ['', { validators: Validators.required }],
-      sexoId: 1,
+      sexoId: ['', { validators: Validators.required }],
       endereco: ['', { validators: Validators.required }],
-      permissaoId: 1,
+      permissaoId: ['', { validators: Validators.required }],
       telefoneCelular: ['', { validators: Validators.required }],
       telefoneCasa: ['', { validators: Validators.required }],
       dataNascimento: ['', { validators: Validators.required }],
-      stateId: 1,
-      situacaoMatriculaId: 1,
-      ativo: 1,
-      cancelamentoDate: '',
-      numeroWhatsapp: '',
+      stateId: ['', { validators: Validators.required }],
     });
   }
 
@@ -197,23 +197,36 @@ export class AlunoFormComponent implements OnInit {
     let aluno: Aluno = new Aluno();
 
     aluno.ativo = formModel.ativo as boolean;
-    aluno.situacaoMatriculaId = formModel.situacaoMatriculaId as number;
-    aluno.cancelamentoDate = moment(formModel.dataNascimento, 'DD/MM/YYYY ').toDate();
+
     aluno.numeroCartao = formModel.numeroCartao as string;
+
     aluno.numeroWhatsapp = formModel.numeroWhatsapp as string;
+
     aluno.pessoa = new Pessoa();
+
     aluno.pessoa.nome = formModel.nome as string;
+
     aluno.pessoa.email = formModel.email as string;
+
     aluno.pessoa.cpf = formModel.cpf as string;
+
     aluno.pessoa.telefoneCasa = formModel.telefoneCasa as string;
+
     aluno.pessoa.telefoneCelular = formModel.telefoneCelular as string;
+
     aluno.pessoa.sexoId = formModel.sexoId as number;
+
     aluno.pessoa.permissaoId = formModel.permissaoId as number;
+
     aluno.pessoa.endereco = formModel.endereco as string;
+
     aluno.pessoa.stateId = this.form.controls['stateId'].value;
+
     aluno.pessoa.dataNascimento = moment(formModel.dataNascimento, 'DD/MM/YYYY ').toDate();
+
     if (this.selectedCity !== undefined && this.selectedCity !== null) {
       aluno.pessoa.cityId = this.selectedCity.cityId;
+
     }
 
     return aluno;
