@@ -5,6 +5,7 @@ import { AlunoSearch } from '../models/aluno-search-model';
 import { CustomErrorHandler } from '../core';
 import { Paging } from '../models/paging-model';
 import { Aluno } from '../models/aluno-model';
+import { MatriculaAluno } from '../models/matricula-aluno-model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AlunoService {
 
   constructor(private http: HttpClient) { }
 
-  search(search: AlunoSearch): Promise<Paging<Aluno>> {
+  search(search: AlunoSearch): Promise<Paging<MatriculaAluno>> {
     let params = new HttpParams();
 
     if (search.nome !== undefined && search.nome !== null && search.nome !== '') {
@@ -39,7 +40,7 @@ export class AlunoService {
       params = params.append('sortDirection', search.sortDirection.toString());
     }
 
-    return this.http.get<Paging<Aluno>>(`${this.alunoUrl}` + '/Search', { params: params })
+    return this.http.get<Paging<MatriculaAluno>>(`${this.alunoUrl}` + '/Search', { params: params })
       .toPromise()
       .then(data => { return data; })
       .catch(CustomErrorHandler.handleApiError);
@@ -49,17 +50,17 @@ export class AlunoService {
     return this.http.get<any[]>(`${this.alunoUrl}`);
   }
 
-  add(aluno: Aluno) {
-    let body = aluno
+  add(matriculaAluno: MatriculaAluno) {
+    let body = matriculaAluno
     return this.http.post(`${this.alunoUrl}`, body)
       .toPromise()
       .then(res => { return res; })
       .catch(CustomErrorHandler.handleApiError)
   }
 
-  update(alunoId: string, aluno: Aluno) {
-    let body = aluno
-    return this.http.put(`${this.alunoUrl}` + '/' + alunoId, body)
+  update(matriculaAlunoId: string, matriculaAluno: MatriculaAluno) {
+    let body = matriculaAluno
+    return this.http.put(`${this.alunoUrl}` + '/' + matriculaAlunoId, body)
       .toPromise()
       .then(res => { return res; })
       .catch(CustomErrorHandler.handleApiError)

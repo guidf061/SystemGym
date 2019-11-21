@@ -14,24 +14,27 @@ import { CustomDateAdapter } from '../../../custom-date-adapter';
 import { Sexo } from '../../../models/sexo-model';
 import { CombosListService } from '../../../services/combosList.service';
 import { SituacaoMatricula } from '../../../models/situacao-matricula-model';
+import { Plano } from '../../../models/plano-model';
+import { MatriculaAluno } from '../../../models/matricula-aluno-model';
 
 
 @Component({
-  selector: 'app-aluno-form',
-  templateUrl: './aluno-form.component.html',
-  styleUrls: ['./aluno-form.component.scss'],
+  selector: 'app-matricula-form',
+  templateUrl: './matricula-form.component.html',
+  styleUrls: ['./matricula-form.component.scss'],
   providers: [
     {
       provide: DateAdapter, useClass: CustomDateAdapter
     }
   ]
 })
-export class AlunoFormComponent implements OnInit {
+export class MatriculaFormComponent implements OnInit {
   form: FormGroup;
   title: string = 'Matricular Aluno';
-  aluno: Aluno;
+  matriculaAluno: MatriculaAluno;
   states: State[];
   sexos: Sexo[];
+  planos: Plano[];
   situacaoMatriculas: SituacaoMatricula[];
   stateSelec: boolean = false;
 
@@ -43,10 +46,10 @@ export class AlunoFormComponent implements OnInit {
     private addressService: AddressService,
     private snackBar: MatSnackBar,
     private combosListService: CombosListService,
-    private dialogRef: MatDialogRef<AlunoFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Aluno,
+    private dialogRef: MatDialogRef<MatriculaFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: MatriculaAluno,
     private fb: FormBuilder) {
-    this.aluno = data;
+    this.matriculaAluno = data;
   }
 
   selectedCity: City;
@@ -86,15 +89,26 @@ export class AlunoFormComponent implements OnInit {
         });
       });
 
+    this.combosListService.getSituacaoMatricula().then(rows => {
+      this.situacaoMatriculas = rows;
+      this.loaderService.hide();
+    },
+      error => {
+        this.loaderService.hide();
+        this.snackBar.open(error, 'Fechar', {
+          duration: 10000
+        });
+      });
+
     this.createFormGroup();
 
-    if (this.aluno !== undefined && this.aluno !== null) {
+    if (this.matriculaAluno !== undefined && this.matriculaAluno !== null) {
       this.title = 'Alterar Matrícula';
 
       this.setFormGroup();
     }
     else {
-      this.aluno = new Aluno();
+      this.matriculaAluno = new MatriculaAluno();
     }
   }
 
@@ -104,14 +118,14 @@ export class AlunoFormComponent implements OnInit {
     if (this.form.valid) {
       this.loaderService.show();
 
-      let aluno: Aluno = this.prepareSave();
+      let matriculaAluno: MatriculaAluno = this.prepareSave();
 
       let save: Promise<any>;
 
-      if (this.aluno.alunoId === null || this.aluno.alunoId === undefined) {
-        save = this.alunoService.add(aluno);
+      if (this.matriculaAluno.matriculaAlunoId === null || this.matriculaAluno.matriculaAlunoId === undefined) {
+        save = this.alunoService.add(matriculaAluno);
       } else {
-        save = this.alunoService.update(this.aluno.alunoId, aluno);
+        save = this.alunoService.update(this.matriculaAluno.matriculaAlunoId, matriculaAluno);
       }
 
       save.then(reseted => {
@@ -151,85 +165,115 @@ export class AlunoFormComponent implements OnInit {
 
   private setFormGroup(): void {
     this.form.setValue({
-      numeroCartao: this.aluno.numeroCartao,
-      numeroWhatsapp: this.aluno.numeroWhatsapp,
-      ativo: this.aluno.ativo,
+      // aluno
+      numeroCartao: this.matriculaAluno.aluno.numeroCartao,
+      numeroWhatsapp: this.matriculaAluno.aluno.numeroWhatsapp,
 
-      nome: this.aluno.pessoa.nome,
-      email: this.aluno.pessoa.email,
-      cpf: this.aluno.pessoa.cpf,
-      sexoId: this.aluno.pessoa.sexoId,
-      endereco: this.aluno.pessoa.endereco,
-      permissaoId: this.aluno.pessoa.permissaoId,
-      telefoneCelular: this.aluno.pessoa.telefoneCelular,
-      telefoneCasa: this.aluno.pessoa.telefoneCasa,
-      dataNascimento: this.aluno.pessoa.dataNascimento,
-      stateId: (this.aluno.pessoa.city == undefined && this.aluno.pessoa.city == null ? '' : this.aluno.pessoa.city.stateId),
+      //matricula
+      situacaoMatriculaId: this.matriculaAluno.situacaoMatriculaId,
+      ativo: this.matriculaAluno.ativo,
+      
+      //pessoa
+      nome: this.matriculaAluno.aluno.pessoa.nome,
+      email: this.matriculaAluno.aluno.pessoa.email,
+      cpf: this.matriculaAluno.aluno.pessoa.cpf,
+      sexoId: this.matriculaAluno.aluno.pessoa.sexoId,
+      endereco: this.matriculaAluno.aluno.pessoa.endereco,
+      telefoneCelular: this.matriculaAluno.aluno.pessoa.telefoneCelular,
+      telefoneCasa: this.matriculaAluno.aluno.pessoa.telefoneCasa,
+      dataNascimento: this.matriculaAluno.aluno.pessoa.dataNascimento,
+      stateId: (this.matriculaAluno.aluno.pessoa.city == undefined && this.matriculaAluno.aluno.pessoa.city == null ? '' : this.matriculaAluno.aluno.pessoa.city.stateId),
     });
 
-    if (this.aluno.pessoa.city !== undefined && this.aluno.pessoa.city !== null) {
-      this.keyword = this.aluno.pessoa.city.name;
-      this.selectedCity = this.aluno.pessoa.city;
+    if (this.matriculaAluno.aluno.pessoa.city !== undefined && this.matriculaAluno.aluno.pessoa.city !== null) {
+      this.keyword = this.matriculaAluno.aluno.pessoa.city.name;
+      this.selectedCity = this.matriculaAluno.aluno.pessoa.city;
     }
   }
 
   private createFormGroup(): void {
     this.form = this.fb.group({
+      // aluno
       numeroWhatsapp: ['', { validators: Validators.required }],
       numeroCartao: ['', { validators: Validators.required }],
+
+      //matricula
+      situacaoMatriculaId: '',
       ativo: false,
-     
+
+      //pessoa
       nome: ['', { validators: Validators.required }],
       email: ['', { validators: Validators.required }],
       cpf: ['', { validators: Validators.required }],
       sexoId: ['', { validators: Validators.required }],
       endereco: ['', { validators: Validators.required }],
-      permissaoId: ['', { validators: Validators.required }],
       telefoneCelular: ['', { validators: Validators.required }],
       telefoneCasa: ['', { validators: Validators.required }],
       dataNascimento: ['', { validators: Validators.required }],
       stateId: ['', { validators: Validators.required }],
+     
     });
   }
 
-  private prepareSave(): Aluno {
+  private prepareSave(): MatriculaAluno {
     const formModel = this.form.value;
-    let aluno: Aluno = new Aluno();
+    let matriculaAluno: MatriculaAluno = new MatriculaAluno();
 
-    aluno.ativo = formModel.ativo as boolean;
+    //matricula
 
-    aluno.numeroCartao = formModel.numeroCartao as string;
+    matriculaAluno.ativo = formModel.ativo as boolean,
 
-    aluno.numeroWhatsapp = formModel.numeroWhatsapp as string;
+    matriculaAluno.cancelamentoDate = moment(formModel.cancelamentoDate, 'DD/MM/YYYY ').toDate();
 
-    aluno.pessoa = new Pessoa();
+    matriculaAluno.situacaoMatriculaId = formModel.situacaoMatriculaId as number;
 
-    aluno.pessoa.nome = formModel.nome as string;
+    if (this.matriculaAluno !== undefined && this.matriculaAluno !== null){
+      matriculaAluno.alunoId = this.matriculaAluno.alunoId;
+    }
 
-    aluno.pessoa.email = formModel.email as string;
+    //aluno
 
-    aluno.pessoa.cpf = formModel.cpf as string;
+    matriculaAluno.aluno = new Aluno();
 
-    aluno.pessoa.telefoneCasa = formModel.telefoneCasa as string;
+    if (this.matriculaAluno.aluno !== undefined && this.matriculaAluno.aluno !== null) {
+      matriculaAluno.aluno.pessoaId = this.matriculaAluno.aluno.pessoaId;
+    }
 
-    aluno.pessoa.telefoneCelular = formModel.telefoneCelular as string;
+    matriculaAluno.aluno.numeroCartao = formModel.numeroCartao as string;
 
-    aluno.pessoa.sexoId = formModel.sexoId as number;
+    matriculaAluno.aluno.numeroWhatsapp = formModel.numeroWhatsapp as string;
 
-    aluno.pessoa.permissaoId = formModel.permissaoId as number;
 
-    aluno.pessoa.endereco = formModel.endereco as string;
+    //pessoa
 
-    aluno.pessoa.stateId = this.form.controls['stateId'].value;
+    matriculaAluno.aluno.pessoa = new Pessoa();
 
-    aluno.pessoa.dataNascimento = moment(formModel.dataNascimento, 'DD/MM/YYYY ').toDate();
+    matriculaAluno.aluno.pessoa.nome = formModel.nome as string;
+
+    matriculaAluno.aluno.pessoa.email = formModel.email as string;
+
+    matriculaAluno.aluno.pessoa.cpf = formModel.cpf as string;
+
+    matriculaAluno.aluno.pessoa.telefoneCasa = formModel.telefoneCasa as string;
+
+    matriculaAluno.aluno.pessoa.telefoneCelular = formModel.telefoneCelular as string;
+
+    matriculaAluno.aluno.pessoa.sexoId = formModel.sexoId as number;
+
+    matriculaAluno.aluno.pessoa.permissaoId = formModel.permissaoId as number;
+
+    matriculaAluno.aluno.pessoa.endereco = formModel.endereco as string;
+
+    matriculaAluno.aluno.pessoa.stateId = this.form.controls['stateId'].value;
+
+    matriculaAluno.aluno.pessoa.dataNascimento = moment(formModel.dataNascimento, 'DD/MM/YYYY ').toDate();
 
     if (this.selectedCity !== undefined && this.selectedCity !== null) {
-      aluno.pessoa.cityId = this.selectedCity.cityId;
+      matriculaAluno.aluno.pessoa.cityId = this.selectedCity.cityId;
 
     }
 
-    return aluno;
+    return matriculaAluno;
   }
 }
 

@@ -11,7 +11,7 @@ namespace SystemGym.Model.Aluno
         public bool Ativo { get; set; }
         public DateTime CriacaoDate { get; set; }
         public DateTime? CancelamentoDate { get; set; }
+        public DateTime? AlteracaoDate { get; set; }
         public AlunoReturnModel Aluno { get; set; }
-        public SituacaoMatriculaReturnModel Pagamento { get; set; }
     }
 }

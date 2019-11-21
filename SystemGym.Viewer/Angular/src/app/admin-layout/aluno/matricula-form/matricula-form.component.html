@@ -28,6 +28,7 @@
         <div fxFlex>
           <mat-form-field>
             <input matInput placeholder="Nome Completo" formControlName="nome"
+                   
                    required>
             <mat-error *ngIf="form.controls['nome'].hasError('required')">
               Campo obrigat&oacute;rio.
@@ -84,7 +85,6 @@
         </div>
       </div>
 
-
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
@@ -121,9 +121,8 @@
         </div>
         <div fxFlex>
           <mat-form-field>
-            <mat-select placeholder="Situação da Matrícula" formControlName="situacaoMatriculaId" required>
-              <mat-option value=1>Regular</mat-option>
-              <mat-option value=2>Irregular</mat-option>
+            <mat-select placeholder="Situacao da Matricula" formControlName="situacaoMatriculaId">
+              <mat-option *ngFor="let item of situacaoMatriculas;" [value]="item.situacaoMatriculaId">{{item.descricao}}</mat-option>
             </mat-select>
             <mat-error *ngIf="form.controls['situacaoMatriculaId'].hasError('required')">
               Campo obrigat&oacute;rio.

@@ -2,7 +2,7 @@ import { Component, OnInit, Pipe, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
 
-import { AlunoFormService } from './aluno-form/aluno-form.service';
+
 import { Aluno } from '../../models/aluno-model';
 import { AlunoService } from '../../services/aluno.service';
 import { ConfirmService, LoaderService } from '../../core';
@@ -10,6 +10,8 @@ import { MatSnackBar, MatPaginator, MatSort } from '@angular/material';
 import { AlunoSearch } from '../../models/aluno-search-model';
 import { merge } from 'rxjs';
 import { PagamentoListService } from './pagamento/pagamento.service';
+import { MatriculaFormService } from './matricula-form/matricula-form.service';
+import { MatriculaAluno } from '../../models/matricula-aluno-model';
 
 @Component({
   selector: 'app-aluno',
@@ -19,8 +21,7 @@ import { PagamentoListService } from './pagamento/pagamento.service';
 export class AlunoComponent implements OnInit {
 
   form: FormGroup;
-  aluno: Aluno;
-  data: Aluno[];
+  data: MatriculaAluno[];
   dataSource = this.data;
 
   noDataFound: boolean = false;
@@ -31,14 +32,14 @@ export class AlunoComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(private alunoService: AlunoService,
-    private alunoForService: AlunoFormService,
+    private matriculaFormService: MatriculaFormService,
     private pagamentoListService: PagamentoListService,
     private confirmService: ConfirmService,
     private snackBar: MatSnackBar,
     private loaderService: LoaderService,
     private fb: FormBuilder) { }
 
-  displayedColumns: string[] = ['pessoa.nome', 'pessoa.cpf', 'pessoa.email', 'pagamento' ,'edit', 'del'];
+  displayedColumns: string[] = ['aluno.pessoa.nome', 'aluno.pessoa.cpf', 'aluno.pessoa.email', 'pagamento' ,'edit', 'del'];
 
   ngOnInit() {
 
@@ -48,7 +49,7 @@ export class AlunoComponent implements OnInit {
 
     this.paginator.pageIndex = 0;
     this.paginator.pageSize = document.documentElement.clientWidth < 600 ? 10 : 20;
-    this.sort.active = 'pessoa.nome';
+    this.sort.active = 'aluno.pessoa.nome';
     this.sort.direction = 'asc';
 
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
@@ -82,8 +83,8 @@ export class AlunoComponent implements OnInit {
       });
   }
 
-  editClick(aluno: Aluno) {
-    this.alunoForService.showDialog(aluno).subscribe(update => {
+  editClick(matriculaAluno: MatriculaAluno) {
+    this.matriculaFormService.showDialog(matriculaAluno).subscribe(update => {
       if (update) {
         this.loadData();
       }
@@ -128,7 +129,7 @@ export class AlunoComponent implements OnInit {
   }
 
   createClick(): void {
-    this.alunoForService.showDialog(null).subscribe(update => {
+    this.matriculaFormService.showDialog(null).subscribe(update => {
       if (update) {
         this.loadData();
       }

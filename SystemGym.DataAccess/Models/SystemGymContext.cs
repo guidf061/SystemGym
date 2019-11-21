@@ -196,6 +196,8 @@ namespace SystemGym.DataAccess.Models
             {
                 entity.Property(e => e.MatriculaAlunoId).HasDefaultValueSql("(newid())");
 
+                entity.Property(e => e.AlteracaoDate).HasColumnType("datetime");
+
                 entity.Property(e => e.CancelamentoDate).HasColumnType("datetime");
 
                 entity.Property(e => e.CriacaoDate).HasColumnType("datetime");

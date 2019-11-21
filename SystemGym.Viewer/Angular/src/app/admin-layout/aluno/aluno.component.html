@@ -42,23 +42,23 @@
 
     <div class="flex-container" [class.hide]="noDataFound === true || !data">
 
-      <table mat-table [dataSource]="data" matSort matSortActive="pessoa.nome" matSortDisableClear matSortDirection="desc">
-        <ng-container matColumnDef="pessoa.nome">
+      <table mat-table [dataSource]="data" matSort matSortActive="aluno.pessoa.nome" matSortDisableClear matSortDirection="desc">
+        <ng-container matColumnDef="aluno.pessoa.nome">
           <th mat-header-cell *matHeaderCellDef class="flex-item" fxFlex>Nome</th>
           <td mat-cell *matCellDef="let row" class="flex-item" fxFlex>
-            {{row.pessoa.nome}}
+            {{row.aluno.pessoa.nome}}
           </td>
         </ng-container>
-        <ng-container matColumnDef="pessoa.cpf">
+        <ng-container matColumnDef="aluno.pessoa.cpf">
           <th mat-header-cell *matHeaderCellDef r class="flex-item" fxFlex fxFlex.lt-xl="150px" fxHide.lt-sm>Cpf</th>
           <td mat-cell *matCellDef="let row" class="flex-item" fxFlex fxFlex.lt-xl="150px" fxHide.lt-sm>
-            {{row.pessoa.cpf}}
+            {{row.aluno.pessoa.cpf}}
           </td>
         </ng-container>
-        <ng-container matColumnDef="pessoa.email">
+        <ng-container matColumnDef="aluno.pessoa.email">
           <th mat-header-cell *matHeaderCellDef class="flex-item" fxFlex fxFlex.lt-xl fxHide.lt-lg>Email</th>
           <td mat-cell *matCellDef="let row" class="flex-item" fxFlex fxFlex.lt-xl fxHide.lt-lg>
-            {{row.pessoa.email}}
+            {{row.aluno.pessoa.email}}
           </td>
         </ng-container>
         <ng-container matColumnDef="edit">

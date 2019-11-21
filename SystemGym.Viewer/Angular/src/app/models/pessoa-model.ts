@@ -11,9 +11,9 @@ export class Pessoa {
   permissaoId: number;
   telefoneCelular: string;
   telefoneCasa: string;
+  dataNascimento: Date;
   criacaoData: Date;
   alteracaoData: Date;
-  dataNascimento: Date;
   stateId: number;
   cityId: number;
   city: City;

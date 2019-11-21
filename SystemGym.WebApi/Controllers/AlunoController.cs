@@ -27,7 +27,7 @@ namespace SystemGym.WebApi.Controllers
         /// </summary>
         /// <param name="model"></param>
         [HttpGet("Search")]
-        public async Task<ActionResult<PagingModel<AlunoReturnModel>>> GetAsync([FromQuery] AlunoSearchModel model)
+        public async Task<ActionResult<PagingModel<MatriculaAlunoReturnModel>>> GetAsync([FromQuery] MatriculaAlunoSearchModel model)
         {
             return this.Ok(await this.alunoService.SearchAsync(model));
         }
@@ -49,7 +49,7 @@ namespace SystemGym.WebApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public ActionResult Post([FromBody] AlunoBindingModel alunoModel)
+        public ActionResult Post([FromBody] MatriculaAlunoBindingModel alunoModel)
         {
             this.alunoService.Adicionar(alunoModel);
             return this.Ok();
@@ -57,7 +57,7 @@ namespace SystemGym.WebApi.Controllers
 
         // PUT api/values/5
         [HttpPut("{alunoId}")]
-        public ActionResult Put(Guid alunoId, [FromBody] AlunoBindingModel alunoModel)
+        public ActionResult Put(Guid alunoId, [FromBody] MatriculaAlunoBindingModel alunoModel)
         {
             this.alunoService.Alterar(alunoId, alunoModel);
             return this.Ok();

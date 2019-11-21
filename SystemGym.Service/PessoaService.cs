@@ -36,7 +36,7 @@ namespace SystemGym.Service
                     DataNascimento = x.DataNascimento
                 })
                 .ToList();
-        } 
+        }
         public PessoaReturnModel Get(Guid pessoaId)
         {
             return this.context.Pessoa
@@ -62,7 +62,7 @@ namespace SystemGym.Service
 
 
 
-        public Guid Adicionar (PessoaBindingModel pessoaModel)
+        public Guid Adicionar(PessoaBindingModel pessoaModel)
         {
 
             var pessoa = new Pessoa()
@@ -108,7 +108,9 @@ namespace SystemGym.Service
             pessoa.PermissaoId = pessoaModel.PermissaoId;
             pessoa.AlteracaoData = DateTime.UtcNow;
             pessoa.DataNascimento = pessoaModel.DataNascimento;
-
+            pessoa.CountryId = 1058;
+            pessoa.StateId = pessoaModel.StateId;
+            pessoa.CityId = pessoaModel.CityId;
 
             this.context.SaveChanges();
 

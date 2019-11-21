@@ -1,8 +1,7 @@
-import { Pessoa } from './pessoa-model';
+
 import { Aluno } from './aluno-model';
 
 export class Pagamento {
-  
   pagamentoId: string;
   alunoId: string;
   colaboradorId: string;
@@ -14,7 +13,6 @@ export class Pagamento {
   pagamentoDate: Date;
   criacaoDate: Date;
   aluno: Aluno;
- // FormaPagamentoReturnModel: FormaPagamento;
 }
 
 

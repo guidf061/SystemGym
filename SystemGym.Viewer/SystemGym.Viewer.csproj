@@ -13,6 +13,7 @@
     <None Remove="Angular\src\app\models\colaborador-search-model.ts" />
     <None Remove="Angular\src\app\models\forma-pagamento-model.ts" />
     <None Remove="Angular\src\app\models\funcao-model.ts" />
+    <None Remove="Angular\src\app\models\matricula-aluno-model.ts" />
     <None Remove="Angular\src\app\models\mes-model.ts" />
     <None Remove="Angular\src\app\models\pagamento-model.ts" />
     <None Remove="Angular\src\app\models\pagamento-search-model.ts" />
@@ -41,6 +42,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="Angular\src\app\models\matricula-aluno-model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Angular\src\app\models\forma-pagamento-model.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

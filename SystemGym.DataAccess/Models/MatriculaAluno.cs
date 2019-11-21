@@ -11,6 +11,7 @@ namespace SystemGym.DataAccess.Models
         public bool Ativo { get; set; }
         public DateTime CriacaoDate { get; set; }
         public DateTime? CancelamentoDate { get; set; }
+        public DateTime? AlteracaoDate { get; set; }
 
         public virtual Aluno Aluno { get; set; }
         public virtual SituacaoMatricula SituacaoMatricula { get; set; }
