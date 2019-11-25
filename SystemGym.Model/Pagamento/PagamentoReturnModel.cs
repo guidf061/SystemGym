@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using SystemGym.Model.Aluno;
+using SystemGym.Model.Ano;
 using SystemGym.Model.FormaPagamento;
+using SystemGym.Model.Mes;
 
 namespace SystemGym.Model.Pagamento
 {
@@ -10,7 +12,7 @@ namespace SystemGym.Model.Pagamento
     {
         public Guid PagamentoId { get; set; }
         public Guid AlunoId { get; set; }
-        public Guid ColaboradorId { get; set; }
+        public Guid? UsuarioId { get; set; }
         public int PlanoId { get; set; }
         public string ValorMensalidade { get; set; }
         public int MesId { get; set; }
@@ -19,6 +21,8 @@ namespace SystemGym.Model.Pagamento
         public DateTime PagamentoDate { get; set; }
         public DateTime CriacaoDate { get; set; }
         public AlunoReturnModel Aluno { get; set; }
+        public AnoReturnModel Ano { get; set; }
+        public MesReturnModel Mes { get; set; }
         public FormaPagamentoReturnModel FormaPagamento { get; set; }
     }
 }

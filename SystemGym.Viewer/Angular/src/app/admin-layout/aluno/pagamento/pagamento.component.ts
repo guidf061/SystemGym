@@ -15,6 +15,9 @@ import { AuthService } from '../../../core/tools/auth.service';
 import { LoggedUserService } from '../../../core/tools/logged-user.service';
 import { ConfirmService, LoaderService } from '../../../core';
 import { PagamentoFormService } from './form/pagamento-form.service';
+import { MatSort } from '@angular/material';
+import { CombosListService } from '../../../services/combosList.service';
+import { Mes } from '../../../models/mes-model';
 
 @Component({
   selector: 'app-pagamento',
@@ -28,13 +31,16 @@ export class PagamentoComponent implements OnInit, OnDestroy {
   companyId: string;
   form: FormGroup;
   data: Pagamento[];
+  meses: Mes[];
   noDataFound: boolean = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   length: number;
 
   constructor(private authService: AuthService,
+    private combosListService: CombosListService,
     private pagamentoService: PagamentoService,
     private pagamentoFormService: PagamentoFormService,
     private snackBar: MatSnackBar,
@@ -47,7 +53,21 @@ export class PagamentoComponent implements OnInit, OnDestroy {
     this.aluno = params;
   }
 
+  displayedColumns: string[] = ['pagamentoDate', 'edit', 'del'];
+
   ngOnInit() {
+
+    this.combosListService.getMes().then(rows => {
+      this.meses = rows;
+      this.loaderService.hide();
+    },
+      error => {
+        this.loaderService.hide();
+        this.snackBar.open(error, 'Fechar', {
+          duration: 10000
+        });
+      });
+
     this.paginator.pageIndex = 0;
     this.paginator.pageSize = document.documentElement.clientWidth < 600 ? 10 : 20;
 
@@ -95,6 +115,57 @@ export class PagamentoComponent implements OnInit, OnDestroy {
         this.loadData();
       }
     });
+  }
+
+  getColor(value: string): string {
+    let diffDays = this.getDiffDaysLastSync(value);
+
+    if (diffDays <= 1) {
+      return "green";
+    } else if(diffDays <= 2) {
+      return "gold";
+    } else if (diffDays >= 3) {
+      return "red";
+    }
+  }
+
+  getImg(value: string) : string {
+    let diffDays = this.getDiffDaysLastSync(value);
+
+    if (diffDays <= 1) {
+      return "check_circle";
+    } else if(diffDays <= 2) {
+      return "warning";
+    } else if (diffDays >= 3) {
+      return "error";
+    }
+  }
+
+  getInfo(value: string) : string {
+    let diffDays = this.getDiffDaysLastSync(value);
+
+    if (diffDays > 1) {
+      return "Sincronização atrasada à " + diffDays + " dias";
+    } else {
+      return null;
+    }
+  }
+
+  getDiffDaysLastSync(value: string) : number {
+    if (value == null || value == undefined) {
+      return;
+    }
+
+    let lastSync = new Date(value);
+    if (lastSync == null) {
+      return;
+    }
+
+    let now = new Date();
+    var diff = Math.abs(now.getTime() - lastSync.getTime());
+    var diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+
+    return diffDays;
   }
 
   deleteClick(pagamento: Pagamento) {

@@ -32,11 +32,11 @@
         <div fxLayout="row" class="contact">
           <div fxFlex fxFlexAlign="center"></div>
         </div>
-        <ng-template ngFor let-contact [ngForOf]="data">
+        <ng-template ngFor let-row [ngForOf]="meses">
           <div fxLayout="row" class="contact">
             <div fxFlex fxFlexAlign="center">
               <div class="name">
-                {{pagamento.aluno.nome}} - {{pagamento.valorMensalidade}}
+                Pagamento referente ao mes de  {{row.descricao}} - Status do Pagamento: {{row.valorMensalidade}}
               </div>
             </div>
             <div fxFlex="30px">

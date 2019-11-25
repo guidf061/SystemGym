@@ -7,7 +7,7 @@ namespace SystemGym.DataAccess.Models
     {
         public Guid PagamentoId { get; set; }
         public Guid AlunoId { get; set; }
-        public Guid? ColaboradorId { get; set; }
+        public Guid? UsuarioId { get; set; }
         public int PlanoId { get; set; }
         public string ValorMensalidade { get; set; }
         public int MesId { get; set; }
@@ -19,9 +19,9 @@ namespace SystemGym.DataAccess.Models
 
         public virtual Aluno Aluno { get; set; }
         public virtual Ano Ano { get; set; }
-        public virtual Colaborador Colaborador { get; set; }
         public virtual FormaPagamento FormaPagamento { get; set; }
         public virtual Mes Mes { get; set; }
         public virtual Plano Plano { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

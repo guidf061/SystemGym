@@ -9,6 +9,6 @@ namespace SystemGym.Model.Aluno
 {
     public class PagamentoSearchModel : PaginatorModel
     {
-        public string AlunoId { get; set; }
+        public Guid? AlunoId { get; set; }
     }
 }

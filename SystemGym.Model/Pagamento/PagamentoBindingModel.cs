@@ -8,7 +8,7 @@ namespace SystemGym.Model.Pagamento
    public class PagamentoBindingModel
     {
         public Guid AlunoId { get; set; }
-        public Guid ColaboradorId { get; set; }
+        public Guid? UsuarioId { get; set; }
         public int PlanoId { get; set; }
         public string ValorMensalidade { get; set; }
         public int MesId { get; set; }

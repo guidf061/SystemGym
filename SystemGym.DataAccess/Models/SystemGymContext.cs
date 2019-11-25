@@ -274,11 +274,6 @@ namespace SystemGym.DataAccess.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Pagamento_Ano");
 
-                entity.HasOne(d => d.Colaborador)
-                    .WithMany(p => p.Pagamento)
-                    .HasForeignKey(d => d.ColaboradorId)
-                    .HasConstraintName("FK_Pagamento_Colaborador");
-
                 entity.HasOne(d => d.FormaPagamento)
                     .WithMany(p => p.Pagamento)
                     .HasForeignKey(d => d.FormaPagamentoId)
@@ -296,6 +291,11 @@ namespace SystemGym.DataAccess.Models
                     .HasForeignKey(d => d.PlanoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Pagamento_Plano");
+
+                entity.HasOne(d => d.Usuario)
+                    .WithMany(p => p.Pagamento)
+                    .HasForeignKey(d => d.UsuarioId)
+                    .HasConstraintName("FK_Pagamento_Usuario");
             });
 
             modelBuilder.Entity<Permissao>(entity =>

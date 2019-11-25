@@ -14,6 +14,9 @@ import { FormaPagamento } from '../../../../models/forma-pagamento-model';
 import { ColaboradorService } from '../../../../services/colaborador.service';
 import { Colaborador } from '../../../../models/colaborador-model';
 import { ColaboradorSearch } from '../../../../models/colaborador-search-model';
+import { UsuarioService } from '../../../../services/usuario.service';
+import { UsuarioSearch } from '../../../../models/usuario-search-model';
+import { Usuario } from '../../../../models/usuario-model';
 
 
 @Component({
@@ -30,7 +33,7 @@ export class PagamentoFormComponent implements OnInit {
   planos: Plano[];
   anos: Ano[];
   meses: Mes[];
-  colaboradores: Colaborador[];
+  usuarios: Usuario[];
   formaPagamentos: FormaPagamento[];
 
   formSubmited: boolean;
@@ -58,7 +61,7 @@ export class PagamentoFormComponent implements OnInit {
   constructor(private pagamentoService: PagamentoService,
     private loaderService: LoaderService,
     private combosListService: CombosListService,
-    private colaboradorService: ColaboradorService,
+    private usuarioService: UsuarioService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<PagamentoFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -113,12 +116,12 @@ export class PagamentoFormComponent implements OnInit {
         });
       });
 
-    let search: ColaboradorSearch = new ColaboradorSearch();
+    let search: UsuarioSearch = new UsuarioSearch();
     search.page = 1;
     search.pageSize = 1000;
 
-    this.colaboradorService.search(search).then(rows => {
-      this.colaboradores = rows.items;
+    this.usuarioService.search(search).then(rows => {
+      this.usuarios = rows.items;
       this.loaderService.hide();
     },
       error => {
@@ -191,7 +194,7 @@ export class PagamentoFormComponent implements OnInit {
 
   private createFormGroup(): void {
     this.form = this.fb.group({
-      colaboradorId: '',
+      usuarioId: '',
       planoId: ['', { validators: Validators.required }],
       valorMensalidade: ['', { validators: Validators.required }],
       mesId: ['', { validators: Validators.required }],
@@ -204,7 +207,7 @@ export class PagamentoFormComponent implements OnInit {
   private setFormGroup(): void {
     this.form.setValue({
       alunoId: this.pagamento.alunoId,
-      colaboradorId: this.pagamento.colaboradorId,
+      usuarioId: this.pagamento.usuarioId,
       planoId: this.pagamento.planoId,
       valorMensalidade: this.pagamento.valorMensalidade,
       mesId: this.pagamento.mesId,
@@ -222,8 +225,8 @@ export class PagamentoFormComponent implements OnInit {
 
     pagamento.planoId = formModel.planoId as number;
 
-    if (formModel.colaboradorId !== undefined && formModel.colaboradorId !== "") {
-      pagamento.colaboradorId = formModel.colaboradorId as string;
+    if (formModel.usuarioId !== undefined && formModel.usuarioId !== "") {
+      pagamento.usuarioId = formModel.usuarioId as string;
     }
   
     pagamento.valorMensalidade = this.form.controls['valorMensalidade'].value as string;

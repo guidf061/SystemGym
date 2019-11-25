@@ -275,7 +275,7 @@ namespace SystemGym.Service
                     var pagamento = new Pagamento()
                     {
                         AlunoId = model.AlunoId,
-                        ColaboradorId = model.ColaboradorId,
+                        UsuarioId = model.UsuarioId,
                         PagamentoDate = DateTime.UtcNow,
                         ValorMensalidade = model.ValorMensalidade,
                         MesId = model.MesId,

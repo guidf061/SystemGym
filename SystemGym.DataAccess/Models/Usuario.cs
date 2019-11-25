@@ -5,6 +5,11 @@ namespace SystemGym.DataAccess.Models
 {
     public partial class Usuario
     {
+        public Usuario()
+        {
+            Pagamento = new HashSet<Pagamento>();
+        }
+
         public Guid UsuarioId { get; set; }
         public Guid PessoaId { get; set; }
         public string UserName { get; set; }
@@ -14,5 +19,6 @@ namespace SystemGym.DataAccess.Models
         public DateTime? DataAlteracao { get; set; }
 
         public virtual Pessoa Pessoa { get; set; }
+        public virtual ICollection<Pagamento> Pagamento { get; set; }
     }
 }

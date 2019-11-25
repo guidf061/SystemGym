@@ -27,8 +27,8 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
-            <mat-select placeholder="Colaborador" formControlName="colaboradorId">
-              <mat-option *ngFor="let item of colaboradores;" [value]="item.colaboradorId">{{item.colaboradorId}}</mat-option>
+            <mat-select placeholder="Usuario" formControlName="usuarioId">
+              <mat-option *ngFor="let item of usuarios;" [value]="item.usuarioId">{{item.pessoa.nome}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

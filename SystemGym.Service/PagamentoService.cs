@@ -12,6 +12,8 @@ using SystemGym.Model.Colaborador;
 using SystemGym.Model.Pessoa;
 using SystemGym.Model.Aluno;
 using SystemGym.Model;
+using SystemGym.Model.Mes;
+using SystemGym.Model.Ano;
 
 namespace SystemGym.Service
 {
@@ -30,13 +32,15 @@ namespace SystemGym.Service
         public async Task<PagingModel<PagamentoReturnModel>> SearchAsync(PagamentoSearchModel model)
         {
             var query = this.context.Pagamento
+                .Include(x => x.Mes)
+                .Include(x => x.Ano)
                 .Include(x => x.Aluno)
                     .ThenInclude(x => x.Pessoa)
                 .AsQueryable();
 
-            if (!string.IsNullOrEmpty(model.AlunoId))
+            if (model.AlunoId.HasValue)
             {
-                query = query.Where(x => x.AlunoId.Equals(model.AlunoId));
+                query = query.Where(x => x.AlunoId.Equals(model.AlunoId.Value));
             }
 
             var pagingModel = new PagingModel<PagamentoReturnModel>();
@@ -45,7 +49,7 @@ namespace SystemGym.Service
 
             if (!string.IsNullOrEmpty(model.Sort))
             {
-                query = query.OrderBy(x => x.Aluno.Pessoa.Nome);
+                query = query.OrderBy(x => x.PagamentoDate);
             }
 
             pagingModel.Items = (await query
@@ -55,9 +59,22 @@ namespace SystemGym.Service
                 .Select(x => new PagamentoReturnModel()
                 {
                     PagamentoId = x.PagamentoId,
+                    UsuarioId = x.UsuarioId,
                     ValorMensalidade = x.ValorMensalidade,
                     PagamentoDate = x.PagamentoDate,
                     FormaPagamentoId = x.FormaPagamentoId,
+                    MesId = x.MesId,
+                    Mes = new MesReturnModel()
+                    {
+                        MesId = x.Mes.MesId,
+                        Descricao = x.Mes.Descricao,
+                    },
+                    Ano = new AnoReturnModel()
+                    {
+                        AnoId = x.Ano.AnoId,
+                        Descricao = x.Ano.Descricao,
+                    },
+
                     CriacaoDate = x.CriacaoDate,
                     Aluno = new AlunoReturnModel()
                     {
@@ -91,17 +108,18 @@ namespace SystemGym.Service
             {
                 try
                 {
+                    var dateNow = DateTime.UtcNow;
                     var pagamento = new Pagamento()
                     {
                         AlunoId = pagamentoModel.AlunoId,
-                        ColaboradorId = pagamentoModel.ColaboradorId,
+                        UsuarioId = pagamentoModel.UsuarioId,
                         PlanoId = pagamentoModel.PlanoId,
                         ValorMensalidade = pagamentoModel.ValorMensalidade,
                         MesId = pagamentoModel.MesId,
                         AnoId = pagamentoModel.AnoId,
                         FormaPagamentoId = pagamentoModel.FormaPagamentoId,
-                        PagamentoDate = DateTime.UtcNow,
-                        CriacaoDate = DateTime.UtcNow
+                        CriacaoDate = DateTime.UtcNow,
+                        PagamentoDate = new DateTime(pagamentoModel.AnoId, pagamentoModel.MesId, dateNow.Day ),
                     };
 
                     this.context.Pagamento.Add(pagamento);
@@ -126,23 +144,23 @@ namespace SystemGym.Service
                 .FirstOrDefault();
 
             pagamento.AlunoId = pagamentoModel.AlunoId;
-            pagamento.ColaboradorId = pagamentoModel.ColaboradorId;
+            pagamento.UsuarioId = pagamentoModel.UsuarioId;
             pagamento.PlanoId = pagamentoModel.PlanoId;
             pagamento.ValorMensalidade = pagamentoModel.ValorMensalidade;
             pagamento.MesId = pagamentoModel.MesId;
             pagamento.AnoId = pagamentoModel.AnoId;
             pagamento.FormaPagamentoId = pagamentoModel.FormaPagamentoId;
-            pagamento.PagamentoDate = DateTime.UtcNow;
+            pagamento.PagamentoDate = new DateTime(pagamentoModel.MesId, 01, pagamentoModel.AnoId);
             pagamento.CriacaoDate = DateTime.UtcNow;
             pagamento.AlteracaoDate = DateTime.UtcNow;
 
             this.context.SaveChanges();
         }
 
-        public void Delete(Guid alunoId,Guid pagamentoId)
+        public void Delete(Guid alunoId, Guid pagamentoId)
         {
             var pagamento = this.context.Pagamento
-                .Where(x => x.AlunoId.Equals(alunoId) && x.PagamentoId.Equals(pagamentoId)) 
+                .Where(x => x.AlunoId.Equals(alunoId) && x.PagamentoId.Equals(pagamentoId))
                 .FirstOrDefault();
 
             this.context.Pagamento.Remove(pagamento);

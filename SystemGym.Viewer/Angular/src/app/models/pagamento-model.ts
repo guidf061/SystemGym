@@ -4,7 +4,7 @@ import { Aluno } from './aluno-model';
 export class Pagamento {
   pagamentoId: string;
   alunoId: string;
-  colaboradorId: string;
+  usuarioId: string;
   planoId: number;
   valorMensalidade: string;
   mesId: number;
