@@ -277,7 +277,6 @@ namespace SystemGym.DataAccess.Models
                 entity.HasOne(d => d.Colaborador)
                     .WithMany(p => p.Pagamento)
                     .HasForeignKey(d => d.ColaboradorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Pagamento_Colaborador");
 
                 entity.HasOne(d => d.FormaPagamento)

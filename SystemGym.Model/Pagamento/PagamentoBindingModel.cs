@@ -14,8 +14,5 @@ namespace SystemGym.Model.Pagamento
         public int MesId { get; set; }
         public int AnoId { get; set; }
         public int FormaPagamentoId { get; set; }
-        public DateTime PagamentoDate { get; set; }
-        public DateTime CriacaoDate { get; set; }
-
     }
 }

@@ -6,6 +6,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { PagamentoService } from '../../../../services/pagamento.service';
 import { Pagamento } from '../../../../models/pagamento-model';
 import { LoaderService, CustomMask } from '../../../../core';
+import { CombosListService } from '../../../../services/combosList.service';
+import { Plano } from '../../../../models/plano-model';
+import { Mes } from '../../../../models/mes-model';
+import { Ano } from '../../../../models/ano-model';
+import { FormaPagamento } from '../../../../models/forma-pagamento-model';
+import { ColaboradorService } from '../../../../services/colaborador.service';
+import { Colaborador } from '../../../../models/colaborador-model';
+import { ColaboradorSearch } from '../../../../models/colaborador-search-model';
 
 
 @Component({
@@ -19,6 +27,11 @@ export class PagamentoFormComponent implements OnInit {
   title: string = 'Registrar';
   pagamento: Pagamento;
   touch: boolean;
+  planos: Plano[];
+  anos: Ano[];
+  meses: Mes[];
+  colaboradores: Colaborador[];
+  formaPagamentos: FormaPagamento[];
 
   formSubmited: boolean;
 
@@ -44,6 +57,8 @@ export class PagamentoFormComponent implements OnInit {
 
   constructor(private pagamentoService: PagamentoService,
     private loaderService: LoaderService,
+    private combosListService: CombosListService,
+    private colaboradorService: ColaboradorService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<PagamentoFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -53,6 +68,68 @@ export class PagamentoFormComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.combosListService.getFormaPagamento().then(rows => {
+      this.formaPagamentos = rows;
+      this.loaderService.hide();
+    },
+      error => {
+        this.loaderService.hide();
+        this.snackBar.open(error, 'Fechar', {
+          duration: 10000
+        });
+      });
+
+    this.combosListService.getAno().then(rows => {
+      this.anos = rows;
+      this.loaderService.hide();
+    },
+      error => {
+        this.loaderService.hide();
+        this.snackBar.open(error, 'Fechar', {
+          duration: 10000
+        });
+      });
+
+    this.combosListService.getMes().then(rows => {
+      this.meses = rows;
+      this.loaderService.hide();
+    },
+      error => {
+        this.loaderService.hide();
+        this.snackBar.open(error, 'Fechar', {
+          duration: 10000
+        });
+      });
+
+    this.combosListService.getPlano().then(rows => {
+      this.planos = rows;
+      this.loaderService.hide();
+    },
+      error => {
+        this.loaderService.hide();
+        this.snackBar.open(error, 'Fechar', {
+          duration: 10000
+        });
+      });
+
+    let search: ColaboradorSearch = new ColaboradorSearch();
+    search.page = 1;
+    search.pageSize = 1000;
+
+    this.colaboradorService.search(search).then(rows => {
+      this.colaboradores = rows.items;
+      this.loaderService.hide();
+    },
+      error => {
+        this.loaderService.hide();
+        this.snackBar.open(error, 'Fechar', {
+          duration: 10000
+        });
+      });
+
+
+
     this.touch = document.documentElement.clientWidth < 960;
 
     this.createFormGroup();
@@ -65,6 +142,7 @@ export class PagamentoFormComponent implements OnInit {
       this.pagamento = new Pagamento();
     }
   }
+
 
   saveClick(): void {
     this.formSubmited = true;
@@ -102,19 +180,31 @@ export class PagamentoFormComponent implements OnInit {
     this.dialogRef.close(update);
   }
 
+  planoSelected() {
+    if (this.form.controls['planoId'].value == 1) {
+      this.form.controls['valorMensalidade'].setValue('100,00 R$');
+    } else {
+      this.form.controls['valorMensalidade'].setValue('90,00 R$');
+    };
+    this.form.controls['valorMensalidade'].disable();
+  }
+
   private createFormGroup(): void {
     this.form = this.fb.group({
+      colaboradorId: '',
       planoId: ['', { validators: Validators.required }],
       valorMensalidade: ['', { validators: Validators.required }],
       mesId: ['', { validators: Validators.required }],
       anoId: ['', { validators: Validators.required }],
       formaPagamentoId: ['', { validators: Validators.required }],
+      
     });
   }
 
   private setFormGroup(): void {
     this.form.setValue({
       alunoId: this.pagamento.alunoId,
+      colaboradorId: this.pagamento.colaboradorId,
       planoId: this.pagamento.planoId,
       valorMensalidade: this.pagamento.valorMensalidade,
       mesId: this.pagamento.mesId,
@@ -132,7 +222,11 @@ export class PagamentoFormComponent implements OnInit {
 
     pagamento.planoId = formModel.planoId as number;
 
-    pagamento.valorMensalidade = formModel.valorMensalidade as string;
+    if (formModel.colaboradorId !== undefined && formModel.colaboradorId !== "") {
+      pagamento.colaboradorId = formModel.colaboradorId as string;
+    }
+  
+    pagamento.valorMensalidade = this.form.controls['valorMensalidade'].value as string;
 
     pagamento.mesId = formModel.mesId as number;
 

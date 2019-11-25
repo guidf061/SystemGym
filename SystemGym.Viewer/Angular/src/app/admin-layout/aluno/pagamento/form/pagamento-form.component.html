@@ -27,6 +27,24 @@
       <div fxLayout="row">
         <div fxFlex>
           <mat-form-field>
+            <mat-select placeholder="Colaborador" formControlName="colaboradorId">
+              <mat-option *ngFor="let item of colaboradores;" [value]="item.colaboradorId">{{item.colaboradorId}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex>
+          <mat-form-field>
+            <mat-select placeholder="Plano" formControlName="planoId"
+                        (selectionChange)="planoSelected()">
+              <mat-option *ngFor="let item of planos;" [value]="item.planoId">{{item.descricao}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls['planoId'].hasError('required')">
+              Campo obrigat&oacute;rio.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex>
+          <mat-form-field>
             <input matInput autocomplete="none" placeholder="Valor da Mensalidade" formControlName="valorMensalidade" />
             <mat-error *ngIf="form.controls['valorMensalidade'].hasError('required')">
               Campo obrigat&oacute;rio.
@@ -35,9 +53,8 @@
         </div>
         <div fxFlex>
           <mat-form-field>
-            <mat-select placeholder="Forma de Pagamento" formControlName="formaPagamentoId"
-                        required>
-              <mat-option value=1>Dinheiro</mat-option>
+            <mat-select placeholder="Forma de Pagamento" formControlName="formaPagamentoId">
+              <mat-option *ngFor="let item of formaPagamentos;" [value]="item.formaPagamentoId">{{item.descricao}}</mat-option>
             </mat-select>
             <mat-error *ngIf="form.controls['formaPagamentoId'].hasError('required')">
               Campo obrigat&oacute;rio.
@@ -46,20 +63,8 @@
         </div>
         <div fxFlex>
           <mat-form-field>
-            <mat-select placeholder="Mes" formControlName="mesId"
-                        required>
-              <mat-option value=1>Janeiro</mat-option>
-              <mat-option value=2>Fevereiro</mat-option>
-              <mat-option value=3>Março</mat-option>
-              <mat-option value=4>Abril</mat-option>
-              <mat-option value=5>Maio</mat-option>
-              <mat-option value=6>Junho</mat-option>
-              <mat-option value=7>Julho</mat-option>
-              <mat-option value=8>Agosto</mat-option>
-              <mat-option value=9>Setembro</mat-option>
-              <mat-option value=10>Outubro</mat-option>
-              <mat-option value=11>Novembro</mat-option>
-              <mat-option value=12>Dezembro</mat-option>
+            <mat-select placeholder="Mes do Pagamento" formControlName="mesId">
+              <mat-option *ngFor="let item of meses;" [value]="item.mesId">{{item.descricao}}</mat-option>
             </mat-select>
             <mat-error *ngIf="form.controls['mesId'].hasError('required')">
               Campo obrigat&oacute;rio.
@@ -68,9 +73,8 @@
         </div>
         <div fxFlex>
           <mat-form-field>
-            <mat-select placeholder="Ano" formControlName="anoId"
-                        required>
-              <mat-option value=1>2019</mat-option>
+            <mat-select placeholder="Ano do Pagamento" formControlName="anoId">
+              <mat-option *ngFor="let item of anos;" [value]="item.anoId">{{item.descricao}}</mat-option>
             </mat-select>
             <mat-error *ngIf="form.controls['anoId'].hasError('required')">
               Campo obrigat&oacute;rio.

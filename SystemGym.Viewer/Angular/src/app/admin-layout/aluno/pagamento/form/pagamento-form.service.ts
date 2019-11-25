@@ -18,7 +18,7 @@ export class PagamentoFormService {
 
     dialogRef = this.dialog.open(PagamentoFormComponent, {
       disableClose: true,
-      width: '500px',
+      width: '700px',
       height: '200px',
       panelClass: 'modal-wrapper',
       data: {

@@ -100,7 +100,7 @@ namespace SystemGym.Service
                         MesId = pagamentoModel.MesId,
                         AnoId = pagamentoModel.AnoId,
                         FormaPagamentoId = pagamentoModel.FormaPagamentoId,
-                        PagamentoDate = pagamentoModel.PagamentoDate,
+                        PagamentoDate = DateTime.UtcNow,
                         CriacaoDate = DateTime.UtcNow
                     };
 

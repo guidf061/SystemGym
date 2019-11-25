@@ -7,7 +7,7 @@ namespace SystemGym.DataAccess.Models
     {
         public Guid PagamentoId { get; set; }
         public Guid AlunoId { get; set; }
-        public Guid ColaboradorId { get; set; }
+        public Guid? ColaboradorId { get; set; }
         public int PlanoId { get; set; }
         public string ValorMensalidade { get; set; }
         public int MesId { get; set; }
