@@ -1,10 +1,10 @@
 <div class="modal contact">
-  <div class="modal-header">
+  <div class="modal-header" style="padding:0px">
     <mat-toolbar color="warn">
       <mat-toolbar-row>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <div fxFlex="50px" fxFlexAlign="center">
-            <button mat-icon-button (click)="closeDialog(false);" type="button" tabindex="-1">
+            <button mat-icon-button (click)="closeDialog(false);" type="button" matTooltip="Voltar" matTooltipPosition="left" tabindex="-1">
               <mat-icon>arrow_back</mat-icon>
             </button>
           </div>
@@ -36,34 +36,16 @@
           <div fxLayout="row" class="contact">
             <div fxFlex fxFlexAlign="center">
               <div class="name">
-                Pagamento referente ao mes de  {{row.descricao}} - Status do Pagamento: {{row.valorMensalidade}}
+                Pagamento referente ao mes de {{row.descricao}}
               </div>
             </div>
             <div fxFlex="30px">
-              <button mat-icon-button [mat-menu-trigger-for]="menu">
-                <mat-icon>more_vert</mat-icon>
+              <button class="buttonLastSync" mat-icon-button [ngStyle]="{'color': getColor(row.mesId)}">
+                <mat-icon matTooltip="{{getInfo(row.mesId)}}">{{getImg(row.mesId)}}</mat-icon>
               </button>
-              <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-menu-item (click)="editClick(contact)">
-                  <mat-icon>edit</mat-icon>
-                  <span> Editar </span>
-                </button>
-                <button mat-menu-item (click)="deleteClick(contact)">
-                  <mat-icon>delete</mat-icon>
-                  <span> Excluir </span>
-                </button>
-              </mat-menu>
             </div>
           </div>
         </ng-template>
-      </div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="end" [fxHide]="data == undefined || data.length == 0">
-      <div fxFlex>
-        <mat-paginator [length]="length"
-                       [pageSizeOptions]="[10, 20, 50, 100]"
-                       itemsPerPageLabel="Itens por p\xE1gina">
-        </mat-paginator>
       </div>
     </div>
 

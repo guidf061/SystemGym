@@ -12,6 +12,7 @@ namespace SystemGym.DataAccess.Models
 
         public int MesId { get; set; }
         public string Descricao { get; set; }
+        public DateTime? CriacaoDate { get; set; }
 
         public virtual ICollection<Pagamento> Pagamento { get; set; }
     }

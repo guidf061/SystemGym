@@ -35,6 +35,7 @@ namespace SystemGym.DataAccess.Models
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Visitante> Visitante { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
@@ -237,6 +238,8 @@ namespace SystemGym.DataAccess.Models
 
             modelBuilder.Entity<Mes>(entity =>
             {
+                entity.Property(e => e.CriacaoDate).HasColumnType("datetime");
+
                 entity.Property(e => e.Descricao)
                     .IsRequired()
                     .HasMaxLength(10)

@@ -17,7 +17,7 @@ export class PagamentoListService {
     dialogRef = this.dialog.open(PagamentoComponent, {
       disableClose: true,
       width: '750px',
-      height: '500px',
+      height: '92%',
       panelClass: 'modal-wrapper',
       data: aluno
     });

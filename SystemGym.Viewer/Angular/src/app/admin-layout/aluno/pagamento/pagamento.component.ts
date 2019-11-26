@@ -68,18 +68,9 @@ export class PagamentoComponent implements OnInit, OnDestroy {
         });
       });
 
-    this.paginator.pageIndex = 0;
-    this.paginator.pageSize = document.documentElement.clientWidth < 600 ? 10 : 20;
-
     this.createFormGroup();
 
     this.loadData();
-
-    this.paginator.page
-      .subscribe(() => {
-        this.loadData();
-        this.scrollTop();
-      });
   }
 
   loadData() {
@@ -117,56 +108,50 @@ export class PagamentoComponent implements OnInit, OnDestroy {
     });
   }
 
-  getColor(value: string): string {
-    let diffDays = this.getDiffDaysLastSync(value);
+  getColor(value: number): string {
+    let dataNow = new Date();
+    let getMonth = dataNow.getMonth() + 1;
+    let objetoMonth = this.data.map(x => x.mesId);
+  
+    let filterMonth = objetoMonth.findIndex(x => x === value);
 
-    if (diffDays <= 1) {
-      return "green";
-    } else if(diffDays <= 2) {
-      return "gold";
-    } else if (diffDays >= 3) {
+    if (filterMonth === -1 && filterMonth < getMonth) {
       return "red";
     }
+    else if (filterMonth => 0 && filterMonth <= getMonth) {
+      return "green";
+    }
+    else if (filterMonth > getMonth){
+      return "SlateGray";
+    }
+
   }
 
-  getImg(value: string) : string {
-    let diffDays = this.getDiffDaysLastSync(value);
+  getImg(value: number) : string {
 
-    if (diffDays <= 1) {
-      return "check_circle";
-    } else if(diffDays <= 2) {
+   let objeto = this.data.map(x => x.mesId);
+   let filter = objeto.findIndex(x => x === value);
+
+   if (filter === -1) {
       return "warning";
-    } else if (diffDays >= 3) {
-      return "error";
-    }
-  }
-
-  getInfo(value: string) : string {
-    let diffDays = this.getDiffDaysLastSync(value);
-
-    if (diffDays > 1) {
-      return "Sincronização atrasada à " + diffDays + " dias";
     } else {
-      return null;
+      return "check_circle";
+    }
+  } 
+
+  getInfo(value: number): string {
+
+    let objeto = this.data.map(x => x.mesId);
+    let filter = objeto.findIndex(x => x === value);
+
+    if (filter === -1) {
+      return "Pagamento ainda nao efetuado ";
+    } else if( filter !== -1) {
+      return "Pagamento efetuado ";
     }
   }
 
-  getDiffDaysLastSync(value: string) : number {
-    if (value == null || value == undefined) {
-      return;
-    }
 
-    let lastSync = new Date(value);
-    if (lastSync == null) {
-      return;
-    }
-
-    let now = new Date();
-    var diff = Math.abs(now.getTime() - lastSync.getTime());
-    var diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
-
-    return diffDays;
-  }
 
   deleteClick(pagamento: Pagamento) {
     this.confirmService.activate()
@@ -209,15 +194,12 @@ export class PagamentoComponent implements OnInit, OnDestroy {
     });
   }
 
-  private prepareSearch():PagamentoSearch {
+  private prepareSearch(): PagamentoSearch {
     let search: PagamentoSearch = new PagamentoSearch();
 
     const formModel = this.form.value;
 
     search.alunoId = this.aluno.alunoId;
-    
-    search.page = this.paginator.pageIndex + 1;
-    search.pageSize = this.paginator.pageSize;
 
     return search;
   }
