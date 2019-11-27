@@ -110,44 +110,72 @@ export class PagamentoComponent implements OnInit, OnDestroy {
 
   getColor(value: number): string {
     let dataNow = new Date();
-    let getMonth = dataNow.getMonth() + 1;
-    let objetoMonth = this.data.map(x => x.mesId);
-  
-    let filterMonth = objetoMonth.findIndex(x => x === value);
 
-    if (filterMonth === -1 && filterMonth < getMonth) {
-      return "red";
-    }
-    else if (filterMonth => 0 && filterMonth <= getMonth) {
-      return "green";
-    }
-    else if (filterMonth > getMonth){
+    let getMonthdataNow = dataNow.getMonth() + 1;
+
+    let dataMonth = this.data.map(x => x.mesId);
+
+    let filterdataMonth = dataMonth.findIndex(x => x === value);
+
+    if (value <= getMonthdataNow) {
+      if (filterdataMonth === -1) {
+        return "red";
+      }
+      else if (filterdataMonth => 0) {
+        return "green";
+      }
+    } else {
       return "SlateGray";
     }
-
   }
 
-  getImg(value: number) : string {
 
-   let objeto = this.data.map(x => x.mesId);
-   let filter = objeto.findIndex(x => x === value);
 
-   if (filter === -1) {
-      return "warning";
+
+  getImg(value: number): string {
+
+    let dataNow = new Date();
+
+    let getMonthdataNow = dataNow.getMonth() + 1;
+
+    let dataMonth = this.data.map(x => x.mesId);
+
+    let filterdataMonth = dataMonth.findIndex(x => x === value);
+
+
+    if (value <= getMonthdataNow) {
+      if (filterdataMonth === -1) {
+        return "report";
+      }
+      else if (filterdataMonth => 0) {
+        return "check_circle";
+      }
     } else {
-      return "check_circle";
+      return "report_off";
     }
-  } 
+  }
 
   getInfo(value: number): string {
 
-    let objeto = this.data.map(x => x.mesId);
-    let filter = objeto.findIndex(x => x === value);
 
-    if (filter === -1) {
-      return "Pagamento ainda nao efetuado ";
-    } else if( filter !== -1) {
-      return "Pagamento efetuado ";
+    let dataNow = new Date();
+
+    let getMonthdataNow = dataNow.getMonth() + 1;
+
+    let dataMonth = this.data.map(x => x.mesId);
+
+    let filterdataMonth = dataMonth.findIndex(x => x === value);
+
+
+    if (value <= getMonthdataNow) {
+      if (filterdataMonth === -1) {
+        return "Pagamento não efetuado ";
+      }
+      else if (filterdataMonth => 0) {
+        return "Pagamento efetuado ";
+      }
+    } else {
+      return "Pagamento não exigido";
     }
   }
 

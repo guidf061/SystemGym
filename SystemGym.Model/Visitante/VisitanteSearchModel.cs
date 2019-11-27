@@ -11,6 +11,6 @@ namespace SystemGym.Model.Visitante
     {
         public string Nome { get; set; }
 
-        public string Cpf { get; set; }
+        public string DocIdentidade { get; set; }
     }
 }

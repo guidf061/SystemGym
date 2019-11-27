@@ -177,7 +177,7 @@ namespace SystemGym.Service
                     {
                         NumeroCartao = model.Aluno.NumeroCartao,
                         NumeroWhatsapp = model.Aluno.NumeroWhatsapp,
-                        CriacaoData = DateTime.UtcNow,
+                        CriacaoData = model.Aluno.Pessoa.DataNascimento,
                         AlteracaoData = DateTime.UtcNow,
                         PessoaId = pessoaService.Adicionar(model.Aluno.Pessoa)
                     };
@@ -253,6 +253,15 @@ namespace SystemGym.Service
             var matricula = this.context.MatriculaAluno
                 .Where(x => x.AlunoId.Equals(aluno.AlunoId))
                 .FirstOrDefault();
+
+                this.context.Pagamento
+                .Where(x => x.AlunoId.Equals(alunoId))
+                .ToList()
+                .ForEach( x =>
+                {
+                    this.context.Pagamento.Remove(x);
+                });
+
 
             if (matricula != null)
             {

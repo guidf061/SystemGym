@@ -17,7 +17,7 @@ export class ColaboradorFormService {
     dialogRef = this.dialog.open(ColaboradorFormComponent, {
       disableClose: true,
       width: '450px',
-      height: '700px',
+      height: '590px',
       panelClass: 'modal-wrapper',
       data: colaborador
     });

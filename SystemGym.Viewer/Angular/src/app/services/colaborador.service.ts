@@ -22,8 +22,8 @@ export class ColaboradorService {
       params = params.append('nome', search.nome);
     }
 
-    if (search.cpf !== undefined && search.cpf !== null && search.cpf !== '') {
-      params = params.append('cpf', search.cpf);
+    if (search.numeroCtps !== undefined && search.numeroCtps !== null && search.numeroCtps !== '') {
+      params = params.append('numeroCtps', search.numeroCtps);
     }
 
     if (search.page != undefined && search.page != null) {

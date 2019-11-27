@@ -23,7 +23,7 @@ namespace SystemGym.Service
             this.pessoaService = pessoaService;
         }
 
-        public async Task<PagingModel<VisitanteReturnModel>> SearchAsync(VisitanteSearchModel usuarioModel)
+        public async Task<PagingModel<VisitanteReturnModel>> SearchAsync(VisitanteSearchModel model)
         {
             var query = this.context.Visitante
                 .Include(x => x.Pessoa)
@@ -31,28 +31,28 @@ namespace SystemGym.Service
 
                 .AsQueryable();
 
-            if (!string.IsNullOrEmpty(usuarioModel.Nome))
+            if (!string.IsNullOrEmpty(model.Nome))
             {
-                query = query.Where(x => EF.Functions.Like(x.Pessoa.Nome, "%" + usuarioModel.Nome + "%"));
+                query = query.Where(x => EF.Functions.Like(x.Pessoa.Nome, "%" + model.Nome + "%"));
             }
 
-            if (!string.IsNullOrEmpty(usuarioModel.Cpf))
+            if (!string.IsNullOrEmpty(model.DocIdentidade))
             {
-                query = query.Where(x => EF.Functions.Like(x.Pessoa.Cpf, "%" + usuarioModel.Cpf + "%"));
+                query = query.Where(x => EF.Functions.Like(x.DocIdentidade, "%" + model.DocIdentidade + "%"));
             }
 
             var pagingModel = new PagingModel<VisitanteReturnModel>();
 
             pagingModel.TotalItems = query.Count();
 
-            if (!string.IsNullOrEmpty(usuarioModel.Sort))
+            if (!string.IsNullOrEmpty(model.Sort))
             {
                 query = query.OrderBy(x => x.Pessoa.Nome);
             }
 
             pagingModel.Items = (await query
-                .Skip(usuarioModel.PageSize * (usuarioModel.Page - 1))
-                .Take(usuarioModel.PageSize)
+                .Skip(model.PageSize * (model.Page - 1))
+                .Take(model.PageSize)
                 .ToListAsync())
                 .Select(x => new VisitanteReturnModel()
                 {   VisitanteId = x.VisitanteId,

@@ -39,7 +39,7 @@ export class ColaboradorComponent implements OnInit {
     private loaderService: LoaderService,
     private fb: FormBuilder) { }
 
-  displayedColumns: string[] = ['pessoa.nome', 'pessoa.cpf', 'pessoa.email', 'edit', 'del'];
+  displayedColumns: string[] = ['pessoa.nome', 'pessoa.cpf', 'pessoa.email', 'docIdentidade','criacaoData','edit', 'del'];
 
   ngOnInit() {
 
@@ -62,7 +62,6 @@ export class ColaboradorComponent implements OnInit {
 
   }
 
-
   loadData() {
 
     this.loaderService.show();
@@ -83,9 +82,12 @@ export class ColaboradorComponent implements OnInit {
       });
   }
 
-
   editClick(colaborador: Colaborador) {
-    this.colaboradorForService.showDialog(colaborador).subscribe();
+    this.colaboradorForService.showDialog(colaborador).subscribe(update => {
+      if (update) {
+        this.loadData();
+      }
+    });
   }
 
   deleteClick(colaborador: Colaborador) {
@@ -118,13 +120,17 @@ export class ColaboradorComponent implements OnInit {
   }
 
   createClick(): void {
-    this.colaboradorForService.showDialog(null).subscribe();
+    this.colaboradorForService.showDialog(null).subscribe(update => {
+      if (update) {
+        this.loadData();
+      }
+    });
   }
 
   private createFormGroup(): void {
     this.form = this.fb.group({
       nome: '',
-      cpf: '',
+      numeroCtps: '',
     });
   }
 
@@ -137,8 +143,8 @@ export class ColaboradorComponent implements OnInit {
       search.nome = formModel.nome as string;
     }
 
-    if (formModel.cpf !== null && formModel.cpf !== '' && formModel.cpf !== undefined) {
-      search.cpf = formModel.cpf as string;
+    if (formModel.numeroCtps !== null && formModel.numeroCtps !== '' && formModel.numeroCtps !== undefined) {
+      search.numeroCtps = formModel.numeroCtps as string;
     }
 
     search.page = this.paginator.pageIndex + 1;

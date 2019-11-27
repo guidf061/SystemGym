@@ -16,6 +16,10 @@ namespace SystemGym.DataAccess.Models
         public int? SituacaoColaboradorId { get; set; }
         public DateTime? CriacaoData { get; set; }
         public DateTime AlteracaoData { get; set; }
+        public string NumeroSerieCtps { get; set; }
+        public string NumeroCtps { get; set; }
+        public string NumeroPisPasep { get; set; }
+        public string DocIdentidade { get; set; }
 
         public virtual Funcao Funcao { get; set; }
         public virtual Pessoa Pessoa { get; set; }

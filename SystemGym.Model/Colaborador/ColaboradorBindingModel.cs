@@ -13,6 +13,10 @@ namespace SystemGym.Model.Colaborador
         public DateTime? AlteracaoData { get; set; }
         public int FuncaoId { get; set; }
         public int SituacaoColaboradorId { get; set; }
+        public string NumeroSerieCtps { get; set; }
+        public string NumeroCtps { get; set; }
+        public string NumeroPisPasep { get; set; }
+        public string DocIdentidade { get; set; }
         public  PessoaBindingModel Pessoa { get; set; }
 
     }   

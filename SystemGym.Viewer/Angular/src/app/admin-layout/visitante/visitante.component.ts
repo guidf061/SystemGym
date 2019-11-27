@@ -39,7 +39,7 @@ export class VisitanteComponent implements OnInit {
     private loaderService: LoaderService,
     private fb: FormBuilder) { }
 
-  displayedColumns: string[] = ['pessoa.nome', 'pessoa.cpf', 'docIdentidade', 'pessoa.email', 'edit', 'del'];
+  displayedColumns: string[] = ['pessoa.nome', 'pessoa.cpf', 'docIdentidade', 'pessoa.email', 'visitaData', 'horaVisita' ,'edit', 'del'];
 
   ngOnInit() {
 
@@ -131,7 +131,7 @@ export class VisitanteComponent implements OnInit {
   private createFormGroup(): void {
     this.form = this.fb.group({
       nome: '',
-      cpf: '',
+      docIdentidade: '',
     });
   }
 
@@ -144,8 +144,8 @@ export class VisitanteComponent implements OnInit {
       search.nome = formModel.nome as string;
     }
 
-    if (formModel.cpf !== null && formModel.cpf !== '' && formModel.cpf !== undefined) {
-      search.cpf = formModel.cpf as string;
+    if (formModel.docIdentidade !== null && formModel.docIdentidade !== '' && formModel.docIdentidade !== undefined) {
+      search.docIdentidade = formModel.docIdentidade as string;
     }
 
     search.page = this.paginator.pageIndex + 1;

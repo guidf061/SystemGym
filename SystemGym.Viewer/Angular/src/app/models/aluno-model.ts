@@ -6,7 +6,7 @@ export class Aluno {
   pessoaId: string;
   numeroCartao: string;
   numeroWhatsapp: string;
-  criacaoData: Date;
+  criacaoDate: Date;
   alteracaoData: Date;     
   pessoa: Pessoa;
   pagamento: Pagamento[];

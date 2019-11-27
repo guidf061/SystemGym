@@ -22,8 +22,8 @@ export class VisitanteService {
       params = params.append('nome', search.nome);
     }
 
-    if (search.cpf !== undefined && search.cpf !== null && search.cpf !== '') {
-      params = params.append('cpf', search.cpf);
+    if (search.docIdentidade !== undefined && search.docIdentidade !== null && search.docIdentidade !== '') {
+      params = params.append('docIdentidade', search.docIdentidade);
     }
 
     if (search.page != undefined && search.page != null) {

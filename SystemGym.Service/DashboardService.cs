@@ -25,7 +25,7 @@ namespace SystemGym.Service
             DateTime date = new DateTime(2019, 01, 01);
             DateTime nowDate = DateTime.Now;
 
-            var query = this.context.Aluno
+            var alunoAtivo = this.context.Aluno
             .Include(x => x.Pessoa)
             .OrderBy(x => x.CriacaoData)
             .Where(x => x.MatriculaAluno.Any(i => i.Ativo.Equals(true)))
@@ -40,8 +40,8 @@ namespace SystemGym.Service
 
             if (new DateTime(2019, 1, 01).Month <= nowDate.Month)
             {
-                janeiro = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.Month))
+                janeiro = alunoAtivo
+                .Where(x => x.CriacaoData.Value.Month.Equals(1))
                 .Count();
             }
             else
@@ -51,8 +51,8 @@ namespace SystemGym.Service
 
             if (new DateTime(2019, 2, 01).Month <= nowDate.Month)
             {
-                fevereiro = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.Month))
+                fevereiro = alunoAtivo
+                .Where(x => x.CriacaoData.Value.Month.Equals(2))
                 .Count();
             }
             else
@@ -62,8 +62,8 @@ namespace SystemGym.Service
 
             if (new DateTime(2019, 3, 01).Month <= nowDate.Month)
             {
-                marco = query
-               .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(2)))
+                marco = alunoAtivo
+               .Where(x => x.CriacaoData.Value.Month.Equals(3))
                .Count() + fevereiro;
             }
             else
@@ -73,8 +73,8 @@ namespace SystemGym.Service
 
             if (new DateTime(2019, 4, 01).Month <= nowDate.Month)
             {
-                abril = query
-               .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(3)))
+                abril = alunoAtivo
+               .Where(x => x.CriacaoData.Value.Month.Equals(4))
                .Count() + marco;
             }
             else
@@ -84,8 +84,8 @@ namespace SystemGym.Service
 
             if (new DateTime(2019, 5, 01).Month <= nowDate.Month)
             {
-                maio = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(4)))
+                maio = alunoAtivo
+                .Where(x => x.CriacaoData.Value.Month.Equals(5))
                 .Count() + abril;
 
             }
@@ -97,8 +97,8 @@ namespace SystemGym.Service
 
             if (new DateTime(2019, 6, 01).Month <= nowDate.Month)
             {
-                junho = query
-               .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(5)))
+                junho = alunoAtivo
+               .Where(x => x.CriacaoData.Value.Month.Equals(6))
                .Count() + maio;
             }
             else
@@ -108,8 +108,8 @@ namespace SystemGym.Service
 
             if (new DateTime(2019, 7, 01).Month <= nowDate.Month)
             {
-                julho = query
-               .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(6)))
+                julho = alunoAtivo
+               .Where(x => x.CriacaoData.Value.Month.Equals(7))
                .Count() + junho;
             }
             else
@@ -119,8 +119,8 @@ namespace SystemGym.Service
 
             if (new DateTime(2019, 8, 01).Month <= nowDate.Month)
             {
-                agosto = query
-            .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(7)))
+                agosto = alunoAtivo
+            .Where(x => x.CriacaoData.Value.Month.Equals(8))
             .Count() + julho;
             }
             else
@@ -130,8 +130,8 @@ namespace SystemGym.Service
 
             if (new DateTime(2019, 9, 01).Month <= nowDate.Month)
             {
-                setembro = query
-              .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(8)))
+                setembro = alunoAtivo
+              .Where(x => x.CriacaoData.Value.Month.Equals(9))
               .Count() + agosto;
             }
             else
@@ -141,8 +141,8 @@ namespace SystemGym.Service
 
             if (new DateTime(2019, 10, 01).Month <= nowDate.Month)
             {
-                outubro = query
-              .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(9)))
+                outubro = alunoAtivo
+              .Where(x => x.CriacaoData.Value.Month.Equals(10))
               .Count() + setembro;
             }
             else
@@ -152,8 +152,8 @@ namespace SystemGym.Service
 
             if (new DateTime(2019, 11, 01).Month <= nowDate.Month)
             {
-                novembro = query
-            .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(10)))
+                novembro = alunoAtivo
+            .Where(x => x.CriacaoData.Value.Month.Equals(11))
             .Count() + outubro;
 
             }
@@ -166,8 +166,8 @@ namespace SystemGym.Service
             if (new DateTime(2019, 12, 01).Month <= nowDate.Month)
             {
 
-                dezembro = query
-                .Where(x => x.CriacaoData.Value.Month.Equals(date.AddMonths(11)))
+                dezembro = alunoAtivo
+                .Where(x => x.CriacaoData.Value.Month.Equals(12))
                 .Count() + novembro;
 
             }

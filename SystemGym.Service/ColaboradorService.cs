@@ -83,41 +83,45 @@ namespace SystemGym.Service
                 .FirstOrDefault();
         }
 
-        public async Task<PagingModel<ColaboradorReturnModel>> SearchAsync(ColaboradorSearchModel usuarioModel)
+        public async Task<PagingModel<ColaboradorReturnModel>> SearchAsync(ColaboradorSearchModel model)
         {
             var query = this.context.Colaborador
                 .Include(x => x.Pessoa)
                     .ThenInclude(x => x.City)
                 .AsQueryable();
 
-            if (!string.IsNullOrEmpty(usuarioModel.Nome))
+            if (!string.IsNullOrEmpty(model.Nome))
             {
-                query = query.Where(x => EF.Functions.Like(x.Pessoa.Nome, "%" + usuarioModel.Nome + "%"));
+                query = query.Where(x => EF.Functions.Like(x.Pessoa.Nome, "%" + model.Nome + "%"));
             }
 
-            if (!string.IsNullOrEmpty(usuarioModel.Cpf))
+            if (!string.IsNullOrEmpty(model.NumeroCtps))
             {
-                query = query.Where(x => EF.Functions.Like(x.Pessoa.Cpf, "%" + usuarioModel.Cpf + "%"));
+                query = query.Where(x => EF.Functions.Like(x.NumeroCtps, "%" + model.NumeroCtps + "%"));
             }
 
             var pagingModel = new PagingModel<ColaboradorReturnModel>();
 
             pagingModel.TotalItems = query.Count();
 
-            if (!string.IsNullOrEmpty(usuarioModel.Sort))
+            if (!string.IsNullOrEmpty(model.Sort))
             {
                 query = query.OrderBy(x => x.Pessoa.Nome);
             }
 
             pagingModel.Items = (await query
-                .Skip(usuarioModel.PageSize * (usuarioModel.Page - 1))
-                .Take(usuarioModel.PageSize)
+                .Skip(model.PageSize * (model.Page - 1))
+                .Take(model.PageSize)
                 .ToListAsync())
                 .Select(x => new ColaboradorReturnModel()
                 {
                     ColaboradorId = x. ColaboradorId,
                     FuncaoId = x.FuncaoId,
                     SituacaoColaboradorId = x.SituacaoColaboradorId,
+                    DocIdentidade = x.DocIdentidade,
+                    NumeroCtps = x.NumeroCtps,
+                    NumeroPisPasep = x.NumeroPisPasep,
+                    NumeroSerieCtps = x.NumeroSerieCtps,
                     AlteracaoData = x.AlteracaoData,
                     CriacaoData = x.CriacaoData,
 
@@ -132,6 +136,7 @@ namespace SystemGym.Service
                         Endereco = x.Pessoa.Endereco,
                         SexoId = x.Pessoa.SexoId,
                         PermissaoId = x.Pessoa.PermissaoId,
+                        DataNascimento = x.Pessoa.DataNascimento,
                         AlteracaoData = x.Pessoa.AlteracaoData,
                         CriacaoData = x.Pessoa.CriacaoData,
                         City = x.Pessoa.City == null ? null : new CityReturnModel()
@@ -152,7 +157,7 @@ namespace SystemGym.Service
 
             return pagingModel;
         }
-        public void Adicionar(ColaboradorBindingModel colaboradorModel)
+        public void Adicionar(ColaboradorBindingModel model)
         {
             using (var transaction = this.context.Database.BeginTransaction())
             {
@@ -161,11 +166,15 @@ namespace SystemGym.Service
                 {
                     var colaborador = new Colaborador()
                     {
-                        FuncaoId = colaboradorModel.FuncaoId,
-                        SituacaoColaboradorId = colaboradorModel.SituacaoColaboradorId,
+                        FuncaoId = model.FuncaoId,
+                        SituacaoColaboradorId = model.SituacaoColaboradorId,
+                        DocIdentidade = model.DocIdentidade,
+                        NumeroSerieCtps = model.NumeroSerieCtps,
+                        NumeroPisPasep = model.NumeroPisPasep,
+                        NumeroCtps = model.NumeroCtps,
                         CriacaoData = DateTime.UtcNow,
                         AlteracaoData = DateTime.UtcNow,
-                        PessoaId = pessoaService.Adicionar(colaboradorModel.Pessoa)
+                        PessoaId = pessoaService.Adicionar(model.Pessoa)
                     };
 
                     this.context.Colaborador.Add(colaborador);
@@ -182,17 +191,22 @@ namespace SystemGym.Service
             }
         }
 
-        public void Alterar (Guid colaboradorId, ColaboradorBindingModel colaboradorModel)
+        public void Alterar (Guid colaboradorId, ColaboradorBindingModel model)
         {
             var colaborador = this.context.Colaborador
                 .Where(x => x.ColaboradorId.Equals(colaboradorId))
                 .FirstOrDefault();
 
-            colaborador.FuncaoId = colaboradorModel.FuncaoId;
-            colaborador.SituacaoColaboradorId = colaborador.SituacaoColaboradorId;
+            colaborador.FuncaoId = model.FuncaoId;
+            colaborador.SituacaoColaboradorId = model.SituacaoColaboradorId;
+            colaborador.NumeroCtps = model.NumeroCtps;
+            colaborador.NumeroPisPasep = model.NumeroPisPasep;
+            colaborador.NumeroSerieCtps = model.NumeroSerieCtps;
+            colaborador.DocIdentidade = model.DocIdentidade;
+
             colaborador.AlteracaoData = DateTime.UtcNow;
 
-            this.pessoaService.Alterar(colaborador.PessoaId, colaboradorModel.Pessoa);
+            this.pessoaService.Alterar(colaborador.PessoaId, model.Pessoa);
 
             this.context.SaveChanges();
 

@@ -35,7 +35,6 @@ namespace SystemGym.DataAccess.Models
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Visitante> Visitante { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
@@ -97,6 +96,22 @@ namespace SystemGym.DataAccess.Models
                 entity.Property(e => e.AlteracaoData).HasColumnType("datetime");
 
                 entity.Property(e => e.CriacaoData).HasColumnType("datetime");
+
+                entity.Property(e => e.DocIdentidade)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NumeroCtps)
+                    .HasMaxLength(7)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NumeroPisPasep)
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NumeroSerieCtps)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Funcao)
                     .WithMany(p => p.Colaborador)
