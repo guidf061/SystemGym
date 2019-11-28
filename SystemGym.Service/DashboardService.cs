@@ -579,5 +579,185 @@ namespace SystemGym.Service
 
             return quantityModel;
         }
+
+        public DashboardQuantityReturnModel GetInadiplentes()
+        {
+            DateTime date = new DateTime(2019, 01, 01);
+            DateTime nowDate = DateTime.Now;
+
+            int janeiro, fevereiro, marco, abril, maio, junho, julho, agosto, setembro, outubro, novembro, dezembro;
+
+            var alunoAtivo = this.context.Aluno
+                 .Where(x => x.MatriculaAluno.Any(i => i.Ativo.Equals(false)))
+                 .ToList();
+
+            if (new DateTime(2019, 1, 01).Month <= nowDate.Month)
+            {
+                janeiro = alunoAtivo
+                .Where(x => x.CriacaoData.Value.Month.Equals(1))
+                .Count();
+            }
+            else
+            {
+                janeiro = 0;
+            };
+
+            if (new DateTime(2019, 2, 01).Month <= nowDate.Month)
+            {
+                fevereiro = alunoAtivo
+                .Where(x => x.CriacaoData.Value.Month.Equals(2))
+                .Count();
+            }
+            else
+            {
+                fevereiro = 0;
+            };
+
+            if (new DateTime(2019, 3, 01).Month <= nowDate.Month)
+            {
+                marco = alunoAtivo
+               .Where(x => x.CriacaoData.Value.Month.Equals(3))
+               .Count() + fevereiro;
+            }
+            else
+            {
+                marco = 0;
+            }
+
+            if (new DateTime(2019, 4, 01).Month <= nowDate.Month)
+            {
+                abril = alunoAtivo
+               .Where(x => x.CriacaoData.Value.Month.Equals(4))
+               .Count() + marco;
+            }
+            else
+            {
+                abril = 0;
+            }
+
+            if (new DateTime(2019, 5, 01).Month <= nowDate.Month)
+            {
+                maio = alunoAtivo
+                .Where(x => x.CriacaoData.Value.Month.Equals(5))
+                .Count() + abril;
+
+            }
+            else
+            {
+                maio = 0;
+            }
+
+
+            if (new DateTime(2019, 6, 01).Month <= nowDate.Month)
+            {
+                junho = alunoAtivo
+               .Where(x => x.CriacaoData.Value.Month.Equals(6))
+               .Count() + maio;
+            }
+            else
+            {
+                junho = 0;
+            }
+
+            if (new DateTime(2019, 7, 01).Month <= nowDate.Month)
+            {
+                julho = alunoAtivo
+               .Where(x => x.CriacaoData.Value.Month.Equals(7))
+               .Count() + junho;
+            }
+            else
+            {
+                julho = 0;
+            }
+
+            if (new DateTime(2019, 8, 01).Month <= nowDate.Month)
+            {
+                agosto = alunoAtivo
+            .Where(x => x.CriacaoData.Value.Month.Equals(8))
+            .Count() + julho;
+            }
+            else
+            {
+                agosto = 0;
+            }
+
+            if (new DateTime(2019, 9, 01).Month <= nowDate.Month)
+            {
+                setembro = alunoAtivo
+              .Where(x => x.CriacaoData.Value.Month.Equals(9))
+              .Count() + agosto;
+            }
+            else
+            {
+                setembro = 0;
+            }
+
+            if (new DateTime(2019, 10, 01).Month <= nowDate.Month)
+            {
+                outubro = alunoAtivo
+              .Where(x => x.CriacaoData.Value.Month.Equals(10))
+              .Count() + setembro;
+            }
+            else
+            {
+                outubro = 0;
+            }
+
+            if (new DateTime(2019, 11, 01).Month <= nowDate.Month)
+            {
+                novembro = alunoAtivo
+            .Where(x => x.CriacaoData.Value.Month.Equals(11))
+            .Count() + outubro;
+
+            }
+            else
+            {
+                novembro = 0;
+            }
+
+
+            if (new DateTime(2019, 12, 01).Month <= nowDate.Month)
+            {
+
+                dezembro = alunoAtivo
+                .Where(x => x.CriacaoData.Value.Month.Equals(12))
+                .Count() + novembro;
+
+            }
+            else
+            {
+                dezembro = 0;
+            }
+
+            var quantityModel = new DashboardQuantityReturnModel
+            {
+                Janeiro = janeiro,
+
+                Fevereiro = fevereiro,
+
+                Marco = marco,
+
+                Abril = abril,
+
+                Maio = maio,
+
+                Junho = junho,
+
+                Julho = julho,
+
+                Agosto = agosto,
+
+                Setembro = setembro,
+
+                Outubro = outubro,
+
+                Novembro = novembro,
+
+                Dezembro = dezembro,
+            };
+
+            return quantityModel;
+        }
     }
 }
+

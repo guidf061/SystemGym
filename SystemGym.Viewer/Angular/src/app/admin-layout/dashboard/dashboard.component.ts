@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit {
 
   getRendimentos: Dashboard = new Dashboard();
 
+  getInadiplentes: Dashboard = new Dashboard();
+
   lineBigDashboardChartType;
   gradientStroke;
   chartColor;
@@ -49,7 +51,13 @@ export class DashboardComponent implements OnInit {
   lineChartGradientsNumbersData:Array<any>;
   lineChartGradientsNumbersOptions:any;
   lineChartGradientsNumbersLabels:Array<any>;
-  lineChartGradientsNumbersColors:Array<any>
+  lineChartGradientsNumbersColors: Array<any>
+
+  lineChartGradientsNumbersType1;
+  lineChartGradientsNumbersData1: Array<any>;
+  lineChartGradientsNumbersOptions1: any;
+  lineChartGradientsNumbersLabel1: Array<any>;
+  lineChartGradientsNumbersColors1: Array<any>
   // events
   chartClicked(e:any):void {
     console.log(e);
@@ -127,6 +135,18 @@ export class DashboardComponent implements OnInit {
 
     this.dashboardService.getRendimento().then(rows => {
       this.getRendimentos = rows;
+      this.loaderService.hide();
+      this.barChartSimpleGradientsNumbers();
+    },
+      error => {
+        this.loaderService.hide();
+        this.snackBar.open(error, 'Fechar', {
+          duration: 10000
+        });
+      });
+
+    this.dashboardService.getInadiplentes().then(rows => {
+      this.getInadiplentes = rows;
       this.loaderService.hide();
       this.barChartSimpleGradientsNumbers();
     },

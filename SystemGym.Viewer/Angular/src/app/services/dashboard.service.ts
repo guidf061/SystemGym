@@ -43,4 +43,11 @@ export class DashboardService {
       .then(data => { return data; })
       .catch(CustomErrorHandler.handleApiError);
   }
+
+  getInadiplentes(): Promise<Dashboard> {
+    return this.http.get<Dashboard>(`${this.url}` + '/GetInadiplentes')
+      .toPromise()
+      .then(data => { return data; })
+      .catch(CustomErrorHandler.handleApiError);
+  }
 }

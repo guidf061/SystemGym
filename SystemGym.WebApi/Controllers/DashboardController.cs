@@ -64,5 +64,16 @@ namespace SystemGym.WebApi.Controllers
         {
             return this.Ok(this.dashboardService.GetRendimento());
         }
+
+        /// <summary>
+        /// Lista a o rendimento do mes .
+        /// </summary>
+        /// <returns>Quantidade de matriculas</returns>
+        [HttpGet("GetInadiplentes")]
+        [ProducesResponseType(typeof(DashboardQuantityReturnModel), 200)]
+        public ActionResult<DashboardQuantityReturnModel> GetInadiplentes()
+        {
+            return this.Ok(this.dashboardService.GetInadiplentes());
+        }
     }
 }
