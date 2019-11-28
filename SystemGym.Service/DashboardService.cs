@@ -401,6 +401,7 @@ namespace SystemGym.Service
 
             var alunoAtivo = this.context.Aluno
             .Include(x => x.Pessoa)
+            .Include(x => x.MatriculaAluno)
             .OrderBy(x => x.CriacaoData)
             .Where(x => x.MatriculaAluno.Any(i => i.Ativo.Equals(true)))
             .ToList().Select(x => new AlunoReturnModel()
