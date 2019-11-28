@@ -14,25 +14,25 @@
     <div class="col-lg-4">
       <div class="card card-chart">
         <div class="card-header">
-          <h4 class="card-title">Usuários Ativos</h4>
+          <h4 class="card-title" style="font-size: 25px">Matrículas Efetuadas</h4>
           <div ngbDropdown>
           </div>
         </div>
         <div class="card-body">
           <div class="chart-area">
             <canvas baseChart id="lineChartExample"
-                        [datasets]="lineChartData"
-                        [labels]="lineChartLabels"
-                        [colors]="lineChartColors"
-                        [options]="lineChartOptions"
-                        [chartType]="lineChartType"
-                        (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)"></canvas>
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [colors]="lineChartColors"
+                    [options]="lineChartOptions"
+                    [chartType]="lineChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
           </div>
         </div>
         <div class="card-footer">
           <div class="stats">
- 
+
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
     <div class="col-lg-4 col-md-6">
       <div class="card card-chart">
         <div class="card-header">
-          <h4 class="card-title">Quantidade Total Alunos</h4>
+          <h4 class="card-title " style="font-size: 25px">Matrículas Canceladas</h4>
           <div ngbDropdown>
           </div>
         </div>
@@ -48,18 +48,18 @@
           <div class="chart-area">
             <!-- <canvas id="lineChartExampleWithNumbersAndGrid"></canvas> -->
             <canvas baseChart id="lineChartExampleWithNumbersAndGrid"
-                        [datasets]="lineChartWithNumbersAndGridData"
-                        [labels]="lineChartWithNumbersAndGridLabels"
-                        [colors]="lineChartWithNumbersAndGridColors"
-                        [options]="lineChartWithNumbersAndGridOptions"
-                        [chartType]="lineChartWithNumbersAndGridType"
-                        (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)"></canvas>
+                    [datasets]="lineChartWithNumbersAndGridData"
+                    [labels]="lineChartWithNumbersAndGridLabels"
+                    [colors]="lineChartWithNumbersAndGridColors"
+                    [options]="lineChartWithNumbersAndGridOptions"
+                    [chartType]="lineChartWithNumbersAndGridType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
           </div>
         </div>
         <div class="card-footer">
           <div class="stats">
-            
+
           </div>
         </div>
       </div>
@@ -67,18 +67,18 @@
     <div class="col-lg-4 col-md-6">
       <div class="card card-chart">
         <div class="card-header">
-          <h4 class="card-title">Faturamento Mês </h4>
+          <h4 class="card-title" style="font-size: 25px">Faturamento </h4>
         </div>
         <div class="card-body">
           <div class="chart-area">
             <canvas baseChart id="barChartSimpleGradientsNumbers"
-                        [datasets]="lineChartGradientsNumbersData"
-                        [labels]="lineChartGradientsNumbersLabels"
-                        [colors]="lineChartGradientsNumbersColors"
-                        [options]="lineChartGradientsNumbersOptions"
-                        [chartType]="lineChartGradientsNumbersType"
-                        (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)"></canvas>
+                    [datasets]="lineChartGradientsNumbersData"
+                    [labels]="lineChartGradientsNumbersLabels"
+                    [colors]="lineChartGradientsNumbersColors"
+                    [options]="lineChartGradientsNumbersOptions"
+                    [chartType]="lineChartGradientsNumbersType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
           </div>
         </div>
         <div class="card-footer">
@@ -87,5 +87,19 @@
         </div>
       </div>
     </div>
+
+    <div class="col-lg-4 col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h4 class="card-title" style="font-size: 25px">Faturamento </h4>
+        </div>
+
+        <div class="card-footer">
+          <div class="stats">
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

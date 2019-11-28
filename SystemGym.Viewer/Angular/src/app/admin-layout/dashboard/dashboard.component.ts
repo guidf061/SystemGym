@@ -12,6 +12,13 @@ import { Dashboard } from '../../models/dashboard-model';
 export class DashboardComponent implements OnInit {
 
   dashboard: Dashboard = new Dashboard();
+
+  getQuantidadeMatriculasMeses: Dashboard = new Dashboard();
+
+  getQuantidadeMatriculasCanceladasMeses: Dashboard = new Dashboard();
+
+  getRendimentos: Dashboard = new Dashboard();
+
   lineBigDashboardChartType;
   gradientStroke;
   chartColor;
@@ -66,10 +73,13 @@ export class DashboardComponent implements OnInit {
   constructor(private loaderService: LoaderService,
     private dashboardService: DashboardService,
     private snackBar: MatSnackBar) {
-    this.dashboard
+    this.dashboard,
+    this.getQuantidadeMatriculasMeses
   }
 
   ngOnInit() {
+
+    this.loaderService.show();
 
     this.bigDashBoard();
 
@@ -83,6 +93,42 @@ export class DashboardComponent implements OnInit {
       this.dashboard = rows;
       this.loaderService.hide();
       this.bigDashBoard();
+    },
+      error => {
+        this.loaderService.hide();
+        this.snackBar.open(error, 'Fechar', {
+          duration: 10000
+        });
+      });
+
+    this.dashboardService.getQuantidadeMatriculasMes().then(rows => {
+      this.getQuantidadeMatriculasMeses = rows;
+      this.loaderService.hide();
+      this.lineChartExample();
+    },
+      error => {
+        this.loaderService.hide();
+        this.snackBar.open(error, 'Fechar', {
+          duration: 10000
+        });
+      });
+
+    this.dashboardService.getQuantidadeMatriculasCanceladas().then(rows => {
+      this.getQuantidadeMatriculasCanceladasMeses = rows;
+      this.loaderService.hide();
+      this.lineChartExampleWithNumbersAndGrid();
+    },
+      error => {
+        this.loaderService.hide();
+        this.snackBar.open(error, 'Fechar', {
+          duration: 10000
+        });
+      });
+
+    this.dashboardService.getRendimento().then(rows => {
+      this.getRendimentos = rows;
+      this.loaderService.hide();
+      this.barChartSimpleGradientsNumbers();
     },
       error => {
         this.loaderService.hide();
@@ -236,16 +282,44 @@ export class DashboardComponent implements OnInit {
     this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
     this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
 
+    if (this.dashboard === undefined || this.dashboard === null) {
+      this.getQuantidadeMatriculasMeses.janeiro = 0;
+      this.getQuantidadeMatriculasMeses.fevereiro = 0;
+      this.getQuantidadeMatriculasMeses.marco = 0;
+      this.getQuantidadeMatriculasMeses.abril = 0;
+      this.getQuantidadeMatriculasMeses.maio = 0;
+      this.getQuantidadeMatriculasMeses.junho = 0;
+      this.getQuantidadeMatriculasMeses.julho = 0;
+      this.getQuantidadeMatriculasMeses.agosto = 0;
+      this.getQuantidadeMatriculasMeses.setembro = 0;
+      this.getQuantidadeMatriculasMeses.outubro = 0;
+      this.getQuantidadeMatriculasMeses.novembro = 0;
+      this.getQuantidadeMatriculasMeses.dezembro = 0;
+    }
+
     this.lineChartData = [
       {
-        label: "Active Users",
+        label: "Matriculas Feitas",
         pointBorderWidth: 2,
         pointHoverRadius: 4,
         pointHoverBorderWidth: 1,
         pointRadius: 4,
         fill: true,
         borderWidth: 2,
-        data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 630]
+        data: [
+          this.getQuantidadeMatriculasMeses.janeiro,
+          this.getQuantidadeMatriculasMeses.fevereiro,
+          this.getQuantidadeMatriculasMeses.marco,
+          this.getQuantidadeMatriculasMeses.abril,
+          this.getQuantidadeMatriculasMeses.maio,
+          this.getQuantidadeMatriculasMeses.junho,
+          this.getQuantidadeMatriculasMeses.julho,
+          this.getQuantidadeMatriculasMeses.agosto,
+          this.getQuantidadeMatriculasMeses.setembro,
+          this.getQuantidadeMatriculasMeses.outubro,
+          this.getQuantidadeMatriculasMeses.novembro,
+          this.getQuantidadeMatriculasMeses.dezembro
+        ]
       }
     ];
     this.lineChartColors = [
@@ -256,7 +330,7 @@ export class DashboardComponent implements OnInit {
         backgroundColor: this.gradientFill
       }
     ];
-    this.lineChartLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    this.lineChartLabels = ["Jan", "Feb", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
     this.lineChartOptions = this.gradientChartOptionsConfiguration;
 
     this.lineChartType = 'line';
@@ -274,16 +348,44 @@ export class DashboardComponent implements OnInit {
     this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
     this.gradientFill.addColorStop(1, this.hexToRGB('#18ce0f', 0.4));
 
+    if (this.dashboard === undefined || this.dashboard === null) {
+      this.getQuantidadeMatriculasCanceladasMeses.janeiro = 0;
+      this.getQuantidadeMatriculasCanceladasMeses.fevereiro = 0;
+      this.getQuantidadeMatriculasCanceladasMeses.marco = 0;
+      this.getQuantidadeMatriculasCanceladasMeses.abril = 0;
+      this.getQuantidadeMatriculasCanceladasMeses.maio = 0;
+      this.getQuantidadeMatriculasCanceladasMeses.junho = 0;
+      this.getQuantidadeMatriculasCanceladasMeses.julho = 0;
+      this.getQuantidadeMatriculasCanceladasMeses.agosto = 0;
+      this.getQuantidadeMatriculasCanceladasMeses.setembro = 0;
+      this.getQuantidadeMatriculasCanceladasMeses.outubro = 0;
+      this.getQuantidadeMatriculasCanceladasMeses.novembro = 0;
+      this.getQuantidadeMatriculasCanceladasMeses.dezembro = 0;
+    }
+
     this.lineChartWithNumbersAndGridData = [
       {
-        label: "Email Stats",
+        label: "Matriculas Cancelada",
         pointBorderWidth: 2,
         pointHoverRadius: 4,
         pointHoverBorderWidth: 1,
         pointRadius: 4,
         fill: true,
         borderWidth: 2,
-        data: [40, 500, 650, 700, 1200, 1250, 1300, 1900]
+        data: [
+          this.getQuantidadeMatriculasCanceladasMeses.janeiro,
+          this.getQuantidadeMatriculasCanceladasMeses.fevereiro,
+          this.getQuantidadeMatriculasCanceladasMeses.marco,
+          this.getQuantidadeMatriculasCanceladasMeses.abril,
+          this.getQuantidadeMatriculasCanceladasMeses.maio,
+          this.getQuantidadeMatriculasCanceladasMeses.junho,
+          this.getQuantidadeMatriculasCanceladasMeses.julho,
+          this.getQuantidadeMatriculasCanceladasMeses.agosto,
+          this.getQuantidadeMatriculasCanceladasMeses.setembro,
+          this.getQuantidadeMatriculasCanceladasMeses.outubro,
+          this.getQuantidadeMatriculasCanceladasMeses.novembro,
+          this.getQuantidadeMatriculasCanceladasMeses.dezembro
+        ]
       }
     ];
     this.lineChartWithNumbersAndGridColors = [
@@ -294,7 +396,7 @@ export class DashboardComponent implements OnInit {
         backgroundColor: this.gradientFill
       }
     ];
-    this.lineChartWithNumbersAndGridLabels = ["12pm,", "3pm", "6pm", "9pm", "12am", "3am", "6am", "9am"];
+    this.lineChartWithNumbersAndGridLabels = ["Jan", "Feb", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
     this.lineChartWithNumbersAndGridOptions = this.gradientChartOptionsConfigurationWithNumbersAndGrid;
 
     this.lineChartWithNumbersAndGridType = 'line';
@@ -311,6 +413,20 @@ export class DashboardComponent implements OnInit {
     this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
     this.gradientFill.addColorStop(1, this.hexToRGB('#2CA8FF', 0.6));
 
+    if (this.dashboard === undefined || this.dashboard === null) {
+      this.getRendimentos.janeiro = 0;
+      this.getRendimentos.fevereiro = 0;
+      this.getRendimentos.marco = 0;
+      this.getRendimentos.abril = 0;
+      this.getRendimentos.maio = 0;
+      this.getRendimentos.junho = 0;
+      this.getRendimentos.julho = 0;
+      this.getRendimentos.agosto = 0;
+      this.getRendimentos.setembro = 0;
+      this.getRendimentos.outubro = 0;
+      this.getRendimentos.novembro = 0;
+      this.getRendimentos.dezembro = 0;
+    }
 
     this.lineChartGradientsNumbersData = [
       {
@@ -321,7 +437,20 @@ export class DashboardComponent implements OnInit {
         pointRadius: 4,
         fill: true,
         borderWidth: 1,
-        data: [80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]
+        data: [
+          this.getRendimentos.janeiro,
+          this.getRendimentos.fevereiro,
+          this.getRendimentos.marco,
+          this.getRendimentos.abril,
+          this.getRendimentos.maio,
+          this.getRendimentos.junho,
+          this.getRendimentos.julho,
+          this.getRendimentos.agosto,
+          this.getRendimentos.setembro,
+          this.getRendimentos.outubro,
+          this.getRendimentos.novembro,
+          this.getRendimentos.dezembro
+        ]
       }
     ];
     this.lineChartGradientsNumbersColors = [
@@ -332,7 +461,7 @@ export class DashboardComponent implements OnInit {
         pointBackgroundColor: "#2CA8FF",
       }
     ];
-    this.lineChartGradientsNumbersLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    this.lineChartGradientsNumbersLabels = ["Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
     this.lineChartGradientsNumbersOptions = {
       maintainAspectRatio: false,
       legend: {
@@ -380,5 +509,4 @@ export class DashboardComponent implements OnInit {
 
     this.lineChartGradientsNumbersType = 'bar';
   }
-
 }

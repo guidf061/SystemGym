@@ -90,6 +90,7 @@ namespace SystemGym.Service
                 .Include(x => x.Aluno)
                     .ThenInclude(x => x.Pessoa)
                        .ThenInclude(x => x.City)
+                       .Where(x => !x.CancelamentoDate.HasValue)
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(model.Nome))
@@ -177,7 +178,7 @@ namespace SystemGym.Service
                     {
                         NumeroCartao = model.Aluno.NumeroCartao,
                         NumeroWhatsapp = model.Aluno.NumeroWhatsapp,
-                        CriacaoData = model.Aluno.Pessoa.DataNascimento,
+                        CriacaoData = DateTime.UtcNow,
                         AlteracaoData = DateTime.UtcNow,
                         PessoaId = pessoaService.Adicionar(model.Aluno.Pessoa)
                     };
@@ -223,11 +224,6 @@ namespace SystemGym.Service
 
             matriculaAluno.AlteracaoDate = DateTime.UtcNow;
 
-            if (matriculaAluno.CancelamentoDate != null)
-            {
-                matriculaAluno.CancelamentoDate = model.CancelamentoDate;
-            }
-
 
             //aluno
 
@@ -246,32 +242,12 @@ namespace SystemGym.Service
 
         public void Delete(Guid alunoId)
         {
-            var aluno = this.context.Aluno
-                .Where(x => x.AlunoId.Equals(alunoId))
-                .FirstOrDefault();
-
             var matricula = this.context.MatriculaAluno
-                .Where(x => x.AlunoId.Equals(aluno.AlunoId))
+                .Where(x => x.AlunoId.Equals(alunoId))
                 .FirstOrDefault();
 
-                this.context.Pagamento
-                .Where(x => x.AlunoId.Equals(alunoId))
-                .ToList()
-                .ForEach( x =>
-                {
-                    this.context.Pagamento.Remove(x);
-                });
-
-
-            if (matricula != null)
-            {
-                this.context.MatriculaAluno.Remove(matricula);
-            }
-
-            this.context.Aluno.Remove(aluno);
-
-            this.pessoaService.Delete(aluno.PessoaId);
-
+            matricula.CancelamentoDate = DateTime.UtcNow;
+           
             this.context.SaveChanges();
         }
 

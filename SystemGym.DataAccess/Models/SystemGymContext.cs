@@ -6,6 +6,7 @@ namespace SystemGym.DataAccess.Models
 {
     public partial class SystemGymContext : DbContext
     {
+
         public SystemGymContext(DbContextOptions<SystemGymContext> options)
             : base(options)
         {
@@ -34,6 +35,7 @@ namespace SystemGym.DataAccess.Models
         public virtual DbSet<TipoNotificacao> TipoNotificacao { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Visitante> Visitante { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -228,7 +230,7 @@ namespace SystemGym.DataAccess.Models
                     .WithMany(p => p.MatriculaAluno)
                     .HasForeignKey(d => d.SituacaoMatriculaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Matricula_SituacaoMatricula");
+                    .HasConstraintName("FK_MatriculaAluno_SituacaoMatricula");
             });
 
             modelBuilder.Entity<MatriculaColaborador>(entity =>

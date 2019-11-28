@@ -72,8 +72,8 @@
         <ng-container matColumnDef="del">
           <th mat-header-cell *matHeaderCellDef fxFlex="68px" fxFlex.lt-lg="40px" fxHide.lt-lg></th>
           <td mat-cell *matCellDef="let row" class="flex-item" fxFlex="68px" fxFlex.lt-lg="40px">
-            <button (click)="deleteClick(row)">
-              <mat-icon>delete</mat-icon>
+            <button matTooltip="Cancelar matricula" matTooltipPosition="left" (click)="deleteClick(row)">
+              <mat-icon>cancel</mat-icon>
             </button>
           </td>
         </ng-container>
@@ -110,7 +110,7 @@
             matTooltip="Matricular Aluno"
             matTooltipPosition="left"
             tabindex="-1">
-      <mat-icon class="mat-24">add</mat-icon>
+      <mat-icon class="mat-24">group_add</mat-icon>
     </button>
   </div>
 </div>

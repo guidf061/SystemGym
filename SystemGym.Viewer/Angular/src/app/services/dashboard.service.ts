@@ -22,4 +22,25 @@ export class DashboardService {
       .then(data => { return data; })
       .catch(CustomErrorHandler.handleApiError);
   }
+
+  getQuantidadeMatriculasMes(): Promise<Dashboard> {
+    return this.http.get<Dashboard>(`${this.url}` + '/QuantityMatriculasMes')
+      .toPromise()
+      .then(data => { return data; })
+      .catch(CustomErrorHandler.handleApiError);
+  }
+
+  getQuantidadeMatriculasCanceladas(): Promise<Dashboard> {
+    return this.http.get<Dashboard>(`${this.url}` + '/QuantityMatriculasCanceladas')
+      .toPromise()
+      .then(data => { return data; })
+      .catch(CustomErrorHandler.handleApiError);
+  }
+
+  getRendimento(): Promise<Dashboard> {
+    return this.http.get<Dashboard>(`${this.url}` + '/GetRendimento')
+      .toPromise()
+      .then(data => { return data; })
+      .catch(CustomErrorHandler.handleApiError);
+  }
 }
