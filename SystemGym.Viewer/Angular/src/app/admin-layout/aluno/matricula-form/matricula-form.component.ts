@@ -266,6 +266,9 @@ export class MatriculaFormComponent implements OnInit {
 
     matriculaAluno.aluno.pessoa.stateId = this.form.controls['stateId'].value;
 
+    matriculaAluno.aluno.pessoa.countryId = 1 as number;
+
+
     matriculaAluno.aluno.pessoa.dataNascimento = moment(formModel.dataNascimento, 'DD/MM/YYYY ').toDate();
 
     if (this.selectedCity !== undefined && this.selectedCity !== null) {

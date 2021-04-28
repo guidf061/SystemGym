@@ -77,7 +77,7 @@ namespace SystemGym.Service
                 PermissaoId = pessoaModel.PermissaoId,
                 StateId = pessoaModel.StateId,
                 CityId = pessoaModel.CityId,
-                CountryId = 1058,
+                CountryId = 1,
                 DataNascimento = pessoaModel.DataNascimento,
                 AlteracaoData = DateTime.UtcNow,
                 CriacaoData = DateTime.UtcNow,

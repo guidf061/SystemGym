@@ -17,4 +17,5 @@ export class Pessoa {
   stateId: number;
   cityId: number;
   city: City;
+  countryId: number;
 }
